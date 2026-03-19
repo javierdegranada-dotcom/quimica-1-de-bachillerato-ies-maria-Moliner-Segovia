@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reacciones Químicas con Gases — 1º Bachillerato</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    tags: 'none'
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+<style>
+  :root {
+    --ink:        #1a1209;
+    --parchment:  #fdf6e3;
+    --cream:      #f5ead0;
+    --gold:       #b8860b;
+    --gold-lt:    #d4a80a;
+    --rust:       #8b2e00;
+    --teal:       #0e5c5c;
+    --teal-lt:    #e6f4f4;
+    --rule:       #c9ad72;
+    --easy-bg:    #e8f5e9;
+    --easy-bd:    #388e3c;
+    --med-bg:     #fff8e1;
+    --med-bd:     #f9a825;
+    --hard-bg:    #fbe9e7;
+    --hard-bd:    #c62828;
+    --note-bg:    #f0f4ff;
+    --note-bd:    #3949ab;
+    --formula-bg: #1a1209;
+    --formula-fg: #ffd966;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--parchment);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    background: var(--ink);
+    color: var(--parchment);
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    border-bottom: 6px solid var(--gold);
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      135deg,
+      transparent 0px, transparent 28px,
+      rgba(184,134,11,.06) 28px, rgba(184,134,11,.06) 30px
+    );
+  }
+  header .badge {
+    display: inline-block;
+    border: 1px solid var(--gold);
+    color: var(--gold-lt);
+    font-family: 'Source Code Pro', monospace;
+    font-size: .72rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    padding: .25em 1em;
+    margin-bottom: 1.2rem;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: #fff;
+  }
+  header h1 span { color: var(--gold-lt); }
+  header p.subtitle {
+    margin-top: .8rem;
+    font-style: italic;
+    font-size: 1rem;
+    color: #c9b88a;
+    font-weight: 300;
+  }
+  header .ornament { color: var(--gold); font-size: 1.4rem; margin: 1rem 0 0; }
+
+  /* ─── INTRO BOX ─── */
+  .intro-wrap {
+    max-width: 820px;
+    margin: 2.5rem auto 0;
+    padding: 0 1.5rem;
+  }
+  .intro-box {
+    background: var(--cream);
+    border-left: 5px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 1.4rem 1.6rem;
+    font-size: .95rem;
+  }
+  .intro-box h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    color: var(--rust);
+    margin-bottom: .6rem;
+  }
+  .intro-box ul { padding-left: 1.3rem; }
+  .intro-box li { margin-bottom: .3rem; }
+
+  /* ─── REFERENCE TABLE ─── */
+  .ref-section {
+    max-width: 820px;
+    margin: 2rem auto 0;
+    padding: 0 1.5rem;
+  }
+  .ref-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--teal);
+    border-bottom: 2px solid var(--rule);
+    padding-bottom: .4rem;
+    margin-bottom: 1rem;
+  }
+  .ref-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: .75rem;
+  }
+  .ref-card {
+    background: var(--formula-bg);
+    color: var(--formula-fg);
+    border-radius: 6px;
+    padding: .9rem 1rem;
+    font-size: .88rem;
+  }
+  .ref-card .label {
+    font-family: 'Source Code Pro', monospace;
+    font-size: .7rem;
+    color: #9e8860;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    margin-bottom: .35rem;
+  }
+
+  /* ─── MAIN CONTENT ─── */
+  main {
+    max-width: 820px;
+    margin: 2.5rem auto 4rem;
+    padding: 0 1.5rem;
+  }
+
+  /* ─── SECTION DIVIDER ─── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 3rem 0 1.5rem;
+  }
+  .section-header .tag {
+    font-family: 'Source Code Pro', monospace;
+    font-size: .72rem;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    padding: .3em 1em;
+    border-radius: 2px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .tag-easy  { background: var(--easy-bg);  color: var(--easy-bd);  border: 1px solid var(--easy-bd); }
+  .tag-med   { background: var(--med-bg);   color: var(--med-bd);   border: 1px solid var(--med-bd);  }
+  .tag-hard  { background: var(--hard-bg);  color: var(--hard-bd);  border: 1px solid var(--hard-bd); }
+  .section-header hr { flex: 1; border: none; border-top: 1px dashed var(--rule); }
+
+  /* ─── EXERCISE CARD ─── */
+  .exercise {
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 1.8rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,.06);
+  }
+  .exercise-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 1.4rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .ex-easy  .exercise-header { background: var(--easy-bg); }
+  .ex-med   .exercise-header { background: var(--med-bg);  }
+  .ex-hard  .exercise-header { background: var(--hard-bg); }
+
+  .ex-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    background: var(--ink);
+    min-width: 2.8rem;
+    height: 2.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: .1rem;
+  }
+  .ex-easy .ex-num  { background: var(--easy-bd); }
+  .ex-med  .ex-num  { background: var(--med-bd); color: var(--ink); }
+  .ex-hard .ex-num  { background: var(--hard-bd); }
+
+  .ex-title-block { flex: 1; }
+  .ex-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .ex-tags { margin-top: .25rem; display: flex; flex-wrap: wrap; gap: .4rem; }
+  .ex-tag {
+    font-family: 'Source Code Pro', monospace;
+    font-size: .65rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: .15em .6em;
+    border-radius: 2px;
+    background: rgba(0,0,0,.07);
+    color: var(--ink);
+  }
+
+  .exercise-body { padding: 1.4rem; }
+
+  /* ─── ENUNCIADO ─── */
+  .enunciado {
+    font-size: .97rem;
+    font-weight: 400;
+    line-height: 1.8;
+    margin-bottom: 1.2rem;
+    padding: 1rem 1.2rem;
+    background: #fff;
+    border-radius: 6px;
+    border-left: 4px solid var(--gold);
+  }
+  .enunciado strong { color: var(--rust); }
+
+  /* ─── REACTION ─── */
+  .reaction-box {
+    background: var(--formula-bg);
+    color: var(--formula-fg);
+    border-radius: 6px;
+    padding: 1rem 1.4rem;
+    text-align: center;
+    font-size: 1.05rem;
+    margin-bottom: 1.2rem;
+    letter-spacing: .02em;
+    overflow-x: auto;
+  }
+  .reaction-box .ajuste {
+    font-family: 'Source Code Pro', monospace;
+    font-size: .7rem;
+    color: #9e8860;
+    display: block;
+    margin-top: .3rem;
+    letter-spacing: .12em;
+  }
+
+  /* ─── CONCEPT NOTE ─── */
+  .concept-note {
+    background: var(--note-bg);
+    border-left: 4px solid var(--note-bd);
+    border-radius: 0 6px 6px 0;
+    padding: .9rem 1.1rem;
+    margin-bottom: 1.2rem;
+    font-size: .88rem;
+  }
+  .concept-note strong { color: var(--note-bd); }
+
+  /* ─── SOLUTION TOGGLE ─── */
+  details { margin-top: .8rem; }
+  summary {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    font-family: 'Source Code Pro', monospace;
+    font-size: .78rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--teal);
+    border: 1.5px solid var(--teal);
+    padding: .4em 1em;
+    border-radius: 3px;
+    user-select: none;
+    transition: background .2s;
+  }
+  summary:hover { background: var(--teal-lt); }
+  summary::marker { display: none; }
+  summary::-webkit-details-marker { display: none; }
+  summary::before { content: '▶'; font-size: .6rem; transition: transform .25s; }
+  details[open] summary::before { transform: rotate(90deg); }
+
+  /* ─── SOLUTION CONTENT ─── */
+  .solution {
+    margin-top: 1rem;
+    border-top: 1px dashed var(--rule);
+    padding-top: 1rem;
+  }
+  .sol-step {
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    gap: .5rem 1rem;
+    margin-bottom: 1.1rem;
+    align-items: start;
+  }
+  .sol-step-num {
+    font-family: 'Source Code Pro', monospace;
+    font-size: .7rem;
+    background: var(--ink);
+    color: var(--gold-lt);
+    border-radius: 50%;
+    width: 1.7rem; height: 1.7rem;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 600;
+    flex-shrink: 0;
+    margin-top: .2rem;
+  }
+  .sol-step-body { font-size: .93rem; line-height: 1.8; }
+  .sol-step-body h4 {
+    font-family: 'Source Code Pro', monospace;
+    font-size: .72rem;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: .35rem;
+  }
+
+  .op-box {
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: .75rem 1rem;
+    margin: .5rem 0;
+    font-size: .95rem;
+    overflow-x: auto;
+  }
+
+  .result-box {
+    background: var(--ink);
+    color: #ffd966;
+    border-radius: 6px;
+    padding: .75rem 1.2rem;
+    margin-top: .7rem;
+    font-family: 'Source Code Pro', monospace;
+    font-size: .88rem;
+  }
+  .result-box .res-label {
+    font-size: .65rem;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: #9e8860;
+    display: block;
+    margin-bottom: .2rem;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--ink);
+    color: #7a6a4e;
+    text-align: center;
+    padding: 1.8rem 1rem;
+    font-size: .78rem;
+    font-family: 'Source Code Pro', monospace;
+    letter-spacing: .05em;
+    border-top: 4px solid var(--gold);
+  }
+  footer span { color: var(--gold); }
+
+  @media print {
+    details { display: block; }
+    summary { display: none; }
+    .solution { display: block !important; }
+  }
+
+  @media (max-width: 600px) {
+    .ref-grid { grid-template-columns: 1fr 1fr; }
+    .sol-step { grid-template-columns: 1fr; }
+    .sol-step-num { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">IES María Moliner · Segovia · 1.º Bachillerato</div>
+  <h1>Reacciones Químicas<br><span>con Gases</span></h1>
+  <p class="subtitle">% en volumen · % en masa · Reactivo limitante · Volúmenes · Fracciones molares</p>
+  <div class="ornament">⸻ ⚗ ⸻</div>
+</header>
+
+<!-- DATOS DE REFERENCIA -->
+<div class="ref-section">
+  <h2>Datos y relaciones clave</h2>
+  <div class="ref-grid">
+
+    <div class="ref-card">
+      <div class="label">Ley de Avogadro (C.N.)</div>
+      $$V_m = 22{,}4 \ \text{L/mol}$$
+    </div>
+
+    <div class="ref-card">
+      <div class="label">Gas Ideal</div>
+      $$pV = nRT \qquad R = 0{,}082 \ \tfrac{\text{atm·L}}{\text{mol·K}}$$
+    </div>
+
+    <div class="ref-card">
+      <div class="label">Fracción molar</div>
+      $$\chi_i = \frac{n_i}{n_{\text{total}}} \qquad \sum_i \chi_i = 1$$
+    </div>
+
+    <div class="ref-card">
+      <div class="label">Presión parcial (Dalton)</div>
+      $$p_i = \chi_i \cdot p_{\text{total}}$$
+    </div>
+
+    <div class="ref-card">
+      <div class="label">% en volumen (gases)</div>
+      $$\%V_i = \chi_i \times 100$$
+    </div>
+
+    <div class="ref-card">
+      <div class="label">% en masa</div>
+      $$\%m_i = \frac{m_i}{m_{\text{total}}} \times 100$$
+    </div>
+
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="intro-wrap">
+  <div class="intro-box">
+    <h2>Antes de empezar — recuerda</h2>
+    <ul>
+      <li>En gases ideales, <strong>fracción molar = fracción en volumen</strong>. Esto simplifica enormemente los cálculos.</li>
+      <li>Cuando trabajes con volúmenes de gas a C.N. (0 °C, 1 atm), usa $V_m = 22{,}4$ L/mol.</li>
+      <li>Si te dan volúmenes de gas <em>en vez de masas</em>, divide directamente entre los coeficientes estequiométricos: los gases reaccionan en la misma proporción de volúmenes que de moles.</li>
+      <li>Para encontrar el <strong>reactivo limitante</strong>, calcula cuánto producto daría cada reactivo por separado; el que da menos es el limitante.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<main>
+
+  <!-- ══ NIVEL BÁSICO ══ -->
+  <div class="section-header">
+    <span class="tag tag-easy">Nivel básico — ejercicios 1 y 2</span>
+    <hr>
+  </div>
+
+  <!-- ─── EJERCICIO 1 ─── -->
+  <article class="exercise ex-easy">
+    <div class="exercise-header">
+      <div class="ex-num">1</div>
+      <div class="ex-title-block">
+        <div class="ex-title">Síntesis del agua — porcentaje en volumen</div>
+        <div class="ex-tags">
+          <span class="ex-tag">% en volumen</span>
+          <span class="ex-tag">Estequiometría básica</span>
+          <span class="ex-tag">C.N.</span>
+        </div>
+      </div>
+    </div>
+    <div class="exercise-body">
+
+      <div class="enunciado">
+        Se mezclan <strong>44,8 L de hidrógeno</strong> y <strong>22,4 L de oxígeno</strong>, ambos medidos a condiciones normales (C.N.), y se hace reaccionar la mezcla.<br>
+        a) ¿Qué volumen de agua gaseosa se obtiene?<br>
+        b) Calcula el <strong>porcentaje en volumen</strong> de cada gas en la mezcla inicial.
+      </div>
+
+      <div class="reaction-box">
+        $$2\,\text{H}_2(g) + \text{O}_2(g) \;\longrightarrow\; 2\,\text{H}_2\text{O}(g)$$
+        <span class="ajuste">Ajustada — método de inspección</span>
+      </div>
+
+      <div class="concept-note">
+        <strong>Clave:</strong> En gases ideales, los <em>volúmenes</em> reaccionan en la misma proporción que los <em>moles</em>. Así, 2 L de H₂ consumen 1 L de O₂ y producen 2 L de H₂O.
+      </div>
+
+      <details>
+        <summary>Ver resolución completa</summary>
+        <div class="solution">
+
+          <div class="sol-step">
+            <div class="sol-step-num">1</div>
+            <div class="sol-step-body">
+              <h4>Moles de cada gas</h4>
+              $$n_{\text{H}_2} = \frac{44{,}8\text{ L}}{22{,}4\text{ L/mol}} = \mathbf{2\ mol}$$
+              $$n_{\text{O}_2} = \frac{22{,}4\text{ L}}{22{,}4\text{ L/mol}} = \mathbf{1\ mol}$$
+            </div>
+          </div>
+
+          <div class="sol-step">
+            <div class="sol-step-num">2</div>
+            <div class="sol-step-body">
+              <h4>a) Volumen de H₂O producido</h4>
+              La proporción estequiométrica es 2 mol H₂ → 2 mol H₂O, por tanto:
+              <div class="op-box">
+                $$V_{\text{H}_2\text{O}} = 2\ \text{mol} \times 22{,}4\ \frac{\text{L}}{\text{mol}} = 44{,}8\ \text{L}$$
+              </div>
+              <div class="result-box">
+                <span class="res-label">Resultado a)</span>
+                $V_{\text{H}_2\text{O}} = 44{,}8\ \text{L a C.N.}$
+              </div>
+            </div>
+          </div>
+
+          <div class="sol-step">
+            <div class="sol-step-num">3</div>
+            <div class="sol-step-body">
+              <h4>b) Porcentaje en volumen de la mezcla inicial</h4>
+              $V_{\text{total}} = 44{,}8 + 22{,}4 = 67{,}2\ \text{L}$
+              <div class="op-box">
+                $$\%V_{\text{H}_2} = \frac{44{,}8}{67{,}2}\times 100 = 66{,}7\%$$
+                $$\%V_{\text{O}_2} = \frac{22{,}4}{67{,}2}\times 100 = 33{,}3\%$$
+              </div>
+              <div class="result-box">
+                <span class="res-label">Resultado b)</span>
+                $\%V_{\text{H}_2} = 66{,}7\%$ · $\%V_{\text{O}_2} = 33{,}3\%$
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </details>
+    </div>
+  </article>
+
+  <!-- ─── EJERCICIO 2 ─── -->
+  <article class="exercise ex-easy">
+    <div class="exercise-header">
+      <div class="ex-num">2</div>
+      <div class="ex-title-block">
+        <div class="ex-title">Combustión del metano — porcentaje en masa del CO₂</div>
+        <div class="ex-tags">
+          <span class="ex-tag">% en masa</span>
+          <span class="ex-tag">Combustión</span>
+          <span class="ex-tag">Masas molares</span>
+        </div>
+      </div>
+    </div>
+    <div class="exercise-body">
+
+      <div class="enunciado">
+        Se queman completamente <strong>3 mol de metano</strong> (CH₄) en exceso de oxígeno.<br>
+        a) ¿Cuántos gramos de CO₂ y de H₂O se obtienen?<br>
+        b) Calcula el <strong>porcentaje en masa</strong> de CO₂ en la mezcla de productos.
+      </div>
+
+      <div class="reaction-box">
+        $$\text{CH}_4(g) + 2\,\text{O}_2(g) \;\longrightarrow\; \text{CO}_2(g) + 2\,\text{H}_2\text{O}(g)$$
+      </div>
+
+      <div class="concept-note">
+        <strong>Masas molares:</strong> CH₄ = 16 g/mol · CO₂ = 44 g/mol · H₂O = 18 g/mol
+      </div>
+
+      <details>
+        <summary>Ver resolución completa</summary>
+        <div class="solution">
+
+          <div class="sol-step">
+            <div class="sol-step-num">1</div>
+            <div class="sol-step-body">
+              <h4>Masas producidas (estequiometría 1:1:2)</h4>
+              <div class="op-box">
+                $$m_{\text{CO}_2} = 3\ \text{mol} \times 44\ \frac{\text{g}}{\text{mol}} = 132\ \text{g}$$
+                $$m_{\text{H}_2\text{O}} = (3 \times 2)\ \text{mol} \times 18\ \frac{\text{g}}{\text{mol}} = 108\ \text{g}$$
+              </div>
+            </div>
+          </div>
+
+          <div class="sol-step">
+            <div class="sol-step-num">2</div>
+            <div class="sol-step-body">
+              <h4>b) Porcentaje en masa del CO₂</h4>
+              <div class="op-box">
+                $$m_{\text{total productos}} = 132 + 108 = 240\ \text{g}$$
+                $$\%m_{\text{CO}_2} = \frac{132}{240}\times 100 = 55\%$$
+              </div>
+              <div class="result-box">
+                <span class="res-label">Resultados</span>
+                $m_{\text{CO}_2}=132\ \text{g}$ · $m_{\text{H}_2\text{O}}=108\ \text{g}$ · $\%m_{\text{CO}_2}=55\%$
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </details>
+    </div>
+  </article>
+
+  <!-- ══ NIVEL INTERMEDIO ══ -->
+  <div class="section-header">
+    <span class="tag tag-med">Nivel intermedio — ejercicios 3, 4 y 5</span>
+    <hr>
+  </div>
+
+  <!-- ─── EJERCICIO 3 ─── -->
+  <article class="exercise ex-med">
+    <div class="exercise-header">
+      <div class="ex-num">3</div>
+      <div class="ex-title-block">
+        <div class="ex-title">Síntesis del amoníaco — reactivo limitante</div>
+        <div class="ex-tags">
+          <span class="ex-tag">Reactivo limitante</span>
+          <span class="ex-tag">Reactivo en exceso</span>
+          <span class="ex-tag">Volumen de producto</span>
+        </div>
+      </div>
+    </div>
+    <div class="exercise-body">
+
+      <div class="enunciado">
+        Se dispone de <strong>30 L de N₂</strong> y <strong>60 L de H₂</strong>, ambos a C.N.<br>
+        a) Identifica el <strong>reactivo limitante</strong>.<br>
+        b) Calcula el volumen de NH₃ producido y el volumen de reactivo que sobra.
+      </div>
+
+      <div class="reaction-box">
+        $$\text{N}_2(g) + 3\,\text{H}_2(g) \;\longrightarrow\; 2\,\text{NH}_3(g)$$
+      </div>
+
+      <div class="concept-note">
+        <strong>Método del reactivo limitante:</strong> Calcula el volumen de NH₃ que produciría cada reactivo por separado. El que produzca <em>menos</em> es el limitante. Los volúmenes de gases son directamente proporcionales a los moles en C.N.
+      </div>
+
+      <details>
+        <summary>Ver resolución completa</summary>
+        <div class="solution">
+
+          <div class="sol-step">
+            <div class="sol-step-num">1</div>
+            <div class="sol-step-body">
+              <h4>¿Cuánto NH₃ produce cada reactivo si fuera el limitante?</h4>
+              <div class="op-box">
+                $$\text{Si limita N}_2\text{:}\quad V_{\text{NH}_3} = 30\ \text{L} \times \frac{2}{1} = 60\ \text{L de NH}_3$$
+                $$\text{Si limita H}_2\text{:}\quad V_{\text{NH}_3} = 60\ \text{L} \times \frac{2}{3} = 40\ \text{L de NH}_3$$
+              </div>
+              El <strong>H₂ produce menos</strong>, así que es el <strong>reactivo limitante</strong>.
+            </div>
+          </div>
+
+          <div class="sol-step">
+            <div class="sol-step-num">2</div>
+            <div class="sol-step-body">
+              <h4>Volumen de N₂ consumido por 60 L de H₂</h4>
+              <div class="op-box">
+                $$V_{\text{N}_2\text{ consumido}} = 60\ \text{L} \times \frac{1}{3} = 20\ \text{L}$$
+                $$V_{\text{N}_2\text{ sobrante}} = 30 - 20 = 10\ \text{L}$$
+              </div>
+            </div>
+          </div>
+
+          <div class="sol-step">
+            <div class="sol-step-num">3</div>
+            <div class="sol-step-body">
+              <div class="result-box">
+                <span class="res-label">Resultados</span>
+                Reactivo limitante: <strong>H₂</strong> · $V_{\text{NH}_3} = 40\ \text{L}$ · N₂ sobrante: $10\ \text{L}$
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </details>
+    </div>
+  </article>
+
+  <!-- ─── EJERCICIO 4 ─── -->
+  <article class="exercise ex-med">
+    <div class="exercise-header">
+      <div class="ex-num">4</div>
+      <div class="ex-title-block">
+        <div class="ex-title">Fracción molar y presión parcial de una mezcla</div>
+        <div class="ex-tags">
+          <span class="ex-tag">Fracción molar</span>
+          <span class="ex-tag">Presión parcial</span>
+          <span class="ex-tag">Ley de Dalton</span>
+        </div>
+      </div>
+    </div>
+    <div class="exercise-body">
+
+      <div class="enunciado">
+        Un recipiente contiene una mezcla de gases a <strong>2,5 atm</strong> de presión total formada por: <strong>0,4 mol de N₂</strong>, <strong>0,2 mol de O₂</strong> y <strong>0,1 mol de CO₂</strong>.<br>
+        a) Calcula la fracción molar de cada gas.<br>
+        b) Calcula la presión parcial de cada componente.<br>
+        c) Expresa la composición en porcentaje en volumen.
+      </div>
+
+      <div class="concept-note">
+        <strong>Ley de Dalton:</strong> La presión que ejerce cada gas de una mezcla ideal es como si estuviera solo ocupando el mismo volumen. $p_i = \chi_i \cdot p_T$.
+      </div>
+
+      <details>
+        <summary>Ver resolución completa</summary>
+        <div class="solution">
+
+          <div class="sol-step">
+            <div class="sol-step-num">1</div>
+            <div class="sol-step-body">
+              <h4>a) Fracciones molares</h4>
+              <div class="op-box">
+                $$n_{\text{total}} = 0{,}4 + 0{,}2 + 0{,}1 = 0{,}7\ \text{mol}$$
+                $$\chi_{\text{N}_2} = \frac{0{,}4}{0{,}7} = 0{,}571 \qquad \chi_{\text{O}_2} = \frac{0{,}2}{0{,}7} = 0{,}286 \qquad \chi_{\text{CO}_2} = \frac{0{,}1}{0{,}7} = 0{,}143$$
+              </div>
+              Comprobación: $0{,}571 + 0{,}286 + 0{,}143 = 1{,}000$ ✓
+            </div>
+          </div>
+
+          <div class="sol-step">
+            <div class="sol-step-num">2</div>
+            <div class="sol-step-body">
+              <h4>b) Presiones parciales</h4>
+              <div class="op-box">
+                $$p_{\text{N}_2} = 0{,}571 \times 2{,}5 = 1{,}43\ \text{atm}$$
+                $$p_{\text{O}_2} = 0{,}286 \times 2{,}5 = 0{,}71\ \text{atm}$$
+                $$p_{\text{CO}_2} = 0{,}143 \times 2{,}5 = 0{,}36\ \text{atm}$$
+              </div>
+            </div>
+          </div>
+
+          <div class="sol-step">
+            <div class="sol-step-num">3</div>
+            <div class="sol-step-body">
+              <h4>c) % en volumen = % molar</h4>
+              <div class="result-box">
+                <span class="res-label">Resultados</span>
+                $\%V_{\text{N}_2}=57{,}1\%$ · $\%V_{\text{O}_2}=28{,}6\%$ · $\%V_{\text{CO}_2}=14{,}3\%$
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </details>
+    </div>
+  </article>
+
+  <!-- ─── EJERCICIO 5 ─── -->
+  <article class="exercise ex-med">
+    <div class="exercise-header">
+      <div class="ex-num">5</div>
+      <div class="ex-title-block">
+        <div class="ex-title">Combustión del propano — litros a condiciones no normales</div>
+        <div class="ex-tags">
+          <span class="ex-tag">Gas Ideal (pV=nRT)</span>
+          <span class="ex-tag">Combustión</span>
+          <span class="ex-tag">Volumen en L</span>
+        </div>
+      </div>
+    </div>
+    <div class="exercise-body">
+
+      <div class="enunciado">
+        Se queman <strong>22 g de propano</strong> (C₃H₈) en exceso de aire. La reacción ocurre a <strong>350 K y 1,2 atm</strong>.<br>
+        a) Escribe y ajusta la reacción de combustión completa.<br>
+        b) Calcula el volumen de CO₂ producido en esas condiciones.<br>
+        c) Calcula el volumen de O₂ consumido en las mismas condiciones.
+      </div>
+
+      <div class="reaction-box">
+        $$\text{C}_3\text{H}_8(g) + 5\,\text{O}_2(g) \;\longrightarrow\; 3\,\text{CO}_2(g) + 4\,\text{H}_2\text{O}(g)$$
+      </div>
+
+      <div class="concept-note">
+        <strong>Gas ideal:</strong> Cuando las condiciones no son las normales (0 °C, 1 atm), usa $pV = nRT$. Despeja $V = \dfrac{nRT}{p}$.
+        $M_{\text{C}_3\text{H}_8} = 44\ \text{g/mol}$
+      </div>
+
+      <details>
+        <summary>Ver resolución completa</summary>
+        <div class="solution">
+
+          <div class="sol-step">
+            <div class="sol-step-num">1</div>
+            <div class="sol-step-body">
+              <h4>Moles de propano</h4>
+              <div class="op-box">
+                $$n_{\text{C}_3\text{H}_8} = \frac{22\ \text{g}}{44\ \text{g/mol}} = 0{,}5\ \text{mol}$$
+              </div>
+            </div>
+          </div>
+
+          <div class="sol-step">
+            <div class="sol-step-num">2</div>
+            <div class="sol-step-body">
+              <h4>Moles de CO₂ y de O₂</h4>
+              <div class="op-box">
+                $$n_{\text{CO}_2} = 0{,}5\ \text{mol} \times \frac{3\ \text{mol CO}_2}{1\ \text{mol C}_3\text{H}_8} = 1{,}5\ \text{mol}$$
+                $$n_{\text{O}_2} = 0{,}5\ \text{mol} \times \frac{5\ \text{mol O}_2}{1\ \text{mol C}_3\text{H}_8} = 2{,}5\ \text{mol}$$
+              </div>
+            </div>
+          </div>
+
+          <div class="sol-step">
+            <div class="sol-step-num">3</div>
+            <div class="sol-step-body">
+              <h4>Volúmenes a 350 K y 1,2 atm</h4>
+              <div class="op-box">
+                $$V_{\text{CO}_2} = \frac{n_{\text{CO}_2} \cdot R \cdot T}{p} = \frac{1{,}5 \times 0{,}082 \times 350}{1{,}2} = \frac{43{,}05}{1{,}2} = 35{,}9\ \text{L}$$
+                $$V_{\text{O}_2} = \frac{2{,}5 \times 0{,}082 \times 350}{1{,}2} = \frac{71{,}75}{1{,}2} = 59{,}8\ \text{L}$$
+              </div>
+              <div class="result-box">
+                <span class="res-label">Resultados</span>
+                $V_{\text{CO}_2} = 35{,}9\ \text{L}$ · $V_{\text{O}_2} = 59{,}8\ \text{L}$ · a 350 K, 1,2 atm
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </details>
+    </div>
+  </article>
+
+  <!-- ══ NIVEL AVANZADO ══ -->
+  <div class="section-header">
+    <span class="tag tag-hard">Nivel avanzado — ejercicios 6, 7 y 8</span>
+    <hr>
+  </div>
+
+  <!-- ─── EJERCICIO 6 ─── -->
+  <article class="exercise ex-hard">
+    <div class="exercise-header">
+      <div class="ex-num">6</div>
+      <div class="ex-title-block">
+        <div class="ex-title">Mezcla de gases: composición final tras reacción parcial</div>
+        <div class="ex-tags">
+          <span class="ex-tag">Reactivo limitante</span>
+          <span class="ex-tag">Fracción molar final</span>
+          <span class="ex-tag">% en volumen post-reacción</span>
+        </div>
+      </div>
+    </div>
+    <div class="exercise-body">
+
+      <div class="enunciado">
+        Una mezcla contiene <strong>50 L de H₂</strong>, <strong>30 L de O₂</strong> y <strong>20 L de N₂</strong> (todos a C.N.).<br>
+        Se hace reaccionar el hidrógeno con el oxígeno hasta que uno de los dos se agota.<br>
+        a) Indica el reactivo limitante y calcula el volumen de H₂O formado.<br>
+        b) Calcula la composición de la <strong>mezcla gaseosa final</strong> en porcentaje en volumen (asume que el H₂O queda en fase gaseosa).<br>
+        c) ¿Cuál sería la fracción molar del N₂ en la mezcla final?
+      </div>
+
+      <div class="reaction-box">
+        $$2\,\text{H}_2(g) + \text{O}_2(g) \;\longrightarrow\; 2\,\text{H}_2\text{O}(g)$$
+      </div>
+
+      <details>
+        <summary>Ver resolución completa</summary>
+        <div class="solution">
+
+          <div class="sol-step">
+            <div class="sol-step-num">1</div>
+            <div class="sol-step-body">
+              <h4>a) Reactivo limitante</h4>
+              La estequiometría exige $\dfrac{V_{\text{H}_2}}{V_{\text{O}_2}} = \dfrac{2}{1}$.
+              <div class="op-box">
+                $$\frac{50}{30} = 1{,}67 \quad \text{pero la reacción pide} \quad \frac{2}{1} = 2$$
+              </div>
+              Como la relación real (1,67) es <em>menor</em> que la requerida (2), hay <strong>H₂ en defecto</strong> → <strong>H₂ es el reactivo limitante</strong>.
+              <div class="op-box">
+                $$V_{\text{H}_2\text{O}} = V_{\text{H}_2} \times \frac{2}{2} = 50\ \text{L}$$
+                $$V_{\text{O}_2\ \text{consumido}} = 50\ \text{L} \times \frac{1}{2} = 25\ \text{L}$$
+              </div>
+            </div>
+          </div>
+
+          <div class="sol-step">
+            <div class="sol-step-num">2</div>
+            <div class="sol-step-body">
+              <h4>b) Composición de la mezcla final</h4>
+              <div class="op-box">
+                $$\begin{array}{ll}
+                  \text{H}_2\text{O}: & 50\ \text{L} \\
+                  \text{O}_2\ \text{sobrante}: & 30 - 25 = 5\ \text{L} \\
+                  \text{N}_2\ \text{inerte}: & 20\ \text{L} \\
+                  \hline
+                  \text{Total}: & 75\ \text{L}
+                \end{array}$$
+              </div>
+              <div class="op-box">
+                $$\%V_{\text{H}_2\text{O}} = \frac{50}{75}\times 100 = 66{,}7\%$$
+                $$\%V_{\text{O}_2} = \frac{5}{75}\times 100 = 6{,}7\%$$
+                $$\%V_{\text{N}_2} = \frac{20}{75}\times 100 = 26{,}6\%$$
+              </div>
+            </div>
+          </div>
+
+          <div class="sol-step">
+            <div class="sol-step-num">3</div>
+            <div class="sol-step-body">
+              <h4>c) Fracción molar del N₂</h4>
+              <div class="result-box">
+                <span class="res-label">Resultados</span>
+                $\chi_{\text{N}_2} = \dfrac{20}{75} = 0{,}267$ · $\%V_{\text{H}_2\text{O}}=66{,}7\%$ · $\%V_{\text{O}_2}=6{,}7\%$ · $\%V_{\text{N}_2}=26{,}6\%$
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </details>
+    </div>
+  </article>
+
+  <!-- ─── EJERCICIO 7 ─── -->
+  <article class="exercise ex-hard">
+    <div class="exercise-header">
+      <div class="ex-num">7</div>
+      <div class="ex-title-block">
+        <div class="ex-title">Mezcla de combustibles — reactivo limitante con % en masa y volumen</div>
+        <div class="ex-tags">
+          <span class="ex-tag">Mezcla combustibles</span>
+          <span class="ex-tag">% en masa y en volumen</span>
+          <span class="ex-tag">pV=nRT</span>
+          <span class="ex-tag">Reactivo limitante</span>
+        </div>
+      </div>
+    </div>
+    <div class="exercise-body">
+
+      <div class="enunciado">
+        Una mezcla gaseosa de combustibles contiene <strong>30% en volumen de metano</strong> (CH₄) y <strong>70% en volumen de etano</strong> (C₂H₆). Se dispone de <strong>100 L de la mezcla</strong> a <strong>25 °C y 1 atm</strong>, que se queman con <strong>800 L de aire</strong> (21% O₂ en volumen) en las mismas condiciones.<br>
+        a) Calcula los moles de CH₄ y C₂H₆ presentes.<br>
+        b) Calcula los moles de O₂ disponibles y los necesarios para la combustión completa. Determina si hay suficiente oxígeno.<br>
+        c) Si el oxígeno es limitante, ¿qué masa de CO₂ se forma?<br>
+        d) Calcula el <strong>porcentaje en masa</strong> de CO₂ en los productos de combustión (agua incluida).
+      </div>
+
+      <div class="reaction-box">
+        $$\text{CH}_4(g) + 2\,\text{O}_2(g) \longrightarrow \text{CO}_2(g) + 2\,\text{H}_2\text{O}(g)$$
+        $$\text{C}_2\text{H}_6(g) + \tfrac{7}{2}\,\text{O}_2(g) \longrightarrow 2\,\text{CO}_2(g) + 3\,\text{H}_2\text{O}(g)$$
+      </div>
+
+      <details>
+        <summary>Ver resolución completa</summary>
+        <div class="solution">
+
+          <div class="sol-step">
+            <div class="sol-step-num">1</div>
+            <div class="sol-step-body">
+              <h4>a) Moles de la mezcla de combustibles a 25 °C y 1 atm</h4>
+              <div class="op-box">
+                $$n_{\text{total mezcla}} = \frac{pV}{RT} = \frac{1\times 100}{0{,}082\times 298} = 4{,}09\ \text{mol}$$
+                $$n_{\text{CH}_4} = 0{,}30 \times 4{,}09 = 1{,}23\ \text{mol}$$
+                $$n_{\text{C}_2\text{H}_6} = 0{,}70 \times 4{,}09 = 2{,}86\ \text{mol}$$
+              </div>
+            </div>
+          </div>
+
+          <div class="sol-step">
+            <div class="sol-step-num">2</div>
+            <div class="sol-step-body">
+              <h4>b) O₂ disponible vs. O₂ necesario</h4>
+              <div class="op-box">
+                $$n_{\text{aire}} = \frac{1\times 800}{0{,}082\times 298} = 32{,}7\ \text{mol} \implies n_{\text{O}_2} = 0{,}21\times 32{,}7 = 6{,}87\ \text{mol}$$
+                $$n_{\text{O}_2\text{ necesario}} = 2\times 1{,}23 + 3{,}5\times 2{,}86 = 2{,}46 + 10{,}01 = 12{,}47\ \text{mol}$$
+              </div>
+              $6{,}87 < 12{,}47$ → <strong>el O₂ es el reactivo limitante</strong>; la combustión será incompleta.
+            </div>
+          </div>
+
+          <div class="sol-step">
+            <div class="sol-step-num">3</div>
+            <div class="sol-step-body">
+              <h4>c) Distribución del O₂ limitante y CO₂ producido</h4>
+              Quemamos los combustibles en proporción a sus requerimientos. El O₂ disponible se reparte proporcionalmente entre ambos:
+              <div class="op-box">
+                $$\text{Fracción para CH}_4 = \frac{2{,}46}{12{,}47} = 0{,}197 \implies \text{O}_2\text{ para CH}_4 = 6{,}87\times 0{,}197 = 1{,}35\ \text{mol}$$
+                $$\text{O}_2\text{ para C}_2\text{H}_6 = 6{,}87 - 1{,}35 = 5{,}52\ \text{mol}$$
+                $$n_{\text{CO}_2}\text{ de CH}_4 = \frac{1{,}35}{2}\times 1 = 0{,}675\ \text{mol}$$
+                $$n_{\text{CO}_2}\text{ de C}_2\text{H}_6 = \frac{5{,}52}{3{,}5}\times 2 = 3{,}154\ \text{mol}$$
+                $$n_{\text{CO}_2\text{ total}} = 0{,}675 + 3{,}154 = 3{,}83\ \text{mol} \implies m_{\text{CO}_2} = 3{,}83\times 44 = \mathbf{168{,}5\ \text{g}}$$
+              </div>
+            </div>
+          </div>
+
+          <div class="sol-step">
+            <div class="sol-step-num">4</div>
+            <div class="sol-step-body">
+              <h4>d) % en masa del CO₂ en los productos</h4>
+              <div class="op-box">
+                $$n_{\text{H}_2\text{O}} = \frac{1{,}35}{2}\times 2 + \frac{5{,}52}{3{,}5}\times 3 = 1{,}35 + 4{,}73 = 6{,}08\ \text{mol}$$
+                $$m_{\text{H}_2\text{O}} = 6{,}08\times 18 = 109{,}4\ \text{g}$$
+                $$m_{\text{total productos}} = 168{,}5 + 109{,}4 = 277{,}9\ \text{g}$$
+                $$\%m_{\text{CO}_2} = \frac{168{,}5}{277{,}9}\times 100 = \mathbf{60{,}6\%}$$
+              </div>
+              <div class="result-box">
+                <span class="res-label">Resultados</span>
+                O₂ limitante · $m_{\text{CO}_2} = 168{,}5\ \text{g}$ · $\%m_{\text{CO}_2} = 60{,}6\%$
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </details>
+    </div>
+  </article>
+
+  <!-- ─── EJERCICIO 8 ─── -->
+  <article class="exercise ex-hard">
+    <div class="exercise-header">
+      <div class="ex-num">8</div>
+      <div class="ex-title-block">
+        <div class="ex-title">Problema integral — mezcla, reacción, análisis completo</div>
+        <div class="ex-tags">
+          <span class="ex-tag">Nivel máximo</span>
+          <span class="ex-tag">Reactivo limitante</span>
+          <span class="ex-tag">Fracción molar final</span>
+          <span class="ex-tag">Presión parcial</span>
+          <span class="ex-tag">% masa y volumen</span>
+          <span class="ex-tag">pV=nRT</span>
+        </div>
+      </div>
+    </div>
+    <div class="exercise-body">
+
+      <div class="enunciado">
+        Un recipiente rígido de <strong>50 L</strong> contiene inicialmente una mezcla gaseosa a <strong>2 atm y 400 K</strong> compuesta por <strong>40% SO₂</strong>, <strong>30% O₂</strong> y <strong>30% N₂</strong> (en porcentaje de volumen).<br>
+        Se eleva la temperatura para que reaccione según:
+        <br><br>
+        $$2\,\text{SO}_2(g) + \text{O}_2(g) \;\longrightarrow\; 2\,\text{SO}_3(g)$$
+        <br>
+        La reacción avanza hasta que <strong>se agota el reactivo limitante</strong>.<br>
+        a) Calcula los moles iniciales de cada gas.<br>
+        b) Determina el reactivo limitante.<br>
+        c) Calcula los moles de cada gas en la <strong>mezcla final</strong>.<br>
+        d) Halla la <strong>presión total final</strong> a 400 K.<br>
+        e) Calcula las <strong>presiones parciales finales</strong> y la fracción molar del SO₃.<br>
+        f) Calcula el <strong>porcentaje en masa</strong> de cada componente en la mezcla final.<br>
+        (Masas molares: SO₂=64, O₂=32, N₂=28, SO₃=80 g/mol)
+      </div>
+
+      <details>
+        <summary>Ver resolución completa</summary>
+        <div class="solution">
+
+          <div class="sol-step">
+            <div class="sol-step-num">1</div>
+            <div class="sol-step-body">
+              <h4>a) Moles iniciales totales y de cada gas</h4>
+              <div class="op-box">
+                $$n_{\text{total,i}} = \frac{pV}{RT} = \frac{2\times 50}{0{,}082\times 400} = \frac{100}{32{,}8} = 3{,}049\ \text{mol}$$
+                $$n_{\text{SO}_2} = 0{,}40\times 3{,}049 = 1{,}220\ \text{mol}$$
+                $$n_{\text{O}_2}  = 0{,}30\times 3{,}049 = 0{,}915\ \text{mol}$$
+                $$n_{\text{N}_2}  = 0{,}30\times 3{,}049 = 0{,}915\ \text{mol}$$
+              </div>
+            </div>
+          </div>
+
+          <div class="sol-step">
+            <div class="sol-step-num">2</div>
+            <div class="sol-step-body">
+              <h4>b) Reactivo limitante</h4>
+              La relación estequiométrica es $\text{SO}_2 : \text{O}_2 = 2:1$, así que para consumir todo el SO₂ se necesitaría:
+              <div class="op-box">
+                $$n_{\text{O}_2\text{ necesario}} = \frac{1{,}220}{2} = 0{,}610\ \text{mol}$$
+              </div>
+              Disponemos de $0{,}915\ \text{mol}$ de O₂, que es <em>más</em> que suficiente. Por tanto, el <strong>SO₂ es el reactivo limitante</strong>.
+            </div>
+          </div>
+
+          <div class="sol-step">
+            <div class="sol-step-num">3</div>
+            <div class="sol-step-body">
+              <h4>c) Moles en la mezcla final</h4>
+              <div class="op-box">
+                $$\begin{array}{lcl}
+                  \text{SO}_2\text{ consumido} & = & 1{,}220\ \text{mol} \\
+                  \text{SO}_3\text{ formado}   & = & 1{,}220\ \text{mol} \quad (2\to 2) \\
+                  \text{O}_2\text{ consumido}  & = & 0{,}610\ \text{mol} \\[4pt]
+                  \hline \\[-8pt]
+                  n_{\text{SO}_2}^{\text{fin}} & = & 0\ \text{mol} \\
+                  n_{\text{SO}_3}^{\text{fin}} & = & 1{,}220\ \text{mol} \\
+                  n_{\text{O}_2}^{\text{fin}}  & = & 0{,}915 - 0{,}610 = 0{,}305\ \text{mol} \\
+                  n_{\text{N}_2}^{\text{fin}}  & = & 0{,}915\ \text{mol} \quad \text{(inerte)} \\[4pt]
+                  \hline \\[-8pt]
+                  n_{\text{total,f}}           & = & 1{,}220 + 0{,}305 + 0{,}915 = \mathbf{2{,}440\ \text{mol}}
+                \end{array}$$
+              </div>
+              Nota: $n$ total <em>disminuye</em> porque 3 mol de gases reactivos producen 2 mol de producto.
+            </div>
+          </div>
+
+          <div class="sol-step">
+            <div class="sol-step-num">4</div>
+            <div class="sol-step-body">
+              <h4>d) Presión total final a 400 K</h4>
+              El recipiente es rígido ($V=50\ \text{L}$, $T=400\ \text{K}$):
+              <div class="op-box">
+                $$p_f = \frac{n_{\text{total,f}} \cdot R \cdot T}{V} = \frac{2{,}440\times 0{,}082\times 400}{50} = \frac{80{,}03}{50} = \mathbf{1{,}60\ \text{atm}}$$
+              </div>
+              La presión bajó de 2 atm a 1,60 atm al reducirse el número de moles de gas.
+            </div>
+          </div>
+
+          <div class="sol-step">
+            <div class="sol-step-num">5</div>
+            <div class="sol-step-body">
+              <h4>e) Presiones parciales y fracción molar del SO₃</h4>
+              <div class="op-box">
+                $$\chi_{\text{SO}_3} = \frac{1{,}220}{2{,}440} = 0{,}500 \quad \Rightarrow \quad p_{\text{SO}_3} = 0{,}500\times 1{,}60 = 0{,}80\ \text{atm}$$
+                $$\chi_{\text{O}_2}  = \frac{0{,}305}{2{,}440} = 0{,}125 \quad \Rightarrow \quad p_{\text{O}_2}  = 0{,}125\times 1{,}60 = 0{,}20\ \text{atm}$$
+                $$\chi_{\text{N}_2}  = \frac{0{,}915}{2{,}440} = 0{,}375 \quad \Rightarrow \quad p_{\text{N}_2}  = 0{,}375\times 1{,}60 = 0{,}60\ \text{atm}$$
+              </div>
+              Comprobación: $0{,}80+0{,}20+0{,}60 = 1{,}60$ atm ✓
+            </div>
+          </div>
+
+          <div class="sol-step">
+            <div class="sol-step-num">6</div>
+            <div class="sol-step-body">
+              <h4>f) Porcentaje en masa de cada componente</h4>
+              <div class="op-box">
+                $$m_{\text{SO}_3} = 1{,}220\times 80 = 97{,}6\ \text{g}$$
+                $$m_{\text{O}_2}  = 0{,}305\times 32 = 9{,}76\ \text{g}$$
+                $$m_{\text{N}_2}  = 0{,}915\times 28 = 25{,}62\ \text{g}$$
+                $$m_{\text{total}} = 97{,}6 + 9{,}76 + 25{,}62 = 132{,}98\ \text{g}$$
+              </div>
+              <div class="op-box">
+                $$\%m_{\text{SO}_3} = \frac{97{,}6}{132{,}98}\times 100 = 73{,}4\%$$
+                $$\%m_{\text{O}_2}  = \frac{9{,}76}{132{,}98}\times 100 = 7{,}3\%$$
+                $$\%m_{\text{N}_2}  = \frac{25{,}62}{132{,}98}\times 100 = 19{,}3\%$$
+              </div>
+              <div class="result-box">
+                <span class="res-label">Resultados finales</span>
+                $p_f=1{,}60\ \text{atm}$ · $\chi_{\text{SO}_3}=0{,}500$ · $p_{\text{SO}_3}=0{,}80\ \text{atm}$ · $\%m_{\text{SO}_3}=73{,}4\%$ · $\%m_{\text{O}_2}=7{,}3\%$ · $\%m_{\text{N}_2}=19{,}3\%$
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </details>
+    </div>
+  </article>
+
+</main>
+
+<footer>
+  <span>IES María Moliner · Segovia</span> — Física, Química y Lengua Española<br>
+  1.º Bachillerato · Curso 2024–25 · Hoja de ejercicios generada con ⚗
+</footer>
+
+</body>
+</html>
