@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafío Químico: Disoluciones (Versión Extendida)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: 'Noto Sans', sans-serif;
+            background-color: #f8fafc;
+        }
+        .exercise-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .difficulty-easy { border-left: 6px solid #10b981; }
+        .difficulty-medium { border-left: 6px solid #f59e0b; }
+        .difficulty-hard { border-left: 6px solid #ef4444; }
+        .difficulty-expert { border-left: 6px solid #7c3aed; }
+        
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+    <div class="max-w-4xl mx-auto">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-slate-800 mb-4">🧪 Masterclass: Disoluciones</h1>
+            <p class="text-lg text-slate-600 italic">"Entender la química es aprender a ver lo invisible a través de los números."</p>
+            <div class="mt-6 flex justify-center gap-4 text-sm">
+                <span class="flex items-center"><span class="w-3 h-3 bg-emerald-500 rounded-full mr-2"></span> Básico</span>
+                <span class="flex items-center"><span class="w-3 h-3 bg-amber-500 rounded-full mr-2"></span> Intermedio</span>
+                <span class="flex items-center"><span class="w-3 h-3 bg-red-500 rounded-full mr-2"></span> Difícil</span>
+                <span class="flex items-center"><span class="w-3 h-3 bg-purple-600 rounded-full mr-2"></span> Experto</span>
+            </div>
+        </header>
+
+        <div class="space-y-8">
+            <!-- Ejercicio 1 -->
+            <div class="exercise-card bg-white p-6 rounded-xl shadow-sm difficulty-easy">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-bold text-xl text-slate-700">1. Concentración en g/L</h3>
+                    <span class="bg-emerald-100 text-emerald-700 px-2 py-1 rounded text-xs font-bold">NIVEL 1</span>
+                </div>
+                <p class="text-slate-600 mb-4">Se disuelven 15 g de cloruro de sodio (\(NaCl\)) en agua hasta obtener un volumen total de 250 mL de disolución. Calcula la concentración en g/L.</p>
+                <details class="group">
+                    <summary class="list-none cursor-pointer text-blue-600 font-semibold hover:text-blue-800 flex items-center">
+                        <span class="mr-2">Ver explicación detallada</span>
+                        <svg class="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </summary>
+                    <div class="mt-4 p-5 bg-slate-50 rounded-lg text-slate-700 border-l-4 border-emerald-400 leading-relaxed">
+                        <p class="mb-2"><strong>Estrategia:</strong> La concentración en g/L nos dice cuántos gramos de soluto habría si tuviéramos exactamente un litro de disolución.</p>
+                        <p class="mb-2"><strong>Paso 1:</strong> Convertir el volumen a litros. Como 1 L = 1000 mL:
+                        $$ V = 250 \, mL \cdot \frac{1 \, L}{1000 \, mL} = 0,25 \, L $$</p>
+                        <p class="mb-2"><strong>Paso 2:</strong> Aplicar la definición de concentración en masa:
+                        $$ C(g/L) = \frac{masa \, soluto \, (g)}{volumen \, disolución \, (L)} = \frac{15 \, g}{0,25 \, L} = \mathbf{60 \, g/L} $$</p>
+                        <p class="text-sm italic text-slate-500">Nota: Asegúrate siempre de que el volumen sea el de la "disolución total", no solo el del disolvente.</p>
+                    </div>
+                </details>
+            </div>
+
+            <!-- Ejercicio 2 -->
+            <div class="exercise-card bg-white p-6 rounded-xl shadow-sm difficulty-easy">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-bold text-xl text-slate-700">2. Molaridad Directa</h3>
+                    <span class="bg-emerald-100 text-emerald-700 px-2 py-1 rounded text-xs font-bold">NIVEL 1</span>
+                </div>
+                <p class="text-slate-600 mb-4">Calcula la molaridad de una disolución que contiene 20 g de hidróxido de sodio (\(NaOH\)) en 500 mL de disolución. (Masas: Na=23, O=16, H=1).</p>
+                <details class="group">
+                    <summary class="list-none cursor-pointer text-blue-600 font-semibold hover:text-blue-800 flex items-center">
+                        <span class="mr-2">Ver explicación detallada</span>
+                        <svg class="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </summary>
+                    <div class="mt-4 p-5 bg-slate-50 rounded-lg text-slate-700 border-l-4 border-emerald-400">
+                        <p class="mb-2"><strong>Estrategia:</strong> La molaridad (\(M\)) relaciona los <strong>moles</strong> de soluto con el volumen en litros. Es la unidad más usada en química.</p>
+                        <p class="mb-2"><strong>Paso 1:</strong> Calcular la masa molar (\(M_m\)) del \(NaOH\):
+                        $$ M_m = 23 + 16 + 1 = 40 \, g/mol $$</p>
+                        <p class="mb-2"><strong>Paso 2:</strong> Convertir los gramos a moles (\(n\)):
+                        $$ n = \frac{masa}{M_m} = \frac{20 \, g}{40 \, g/mol} = 0,5 \, mol $$</p>
+                        <p class="mb-2"><strong>Paso 3:</strong> Calcular la molaridad (Volumen = 0,5 L):
+                        $$ M = \frac{n \, (mol)}{V \, (L)} = \frac{0,5 \, mol}{0,5 \, L} = \mathbf{1,0 \, M} $$</p>
+                    </div>
+                </details>
+            </div>
+
+            <!-- Ejercicio 3 -->
+            <div class="exercise-card bg-white p-6 rounded-xl shadow-sm difficulty-medium">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-bold text-xl text-slate-700">3. Preparación de Disoluciones</h3>
+                    <span class="bg-amber-100 text-amber-700 px-2 py-1 rounded text-xs font-bold">NIVEL 2</span>
+                </div>
+                <p class="text-slate-600 mb-4">¿Cuántos gramos de sulfato de cobre (II) (\(CuSO_4\)) se necesitan para preparar 2 litros de una disolución 0,5 M? (Masas: Cu=63.5, S=32, O=16).</p>
+                <details class="group">
+                    <summary class="list-none cursor-pointer text-blue-600 font-semibold hover:text-blue-800 flex items-center">
+                        <span class="mr-2">Ver explicación detallada</span>
+                        <svg class="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </summary>
+                    <div class="mt-4 p-5 bg-slate-50 rounded-lg text-slate-700 border-l-4 border-amber-400">
+                        <p class="mb-2"><strong>Estrategia:</strong> Aquí trabajamos a la inversa. Sabemos la concentración deseada y queremos saber cuánto soluto pesar.</p>
+                        <p class="mb-2"><strong>Paso 1:</strong> Hallar los moles necesarios usando la definición de molaridad (\(n = M \cdot V\)):
+                        $$ n = 0,5 \, mol/L \cdot 2 \, L = 1,0 \, mol $$</p>
+                        <p class="mb-2"><strong>Paso 2:</strong> Calcular la masa molar del \(CuSO_4\):
+                        $$ M_m = 63,5 + 32 + (4 \cdot 16) = 159,5 \, g/mol $$</p>
+                        <p class="mb-2"><strong>Paso 3:</strong> Convertir los moles a gramos:
+                        $$ m = 1,0 \, mol \cdot 159,5 \, g/mol = \mathbf{159,5 \, g} $$</p>
+                    </div>
+                </details>
+            </div>
+
+            <!-- Ejercicio 4 -->
+            <div class="exercise-card bg-white p-6 rounded-xl shadow-sm difficulty-medium">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-bold text-xl text-slate-700">4. Riqueza y Densidad</h3>
+                    <span class="bg-amber-100 text-amber-700 px-2 py-1 rounded text-xs font-bold">NIVEL 2</span>
+                </div>
+                <p class="text-slate-600 mb-4">Un frasco de ácido clorhídrico (\(HCl\)) concentrado tiene una densidad de 1,18 g/mL y una riqueza del 36% en masa. Calcula su molaridad. (Masas: Cl=35.5, H=1).</p>
+                <details class="group">
+                    <summary class="list-none cursor-pointer text-blue-600 font-semibold hover:text-blue-800 flex items-center">
+                        <span class="mr-2">Ver explicación detallada</span>
+                        <svg class="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </summary>
+                    <div class="mt-4 p-5 bg-slate-50 rounded-lg text-slate-700 border-l-4 border-amber-400">
+                        <p class="mb-2"><strong>Estrategia:</strong> Este es un clásico. Para facilitar los cálculos, <strong>asumiremos que tenemos 1 litro (1000 mL)</strong> del ácido del frasco.</p>
+                        <p class="mb-2"><strong>Paso 1:</strong> Calcular la masa de ese litro de disolución usando la densidad:
+                        $$ m_{disolución} = d \cdot V = 1,18 \, g/mL \cdot 1000 \, mL = 1180 \, g $$</p>
+                        <p class="mb-2"><strong>Paso 2:</strong> Calcular cuánto de esa masa es realmente \(HCl\) puro (el resto es agua):
+                        $$ m_{puro} = 1180 \, g \cdot \frac{36}{100} = 424,8 \, g \, HCl $$</p>
+                        <p class="mb-2"><strong>Paso 3:</strong> Pasar esa masa pura a moles (\(M_m \, HCl = 36,5 \, g/mol\)):
+                        $$ n = \frac{424,8 \, g}{36,5 \, g/mol} = 11,64 \, mol $$</p>
+                        <p class="mb-2">Como esos moles están en el litro que asumimos al principio: <strong>Molaridad = 11,64 M</strong>.</p>
+                    </div>
+                </details>
+            </div>
+
+            <!-- Ejercicio 5 -->
+            <div class="exercise-card bg-white p-6 rounded-xl shadow-sm difficulty-medium">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-bold text-xl text-slate-700">5. Dilución</h3>
+                    <span class="bg-amber-100 text-amber-700 px-2 py-1 rounded text-xs font-bold">NIVEL 2</span>
+                </div>
+                <p class="text-slate-600 mb-4">¿Qué volumen de una disolución de \(HNO_3\) 12 M se necesita para preparar 500 mL de una disolución del mismo ácido 0,1 M?</p>
+                <details class="group">
+                    <summary class="list-none cursor-pointer text-blue-600 font-semibold hover:text-blue-800 flex items-center">
+                        <span class="mr-2">Ver explicación detallada</span>
+                        <svg class="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </summary>
+                    <div class="mt-4 p-5 bg-slate-50 rounded-lg text-slate-700 border-l-4 border-amber-400">
+                        <p class="mb-2"><strong>Estrategia:</strong> Al diluir, añadimos agua, pero <strong>los moles de soluto no cambian</strong>. Lo que había en el volumen pequeño de concentrado es lo mismo que habrá en el volumen grande de diluido.</p>
+                        <p class="mb-2"><strong>Lógica:</strong> \( n_{inicial} = n_{final} \), por lo tanto: \( M_{conc} \cdot V_{conc} = M_{dil} \cdot V_{dil} \)</p>
+                        <p class="mb-2"><strong>Cálculo:</strong>
+                        $$ 12 \, M \cdot V_{conc} = 0,1 \, M \cdot 500 \, mL $$
+                        $$ V_{conc} = \frac{0,1 \cdot 500}{12} = \mathbf{4,17 \, mL} $$</p>
+                        <p class="text-sm italic text-slate-500">Nota: Tomarías 4,17 mL con una pipeta y añadirías agua hasta la marca de 500 mL en un matraz aforado.</p>
+                    </div>
+                </details>
+            </div>
+
+            <!-- Ejercicio 6 -->
+            <div class="exercise-card bg-white p-6 rounded-xl shadow-sm difficulty-medium">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-bold text-xl text-slate-700">6. Fracción Molar</h3>
+                    <span class="bg-amber-100 text-amber-700 px-2 py-1 rounded text-xs font-bold">NIVEL 2</span>
+                </div>
+                <p class="text-slate-600 mb-4">Calcula la fracción molar de soluto en una disolución de alcohol etílico (\(C_2H_5OH\)) al 40% en masa en agua. (Masa molar alcohol=46, Agua=18).</p>
+                <details class="group">
+                    <summary class="list-none cursor-pointer text-blue-600 font-semibold hover:text-blue-800 flex items-center">
+                        <span class="mr-2">Ver explicación detallada</span>
+                        <svg class="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </summary>
+                    <div class="mt-4 p-5 bg-slate-50 rounded-lg text-slate-700 border-l-4 border-amber-400">
+                        <p class="mb-2"><strong>Estrategia:</strong> La fracción molar (\(\chi\)) es la proporción de moles de una sustancia respecto al total de moles de la mezcla. No tiene unidades.</p>
+                        <p class="mb-2"><strong>Paso 1:</strong> Supón 100 g de disolución. Tendrás 40 g de alcohol y 60 g de agua.</p>
+                        <p class="mb-2"><strong>Paso 2:</strong> Calcular moles de cada uno:
+                        $$ n_{alcohol} = \frac{40}{46} = 0,87 \, mol \quad ; \quad n_{agua} = \frac{60}{18} = 3,33 \, mol $$</p>
+                        <p class="mb-2"><strong>Paso 3:</strong> Aplicar fórmula de fracción molar para el soluto:
+                        $$ \chi_{alcohol} = \frac{n_{alcohol}}{n_{alcohol} + n_{agua}} = \frac{0,87}{0,87 + 3,33} = \mathbf{0,207} $$</p>
+                        <p class="text-sm italic text-slate-500">Dato: La suma de todas las fracciones molares en una mezcla siempre debe ser exactamente 1.</p>
+                    </div>
+                </details>
+            </div>
+
+            <!-- Ejercicio 7 (DIFÍCIL) -->
+            <div class="exercise-card bg-white p-6 rounded-xl shadow-sm difficulty-hard border-t-2 border-red-500">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-bold text-xl text-red-700">7. Mezcla de Disoluciones</h3>
+                    <span class="bg-red-100 text-red-700 px-2 py-1 rounded text-xs font-bold">DIFÍCIL</span>
+                </div>
+                <p class="text-slate-600 mb-4">Mezclamos 150 mL de ácido sulfúrico 0,4 M con 200 mL de ácido sulfúrico 1,2 M. Después, se añade agua hasta completar un volumen de 500 mL. Calcula la molaridad de la mezcla final.</p>
+                <details class="group">
+                    <summary class="list-none cursor-pointer text-blue-600 font-semibold hover:text-blue-800 flex items-center">
+                        <span class="mr-2">Ver explicación detallada</span>
+                        <svg class="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </summary>
+                    <div class="mt-4 p-5 bg-slate-50 rounded-lg text-slate-700 border-l-4 border-red-400">
+                        <p class="mb-3"><strong>⚠️ El Gran Error:</strong> Nunca sumes las molaridades directamente (\(0,4 + 1,2 = 1,6\)). ¡Eso es imposible! La concentración resultante debe estar en un punto intermedio entre las dos.</p>
+                        <p class="mb-2"><strong>Estrategia:</strong> Los moles son aditivos. Calcula cuántos moles aporta cada vaso y divídelos por el volumen final total.</p>
+                        <ul class="list-disc ml-6 space-y-1 mb-3">
+                            <li>Vaso 1: \( n_1 = M_1 \cdot V_1 = 0,4 \cdot 0,150 = 0,06 \, mol \)</li>
+                            <li>Vaso 2: \( n_2 = M_2 \cdot V_2 = 1,2 \cdot 0,200 = 0,24 \, mol \)</li>
+                        </ul>
+                        <p class="mb-2"><strong>Suma total:</strong> \( n_{total} = 0,06 + 0,24 = 0,30 \, mol \)</p>
+                        <p class="mb-2"><strong>Volumen final:</strong> El enunciado dice que se completa hasta 500 mL (\(0,5 \, L\)).</p>
+                        <p>$$ M_{final} = \frac{0,30 \, mol}{0,5 \, L} = \mathbf{0,6 \, M} $$</p>
+                    </div>
+                </details>
+            </div>
+
+            <!-- Ejercicio 8 (DIFÍCIL) -->
+            <div class="exercise-card bg-white p-6 rounded-xl shadow-sm difficulty-hard border-t-2 border-red-500">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-bold text-xl text-red-700">8. El Problema del Reactivo Comercial</h3>
+                    <span class="bg-red-100 text-red-700 px-2 py-1 rounded text-xs font-bold">DIFÍCIL</span>
+                </div>
+                <p class="text-slate-600 mb-4">Queremos preparar 250 mL de ácido sulfúrico (\(H_2SO_4\)) 2 M a partir de un ácido comercial del 98% y densidad 1,84 g/mL. Calcula el volumen de ácido comercial necesario y el agua a añadir.</p>
+                <details class="group">
+                    <summary class="list-none cursor-pointer text-blue-600 font-semibold hover:text-blue-800 flex items-center">
+                        <span class="mr-2">Ver explicación detallada</span>
+                        <svg class="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </summary>
+                    <div class="mt-4 p-5 bg-slate-50 rounded-lg text-slate-700 border-l-4 border-red-400">
+                        <p class="mb-3"><strong>Estrategia:</strong> Primero calculamos cuánta "sustancia pura" necesitamos para el objetivo final y luego vemos cuánto líquido del frasco sucio (comercial) contiene esa cantidad.</p>
+                        <p class="mb-2"><strong>1. Objetivo final:</strong>
+                        $$ n = 2 \, mol/L \cdot 0,250 \, L = 0,5 \, mol \, H_2SO_4 $$
+                        $$ m_{pura} = 0,5 \, mol \cdot 98 \, g/mol = 49 \, g \, H_2SO_4 $$</p>
+                        <p class="mb-2"><strong>2. Ir al frasco comercial:</strong> Como solo es el 98% puro, necesitaremos pesar un poco más de 49g:
+                        $$ m_{comercial} = \frac{49 \, g \, puros}{0,98} = 50 \, g \, disolución $$</p>
+                        <p class="mb-2"><strong>3. Convertir a volumen (pipeta):</strong>
+                        $$ V_{frasco} = \frac{masa}{densidad} = \frac{50 \, g}{1,84 \, g/mL} = \mathbf{27,17 \, mL} $$</p>
+                        <p><strong>4. Agua:</strong> \( 250 \, mL - 27,17 \, mL = \mathbf{222,83 \, mL} \)</p>
+                    </div>
+                </details>
+            </div>
+
+            <!-- Ejercicio 9 (EXPERTO) -->
+            <div class="exercise-card bg-white p-6 rounded-xl shadow-sm difficulty-expert border-t-2 border-purple-600">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-bold text-xl text-purple-800">9. Sales Hidratadas</h3>
+                    <span class="bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs font-bold">EXPERTO</span>
+                </div>
+                <p class="text-slate-600 mb-4">Calcula la molaridad al disolver 50 g de \(CuSO_4 \cdot 5H_2O\) en agua hasta obtener 400 mL de disolución. (Masas: Cu=63.5, S=32, O=16, H=1).</p>
+                <details class="group">
+                    <summary class="list-none cursor-pointer text-blue-600 font-semibold hover:text-blue-800 flex items-center">
+                        <span class="mr-2">Ver explicación detallada</span>
+                        <svg class="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </summary>
+                    <div class="mt-4 p-5 bg-slate-50 rounded-lg text-slate-700 border-l-4 border-purple-500">
+                        <p class="mb-3"><strong>💡 Concepto clave:</strong> Una sal hidratada tiene moléculas de agua atrapadas en su cristal. Cuando pesas 50g, ¡no todo es sulfato! Parte de ese peso es agua "muerta" que al disolverse simplemente se une al disolvente.</p>
+                        <p class="mb-2"><strong>Paso 1: Masa molar del cristal completo (\(CuSO_4 \cdot 5H_2O\))</strong>
+                        $$ M_m = 63,5 + 32 + (4 \cdot 16) + \mathbf{5 \cdot (2 \cdot 1 + 16)} = 249,5 \, g/mol $$</p>
+                        <p class="mb-2"><strong>Paso 2: Moles de cristales pesados</strong>
+                        $$ n = \frac{50 \, g}{249,5 \, g/mol} = 0,2004 \, mol $$</p>
+                        <p class="mb-2"><strong>Paso 3: Moles de soluto activo</strong>
+                        Como cada molécula de cristal contiene solo 1 átomo de Cobre, hay 0,2004 moles de \(CuSO_4\).</p>
+                        <p class="mb-2"><strong>Paso 4: Molaridad</strong>
+                        $$ M = \frac{0,2004 \, mol}{0,4 \, L} = \mathbf{0,501 \, M} $$</p>
+                        <p class="text-xs text-red-600 font-bold italic">¡Cuidado! Si usas 159,5 g/mol para dividir los 50g iniciales, el resultado será erróneo porque estarías ignorando el peso del agua en la balanza.</p>
+                    </div>
+                </details>
+            </div>
+
+            <!-- Ejercicio 10 (EXPERTO) -->
+            <div class="exercise-card bg-white p-6 rounded-xl shadow-sm difficulty-expert border-t-2 border-purple-600">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-bold text-xl text-purple-800">10. Estequiometría e Iones</h3>
+                    <span class="bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs font-bold">EXPERTO</span>
+                </div>
+                <p class="text-slate-600 mb-4">Mezclamos 200 mL de \(CaCl_2\) 0,5 M con 300 mL de \(NaCl\) 0,2 M. Calcula la concentración final de iones cloruro (\(Cl^-\)).</p>
+                <details class="group">
+                    <summary class="list-none cursor-pointer text-blue-600 font-semibold hover:text-blue-800 flex items-center">
+                        <span class="mr-2">Ver explicación detallada</span>
+                        <svg class="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </summary>
+                    <div class="mt-4 p-5 bg-slate-50 rounded-lg text-slate-700 border-l-4 border-purple-500">
+                        <p class="mb-3"><strong>Estrategia:</strong> Los iones cloruro vienen de dos fuentes distintas. Debemos sumar todos los moles de \(Cl^-\) aportados por ambas sales.</p>
+                        
+                        <div class="grid md:grid-cols-2 gap-4 mb-4">
+                            <div class="bg-white p-3 rounded border">
+                                <p class="font-bold text-sm">Fuente 1: \(CaCl_2\)</p>
+                                <p class="text-xs">\( CaCl_2 \rightarrow Ca^{2+} + \mathbf{2}Cl^- \)</p>
+                                <p class="text-sm">Moles sal = \( 0,2 \cdot 0,5 = 0,1 \, mol \)</p>
+                                <p class="text-sm font-bold">Moles \(Cl^- = 2 \cdot 0,1 = 0,2 \, mol \)</p>
+                            </div>
+                            <div class="bg-white p-3 rounded border">
+                                <p class="font-bold text-sm">Fuente 2: \(NaCl\)</p>
+                                <p class="text-xs">\( NaCl \rightarrow Na^+ + \mathbf{1}Cl^- \)</p>
+                                <p class="text-sm">Moles sal = \( 0,3 \cdot 0,2 = 0,06 \, mol \)</p>
+                                <p class="text-sm font-bold">Moles \(Cl^- = 1 \cdot 0,06 = 0,06 \, mol \)</p>
+                            </div>
+                        </div>
+
+                        <p class="mb-2"><strong>Total de Cloruros:</strong> \( 0,2 + 0,06 = 0,26 \, mol \)</p>
+                        <p class="mb-2"><strong>Volumen de la mezcla:</strong> \( 200 + 300 = 500 \, mL = 0,5 \, L \)</p>
+                        <p class="text-xl font-bold text-center bg-purple-50 p-2 rounded">
+                            $$ [Cl^-] = \frac{0,26 \, mol}{0,5 \, L} = \mathbf{0,52 \, M} $$
+                        </p>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <footer class="mt-16 text-center text-slate-500 text-sm border-t pt-8 pb-12">
+            <p>Guía de estudio para 1º de Bachillerato - Departamento de Química</p>
+            <p class="mt-2">Recordatorio: La constancia en la práctica es el catalizador del éxito.</p>
+        </footer>
+    </div>
+</body>
+</html>
