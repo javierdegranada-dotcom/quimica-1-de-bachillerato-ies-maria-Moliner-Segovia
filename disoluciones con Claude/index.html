@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Disoluciones · 1º Bachillerato</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&display=swap" rel="stylesheet">
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$','$'],['\\(','\\)']] },
+    options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>
+  :root {
+    --ink:       #1a1208;
+    --cream:     #fdf6e8;
+    --parchment: #f5e9cc;
+    --amber:     #c8860a;
+    --amber-lt:  #e8a825;
+    --rust:      #b84220;
+    --teal:      #1a6b6b;
+    --teal-lt:   #d4eeee;
+    --line:      #d4c4a0;
+    --easy:      #2a7a3a;
+    --medium:    #c87020;
+    --hard:      #b42020;
+    --tag-easy:  #e8f5ea;
+    --tag-med:   #fef3e2;
+    --tag-hard:  #fdeaea;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.7;
+    background: var(--cream);
+    color: var(--ink);
+    padding: 0 0 80px;
+  }
+
+  /* ── CABECERA ── */
+  header {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 48px 40px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 18px,
+      rgba(255,255,255,.03) 18px,
+      rgba(255,255,255,.03) 19px
+    );
+  }
+  header::after {
+    content: '⚗';
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 120px;
+    opacity: .06;
+    line-height: 1;
+  }
+  .header-inner { position: relative; max-width: 860px; margin: auto; }
+  .subject-tag {
+    display: inline-block;
+    font-family: 'Source Serif 4', serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--amber-lt);
+    border: 1px solid var(--amber);
+    padding: 4px 12px;
+    border-radius: 2px;
+    margin-bottom: 18px;
+  }
+  header h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 46px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -.5px;
+    margin-bottom: 14px;
+  }
+  header h1 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--amber-lt);
+  }
+  header p {
+    font-size: 15px;
+    color: rgba(253,246,232,.65);
+    max-width: 560px;
+    font-weight: 300;
+    font-style: italic;
+  }
+  .meta-bar {
+    display: flex;
+    gap: 28px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+  }
+  .meta-item {
+    font-size: 12px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: rgba(253,246,232,.5);
+  }
+  .meta-item strong { color: var(--amber-lt); }
+
+  /* ── LEYENDA ── */
+  .legend {
+    max-width: 860px;
+    margin: 32px auto 0;
+    padding: 0 24px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 4px 14px;
+    border-radius: 20px;
+  }
+  .badge-easy   { background: var(--tag-easy); color: var(--easy); }
+  .badge-medium { background: var(--tag-med);  color: var(--medium); }
+  .badge-hard   { background: var(--tag-hard); color: var(--hard); }
+  .badge::before { content: '●'; font-size: 8px; }
+
+  /* ── CONTENEDOR PRINCIPAL ── */
+  main {
+    max-width: 860px;
+    margin: 36px auto 0;
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  /* ── TARJETA DE EJERCICIO ── */
+  .ex-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(26,18,8,.06);
+    animation: fadeUp .5s ease both;
+  }
+  .ex-card:nth-child(n+8) { border-left: 4px solid var(--rust); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .ex-card:nth-child(1)  { animation-delay: .05s; }
+  .ex-card:nth-child(2)  { animation-delay: .10s; }
+  .ex-card:nth-child(3)  { animation-delay: .15s; }
+  .ex-card:nth-child(4)  { animation-delay: .20s; }
+  .ex-card:nth-child(5)  { animation-delay: .25s; }
+  .ex-card:nth-child(6)  { animation-delay: .30s; }
+  .ex-card:nth-child(7)  { animation-delay: .35s; }
+  .ex-card:nth-child(8)  { animation-delay: .40s; }
+  .ex-card:nth-child(9)  { animation-delay: .45s; }
+  .ex-card:nth-child(10) { animation-delay: .50s; }
+
+  .ex-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 22px 14px;
+    border-bottom: 1px solid var(--line);
+    background: var(--parchment);
+  }
+  .ex-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--amber);
+    min-width: 32px;
+    line-height: 1;
+  }
+  .ex-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    flex: 1;
+  }
+
+  .ex-body { padding: 22px 26px; }
+  .ex-body p { margin-bottom: 12px; }
+  .ex-body p:last-child { margin-bottom: 0; }
+
+  /* datos destacados */
+  .datos {
+    background: var(--teal-lt);
+    border-left: 3px solid var(--teal);
+    border-radius: 0 4px 4px 0;
+    padding: 10px 16px;
+    margin: 14px 0;
+    font-size: 14.5px;
+  }
+  .datos strong { color: var(--teal); font-weight: 600; }
+
+  /* respuesta */
+  .answer-block {
+    margin-top: 18px;
+    border: 1px dashed var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .answer-toggle {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 12px 18px;
+    text-align: left;
+    cursor: pointer;
+    font-family: 'Source Serif 4', serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--amber);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background .2s;
+  }
+  .answer-toggle:hover { background: var(--parchment); }
+  .arrow { transition: transform .3s; display: inline-block; }
+  .answer-toggle.open .arrow { transform: rotate(90deg); }
+
+  .answer-content {
+    display: none;
+    padding: 0 0 20px;
+    border-top: 1px dashed var(--line);
+    background: #fdfaf4;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+  .answer-content.visible { display: block; }
+
+  /* bloque de estrategia */
+  .strategy-block {
+    background: var(--parchment);
+    border-bottom: 1px solid var(--line);
+    padding: 16px 22px 18px;
+    margin-bottom: 20px;
+  }
+  .strategy-label {
+    font-size: 10px;
+    letter-spacing: .20em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--amber);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .strategy-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(200,134,10,.3);
+  }
+  .strategy-text {
+    font-size: 14.5px;
+    line-height: 1.75;
+    color: var(--ink);
+    font-style: italic;
+  }
+  .strategy-text strong { color: var(--ink); font-style: normal; }
+
+  /* pasos */
+  .steps-wrapper { padding: 4px 22px 0; }
+  .step-label {
+    font-size: 10px;
+    letter-spacing: .20em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--teal);
+    margin: 12px 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .step-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(26,107,107,.2);
+  }
+  .answer-content .step {
+    display: grid;
+    grid-template-columns: 26px 1fr;
+    gap: 10px;
+    margin-bottom: 14px;
+    align-items: start;
+  }
+  .step-n {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--amber);
+    line-height: 1.7;
+  }
+  .step-body {}
+  .step-why {
+    font-size: 13px;
+    color: #888;
+    font-style: italic;
+    margin-top: 3px;
+    padding-left: 0;
+    line-height: 1.55;
+  }
+  .result-box {
+    margin: 18px 22px 0;
+    background: var(--ink);
+    color: var(--amber-lt);
+    padding: 11px 18px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 15px;
+    display: block;
+  }
+
+  /* dificultad ── fila inferior */
+  .ex-footer {
+    padding: 8px 22px 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    color: #999;
+    font-style: italic;
+  }
+
+  /* ── PIE ── */
+  footer {
+    max-width: 860px;
+    margin: 60px auto 0;
+    padding: 0 24px;
+    border-top: 1px solid var(--line);
+    padding-top: 22px;
+    font-size: 13px;
+    color: #aaa;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-style: italic;
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 36px 20px 32px; }
+    main { padding: 0 14px; }
+    .ex-body { padding: 16px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="subject-tag">Química · 1.º Bachillerato</div>
+    <h1>Disoluciones<br><em>&amp; concentración</em></h1>
+    <p>Molaridad, g/L, % en masa, diluciones y mezclas — 10 ejercicios progresivos</p>
+    <div class="meta-bar">
+      <div class="meta-item">Ejercicios: <strong>10</strong></div>
+      <div class="meta-item">Dificultad: <strong>progresiva</strong></div>
+      <div class="meta-item">IES María Moliner · Segovia</div>
+    </div>
+  </div>
+</header>
+
+<div class="legend">
+  <span class="badge badge-easy">Básico (1–3)</span>
+  <span class="badge badge-medium">Intermedio (4–6)</span>
+  <span class="badge badge-hard">Avanzado (7–10)</span>
+</div>
+
+<main id="ejercicios"></main>
+
+<footer>
+  <span>IES María Moliner · Segovia</span>
+  <span>Química · 1.º Bachillerato · Disoluciones</span>
+</footer>
+
+<script>
+const ejercicios = [
+  {
+    num:1, nivel:'easy', titulo:'Concentración en g/L — directa', concepto:'Concentración másica',
+    enunciado:`<p>Se disuelven <strong>8,0 g de cloruro de sodio (NaCl)</strong> en agua hasta obtener <strong>500 mL de disolución</strong>.</p><p>Calcula la concentración expresada en <strong>g/L</strong>.</p>`,
+    datos:`<strong>Masa de soluto:</strong> 8,0 g &nbsp;|&nbsp; <strong>Volumen:</strong> 500 mL = 0,500 L`,
+    estrategia:`Este ejercicio aplica directamente la definición de concentración másica: <strong>¿cuántos gramos de soluto hay por cada litro de disolución?</strong> Solo hay que dividir la masa entre el volumen, pero primero hay que convertir mL a L, porque la unidad pedida es g/L.`,
+    pasos:[
+      {n:'1', texto:`Convertimos el volumen: $500\\,\\text{mL} = 0{,}500\\,\\text{L}$`, por:`La fórmula usa litros. Si dividimos g entre mL obtenemos g/mL, no g/L.`},
+      {n:'2', texto:`Aplicamos la definición: $C = \\dfrac{m_{\\text{soluto}}}{V} = \\dfrac{8{,}0\\,\\text{g}}{0{,}500\\,\\text{L}}$`, por:`Queremos saber cuántos gramos hay por litro: masa arriba, volumen abajo.`},
+      {n:'3', texto:`$C = 16\\,\\text{g/L}$`, por:`Comprobación intuitiva: en medio litro hay 8 g, luego en un litro entero hay el doble, 16 g. ✓`}
+    ],
+    resultado:'C = 16 g/L'
+  },
+  {
+    num:2, nivel:'easy', titulo:'Molaridad a partir de masa', concepto:'Molaridad',
+    enunciado:`<p>Calcula la <strong>molaridad</strong> de una disolución preparada disolviendo <strong>4,0 g de NaOH</strong> en agua hasta obtener <strong>200 mL de disolución</strong>.</p><p><em>Masa molar del NaOH = 40 g/mol.</em></p>`,
+    datos:`<strong>m(NaOH):</strong> 4,0 g &nbsp;|&nbsp; <strong>M<sub>m</sub>:</strong> 40 g/mol &nbsp;|&nbsp; <strong>V:</strong> 200 mL`,
+    estrategia:`La molaridad expresa moles de soluto por litro de disolución. El enunciado nos da la masa en gramos, no en moles, así que el camino es: <strong>gramos → moles → molaridad</strong>. Primero convertimos con la masa molar y luego dividimos entre el volumen en litros.`,
+    pasos:[
+      {n:'1', texto:`Calculamos los moles: $n = \\dfrac{m}{M_m} = \\dfrac{4{,}0\\,\\text{g}}{40\\,\\text{g/mol}} = 0{,}10\\,\\text{mol}$`, por:`La molaridad necesita moles, no gramos. La masa molar es el "precio de cambio" entre ambas magnitudes.`},
+      {n:'2', texto:`Convertimos el volumen: $200\\,\\text{mL} = 0{,}200\\,\\text{L}$`, por:`La fórmula de molaridad usa litros. Dividir entre 1000 es suficiente.`},
+      {n:'3', texto:`$M = \\dfrac{n}{V} = \\dfrac{0{,}10\\,\\text{mol}}{0{,}200\\,\\text{L}} = 0{,}50\\,\\text{mol/L}$`, por:`Dividimos moles entre litros para obtener "moles por litro", que es exactamente lo que mide la molaridad.`}
+    ],
+    resultado:'M = 0,50 mol/L'
+  },
+  {
+    num:3, nivel:'easy', titulo:'Masa de soluto a partir de M y V', concepto:'Molaridad → masa',
+    enunciado:`<p>¿Qué <strong>masa de glucosa (C₆H₁₂O₆)</strong> hay que pesar para preparar <strong>250 mL</strong> de una disolución <strong>0,20 M</strong>?</p><p><em>M(C₆H₁₂O₆) = 180 g/mol.</em></p>`,
+    datos:`<strong>M:</strong> 0,20 mol/L &nbsp;|&nbsp; <strong>V:</strong> 250 mL &nbsp;|&nbsp; <strong>M<sub>m</sub>:</strong> 180 g/mol`,
+    estrategia:`Ahora el problema está "al revés" del anterior: nos dan la concentración deseada y nos preguntan cuánto pesar. El camino inverso es: <strong>molaridad + volumen → moles → gramos</strong>. Primero averiguamos cuántos moles necesitamos y luego los convertimos en gramos con la masa molar.`,
+    pasos:[
+      {n:'1', texto:`Moles necesarios: $n = M \\cdot V = 0{,}20\\,\\text{mol/L} \\times 0{,}250\\,\\text{L} = 0{,}050\\,\\text{mol}$`, por:`Si la molaridad es "moles por litro", multiplicar por los litros que queremos nos da el total de moles de soluto necesarios.`},
+      {n:'2', texto:`Convertimos a gramos: $m = n \\times M_m = 0{,}050\\,\\text{mol} \\times 180\\,\\text{g/mol} = 9{,}0\\,\\text{g}$`, por:`La balanza no mide moles, mide gramos. La masa molar convierte los moles en la cantidad que pesaremos.`}
+    ],
+    resultado:'m = 9,0 g de glucosa'
+  },
+  {
+    num:4, nivel:'medium', titulo:'Porcentaje en masa ↔ molaridad', concepto:'Conversión % masa → M',
+    enunciado:`<p>Una disolución comercial de ácido sulfúrico <strong>(H₂SO₄)</strong> tiene una riqueza del <strong>96 % en masa</strong> y una densidad de <strong>1,84 g/mL</strong>. Calcula su <strong>molaridad</strong>.</p><p><em>M(H₂SO₄) = 98 g/mol.</em></p>`,
+    datos:`<strong>w:</strong> 96 % &nbsp;|&nbsp; <strong>d:</strong> 1,84 g/mL = 1840 g/L &nbsp;|&nbsp; <strong>M<sub>m</sub>:</strong> 98 g/mol`,
+    estrategia:`Los reactivos comerciales no vienen etiquetados con su molaridad, sino con % en masa y densidad. Para calcular la molaridad necesitamos saber <strong>cuántos moles de soluto hay en exactamente 1 litro de disolución</strong>. La estrategia es: imaginar 1 L, calcular su masa con la densidad, extraer la parte de soluto con el porcentaje y dividir entre la masa molar.`,
+    pasos:[
+      {n:'1', texto:`Masa de 1 L de disolución: $m_{dis} = 1840\\,\\text{g}$`, por:`Trabajamos con exactamente 1 L porque la molaridad es "por litro". La densidad (1840 g/L) nos dice directamente cuánto pesa ese litro.`},
+      {n:'2', texto:`Masa de H₂SO₄ en ese litro: $m_{soluto} = 1840 \\times 0{,}96 = 1766{,}4\\,\\text{g}$`, por:`El 96 % en masa indica que de cada 100 g de disolución, 96 son ácido. Multiplicamos para saber cuánto hay en los 1840 g totales.`},
+      {n:'3', texto:`Moles de H₂SO₄: $n = \\dfrac{1766{,}4}{98} = 18{,}03\\,\\text{mol}$`, por:`Convertimos la masa de soluto a moles. Como esos moles están en 1 L, ya tenemos directamente la molaridad.`},
+      {n:'4', texto:`$M \\approx 18{,}0\\,\\text{mol/L}$`, por:`¡Atención! Este valor es altísimo. El H₂SO₄ comercial es uno de los ácidos más concentrados del laboratorio. Hay que manipularlo con cuidado extremo.`}
+    ],
+    resultado:'M ≈ 18,0 mol/L'
+  },
+  {
+    num:5, nivel:'medium', titulo:'Dilución — fórmula C₁V₁ = C₂V₂', concepto:'Dilución',
+    enunciado:`<p>Se toman <strong>20 mL</strong> de la disolución de H₂SO₄ del ejercicio anterior (18,0 M) y se diluyen con agua hasta un volumen final de <strong>500 mL</strong>.</p><p>Calcula la <strong>molaridad de la disolución diluida</strong>.</p>`,
+    datos:`<strong>C₁:</strong> 18,0 M &nbsp;|&nbsp; <strong>V₁:</strong> 20 mL &nbsp;|&nbsp; <strong>V₂:</strong> 500 mL`,
+    estrategia:`Cuando diluimos, añadimos disolvente (agua), pero <strong>el número de moles de soluto no cambia</strong>. Ese es el principio clave: los moles que había antes siguen estando ahí, pero ahora "están más repartidos" en un mayor volumen. La fórmula $C_1V_1 = C_2V_2$ no es más que eso: igualar los moles antes y después de la dilución.`,
+    pasos:[
+      {n:'1', texto:`Moles tomados: $n = C_1 V_1 = 18{,}0 \\times 0{,}020 = 0{,}360\\,\\text{mol}$`, por:`Hemos tomado 20 mL (= 0,020 L) de la disolución concentrada. Esos moles son los que vamos a "repartir" en el nuevo volumen.`},
+      {n:'2', texto:`Planteamos conservación: $C_1 V_1 = C_2 V_2 \\Rightarrow C_2 = \\dfrac{18{,}0 \\times 20}{500} = 0{,}72\\,\\text{mol/L}$`, por:`Despejamos C₂. Podemos operar en mL directamente porque se cancelan las unidades; solo importa que V₁ y V₂ estén en las mismas unidades.`},
+      {n:'3', texto:`Verificación: el volumen aumentó 25 veces (20→500 mL), la concentración bajó 25 veces (18,0→0,72 M). ✓`, por:`Esta comprobación rápida por proporcionalidad inversa es un buen hábito para detectar errores aritméticos.`}
+    ],
+    resultado:'C₂ = 0,72 mol/L'
+  },
+  {
+    num:6, nivel:'medium', titulo:'Mezcla de dos disoluciones del mismo soluto', concepto:'Mezcla de disoluciones',
+    enunciado:`<p>Se mezclan <strong>300 mL de NaCl 0,40 M</strong> con <strong>200 mL de NaCl 0,80 M</strong>.</p><p>Calcula la <strong>molaridad resultante</strong>. Desprecia la variación de volumen al mezclar.</p>`,
+    datos:`<strong>V₁ = 300 mL, C₁ = 0,40 M &nbsp;|&nbsp; V₂ = 200 mL, C₂ = 0,80 M</strong>`,
+    estrategia:`El error más frecuente en este tipo de ejercicio es promediar las concentraciones directamente. Eso sería incorrecto porque los volúmenes no son iguales. La clave es volver siempre a los <strong>moles</strong>: sumar los moles de cada fracción y dividir entre el volumen total. Los moles son aditivos; las concentraciones, no.`,
+    pasos:[
+      {n:'1', texto:`Moles de cada fracción: $n_1 = 0{,}300 \\times 0{,}40 = 0{,}12\\,\\text{mol}$ &nbsp;|&nbsp; $n_2 = 0{,}200 \\times 0{,}80 = 0{,}16\\,\\text{mol}$`, por:`Multiplicamos molaridad por volumen en litros para obtener los moles que aporta cada parte.`},
+      {n:'2', texto:`Moles totales: $n_{total} = 0{,}12 + 0{,}16 = 0{,}28\\,\\text{mol}$`, por:`Al mezclar, los moles del mismo soluto simplemente se suman.`},
+      {n:'3', texto:`Volumen total: $V_{total} = 300 + 200 = 500\\,\\text{mL} = 0{,}500\\,\\text{L}$`, por:`Suponemos volúmenes aditivos (aproximación habitual en disoluciones diluidas acuosas).`},
+      {n:'4', texto:`$M = \\dfrac{0{,}28}{0{,}500} = 0{,}56\\,\\text{mol/L}$`, por:`Resultado entre 0,40 y 0,80 M, pero más cercano a 0,80 porque esa fracción aporta más moles, aunque tenga menos volumen. Tiene sentido.`}
+    ],
+    resultado:'M = 0,56 mol/L'
+  },
+  {
+    num:7, nivel:'hard', titulo:'Neutralización ácido-base — exceso y concentración final', concepto:'Mezcla con reacción ácido-base',
+    enunciado:`<p>Se mezclan <strong>100 mL de HCl 1,00 M</strong> con <strong>150 mL de NaOH 0,80 M</strong>.</p><ol style="margin:10px 0 0 18px;line-height:1.9"><li>¿Se neutralizan completamente o sobra algún reactivo?</li><li>Calcula la <strong>concentración del exceso</strong> en la disolución final.</li><li>Expresa también el resultado en <strong>g/L</strong>.</li></ol>`,
+    datos:`<strong>HCl:</strong> 100 mL, 1,00 M &nbsp;|&nbsp; <strong>NaOH:</strong> 150 mL, 0,80 M &nbsp;|&nbsp; <strong>M(NaOH):</strong> 40 g/mol &nbsp;|&nbsp; HCl + NaOH → NaCl + H₂O`,
+    estrategia:`Aquí la mezcla no es inerte: HCl y NaOH <strong>reaccionan y se consumen mutuamente</strong>. La dificultad está en decidir cuál se acaba antes (reactivo limitante) y cuánto sobra del otro. El camino: calcular moles de cada uno → comparar (relación 1:1 → gana quien tiene menos moles) → calcular el exceso → expresarlo en la nueva concentración con el volumen total.`,
+    pasos:[
+      {n:'1', texto:`Moles de HCl: $n_{HCl} = 0{,}100\\,\\text{L} \\times 1{,}00\\,\\text{mol/L} = 0{,}100\\,\\text{mol}$`, por:`Calculamos los moles de cada reactivo antes de que reaccionen, por separado.`},
+      {n:'2', texto:`Moles de NaOH: $n_{NaOH} = 0{,}150\\,\\text{L} \\times 0{,}80\\,\\text{mol/L} = 0{,}120\\,\\text{mol}$`, por:`La reacción es 1:1, así que podemos comparar directamente los moles sin ningún factor estequiométrico adicional.`},
+      {n:'3', texto:`HCl es el limitante. Sobra NaOH: $\\Delta n = 0{,}120 - 0{,}100 = 0{,}020\\,\\text{mol}$`, por:`Hay menos HCl → el HCl se agota por completo. Todo el HCl reacciona con 0,100 mol de NaOH, y los 0,020 mol restantes de NaOH quedan en disolución.`},
+      {n:'4', texto:`Volumen final: $V = 100 + 150 = 250\\,\\text{mL} = 0{,}250\\,\\text{L}$`, por:`Al mezclar las dos disoluciones, el volumen total es la suma. El exceso de NaOH está disuelto en todo ese volumen.`},
+      {n:'5', texto:`Molaridad del exceso: $M = \\dfrac{0{,}020}{0{,}250} = 0{,}080\\,\\text{mol/L}$`, por:`Dividimos los moles que sobran entre el volumen total de la disolución resultante.`},
+      {n:'6', texto:`En g/L: $C = 0{,}080\\,\\text{mol/L} \\times 40\\,\\text{g/mol} = 3{,}2\\,\\text{g/L}$`, por:`Multiplicamos la molaridad por la masa molar del NaOH para convertir la concentración a unidades másicas.`}
+    ],
+    resultado:'Sobra NaOH → M = 0,080 mol/L = 3,2 g/L'
+  },
+  {
+    num:8, nivel:'hard', titulo:'Volumen de ácido concentrado para preparar una disolución', concepto:'Dilución inversa con conversión de unidades',
+    enunciado:`<p>En el laboratorio se dispone de ácido nítrico concentrado (<strong>HNO₃</strong>, riqueza 65 %, densidad 1,39 g/mL, M = 63 g/mol).</p><p>¿Qué <strong>volumen</strong> del ácido concentrado se necesita para preparar <strong>1,00 L de disolución 2,00 M</strong>?</p>`,
+    datos:`<strong>w:</strong> 65 % &nbsp;|&nbsp; <strong>d:</strong> 1,39 g/mL &nbsp;|&nbsp; <strong>M<sub>m</sub>:</strong> 63 g/mol &nbsp;|&nbsp; <strong>C₂:</strong> 2,00 M &nbsp;|&nbsp; <strong>V₂:</strong> 1,00 L`,
+    estrategia:`En el laboratorio los reactivos comerciales no llevan la molaridad en la etiqueta: llevan riqueza y densidad. Este problema tiene <strong>dos fases bien diferenciadas</strong>: (1) calcular la molaridad de la botella comercial, igual que en el ejercicio 4, y (2) resolver una dilución inversa —necesitamos encontrar V₁, no C₂— aplicando $C_1V_1 = C_2V_2$.`,
+    pasos:[
+      {n:'1', texto:`Molaridad del ácido comercial: $M_1 = \\dfrac{1390\\,\\text{g/L} \\times 0{,}65}{63\\,\\text{g/mol}} = 14{,}35\\,\\text{mol/L}$`, por:`No nos dan la molaridad del concentrado; debemos calcularla. Imaginamos 1 L del concentrado: pesa 1390 g, el 65 % es HNO₃ → 903,5 g → dividimos entre 63 g/mol.`},
+      {n:'2', texto:`Despejamos V₁: $C_1 V_1 = C_2 V_2 \\Rightarrow V_1 = \\dfrac{2{,}00 \\times 1{,}00}{14{,}35} = 0{,}139\\,\\text{L} = 139\\,\\text{mL}$`, por:`Queremos que los moles del volumen que tomamos del concentrado sean iguales a los moles que necesitamos en la disolución final.`},
+      {n:'3', texto:`<em>Seguridad en el laboratorio:</em> siempre añadir el <strong>ácido sobre el agua</strong>, nunca al revés.`, por:`La disolución de ácido concentrado es muy exotérmica. Si añadimos agua sobre el ácido, el calor puede provocar salpicaduras peligrosas. Primero el agua, luego el ácido, siempre.`}
+    ],
+    resultado:'V₁ ≈ 139 mL del ácido concentrado'
+  },
+  {
+    num:9, nivel:'hard', titulo:'Diluciones seriadas y factor de dilución', concepto:'Diluciones en cadena',
+    enunciado:`<p>A partir de una disolución madre de <strong>KMnO₄ 0,500 M</strong> se realizan <strong>tres diluciones seriadas</strong>, tomando en cada paso <strong>10,0 mL de la disolución anterior y enrasando hasta 100,0 mL</strong>.</p><ol style="margin:10px 0 0 18px;line-height:1.9"><li>¿Cuál es la concentración tras cada dilución?</li><li>¿Cuántos <strong>microgramos</strong> de KMnO₄ hay en 1 mL de la disolución final?</li></ol><p><em>M(KMnO₄) = 158,0 g/mol.</em></p>`,
+    datos:`<strong>C₀:</strong> 0,500 M &nbsp;|&nbsp; Cada paso: tomar 10,0 mL, enrasar a 100,0 mL (factor 1:10)`,
+    estrategia:`Las diluciones seriadas son la técnica habitual en analítica y biología para obtener concentraciones muy bajas de forma controlada. La clave es reconocer que <strong>cada paso aplica el mismo factor de dilución</strong> $f = V_{alícuota}/V_{final}$, lo que convierte el cálculo en una simple potencia. El segundo apartado exige un cuidado especial con las conversiones de unidades (mol → g → μg) y las potencias de diez.`,
+    pasos:[
+      {n:'1', texto:`Factor de dilución por etapa: $f = \\dfrac{10{,}0\\,\\text{mL}}{100{,}0\\,\\text{mL}} = 0{,}100$`, por:`Cada vez tomamos 1/10 del volumen anterior. La concentración cae al 10 % de su valor en cada paso.`},
+      {n:'2', texto:`1.ª dilución: $C_1 = 0{,}500 \\times 0{,}100 = 0{,}0500\\,\\text{M}$`, por:`Aplicamos $C_1 = C_0 \\times f$. Obtenemos la concentración tras el primer paso.`},
+      {n:'3', texto:`2.ª dilución: $C_2 = 0{,}0500 \\times 0{,}100 = 5{,}00 \\times 10^{-3}\\,\\text{M}$`, por:`Volvemos a multiplicar por el mismo factor. La concentración baja un orden de magnitud en cada dilución.`},
+      {n:'4', texto:`3.ª dilución: $C_3 = 5{,}00 \\times 10^{-3} \\times 0{,}100 = 5{,}00 \\times 10^{-4}\\,\\text{M}$`, por:`Equivale a $C_0 \\times f^3 = 0{,}500 \\times (0{,}1)^3$. Tras tres diluciones 1:10, la concentración es 1000 veces menor que la original.`},
+      {n:'5', texto:`Masa en 1 mL: $m = 5{,}00 \\times 10^{-4}\\,\\frac{\\text{mol}}{\\text{L}} \\times 1{,}00 \\times 10^{-3}\\,\\text{L} \\times 158{,}0\\,\\frac{\\text{g}}{\\text{mol}} = 7{,}90 \\times 10^{-5}\\,\\text{g} = 79{,}0\\,\\mu\\text{g}$`, por:`Desglosamos el cálculo: mol/L × L da moles; moles × g/mol da gramos; gramos × 10⁶ da microgramos. Aunque sea una cantidad ínfima, el KMnO₄ sigue siendo intensamente violeta a esta concentración — lo que muestra por qué las diluciones seriadas son tan útiles.`}
+    ],
+    resultado:'C₃ = 5,00×10⁻⁴ M → 79,0 μg/mL'
+  },
+  {
+    num:10, nivel:'hard', titulo:'Problema global — mezcla, precipitación y concentración final', concepto:'Integración total de conceptos',
+    enunciado:`<p>Se dispone de dos disoluciones:</p><ul style="margin:8px 0 8px 20px;line-height:1.9"><li><strong>Disolución A:</strong> 250 mL de CaCl₂ al 2,22 % en masa (densidad 1,02 g/mL)</li><li><strong>Disolución B:</strong> 150 mL de Na₂CO₃ 0,100 M</li></ul><p>Al mezclarlas precipita CaCO₃ según:</p><p style="text-align:center;margin:10px 0">$\\text{CaCl}_2 + \\text{Na}_2\\text{CO}_3 \\rightarrow \\text{CaCO}_3\\downarrow + 2\\,\\text{NaCl}$</p><ol style="margin:10px 0 0 18px;line-height:1.9"><li>Calcula los moles iniciales de cada reactivo.</li><li>Determina el <strong>reactivo limitante</strong>.</li><li>Halla la <strong>concentración molar de NaCl</strong> en la disolución final.</li><li>¿Cuántos gramos de CaCO₃ precipitan?</li></ol><p><em>M(CaCl₂) = 111 g/mol; M(Na₂CO₃) = 106 g/mol; M(CaCO₃) = 100 g/mol.</em></p>`,
+    datos:`<strong>A:</strong> 250 mL, CaCl₂ 2,22 % masa, d = 1,02 g/mL &nbsp;|&nbsp; <strong>B:</strong> 150 mL, Na₂CO₃ 0,100 M`,
+    estrategia:`Este es el ejercicio más completo del tema: combina <strong>% en masa con densidad</strong> (ej. 4), <strong>molaridad directa</strong>, <strong>reacción con reactivo limitante</strong> (ej. 7) y el cálculo de la concentración de un producto nuevo. El plan tiene cuatro fases bien diferenciadas: obtener moles de cada reactivo → decidir quién se agota primero → calcular el NaCl formado y su concentración en la mezcla total → calcular la masa del precipitado. Hay que ser especialmente cuidadoso con los coeficientes estequiométricos (el NaCl aparece con coeficiente 2).`,
+    pasos:[
+      {n:'1', texto:`Masa de la disolución A: $m_A = 250\\,\\text{mL} \\times 1{,}02\\,\\text{g/mL} = 255\\,\\text{g}$`, por:`Usamos la densidad para pasar de volumen a masa, porque el porcentaje en masa se aplica sobre gramos, no sobre mL.`},
+      {n:'2', texto:`Masa de CaCl₂: $255 \\times 0{,}0222 = 5{,}661\\,\\text{g}$ &nbsp;→&nbsp; $n_{CaCl_2} = \\dfrac{5{,}661}{111} = 0{,}05100\\,\\text{mol}$`, por:`El 2,22 % en masa indica que 2,22 g de cada 100 g son CaCl₂. Calculamos cuántos hay en los 255 g totales y lo convertimos a moles.`},
+      {n:'3', texto:`Moles de Na₂CO₃: $n = 0{,}150\\,\\text{L} \\times 0{,}100\\,\\text{mol/L} = 0{,}01500\\,\\text{mol}$`, por:`La disolución B viene dada en molaridad directamente: solo aplicamos $n = M \\cdot V$. Mucho más sencillo que la disolución A.`},
+      {n:'4', texto:`Estequiometría 1:1 → $0{,}0150\\,\\text{mol} \\ll 0{,}0510\\,\\text{mol}$ &nbsp;→&nbsp; <strong>Na₂CO₃ es el reactivo limitante</strong>`, por:`En una relación 1:1, quien tiene menos moles se agota primero. El Na₂CO₃ se consume por completo; sobra mucho CaCl₂.`},
+      {n:'5', texto:`NaCl formado: $n_{NaCl} = 2 \\times 0{,}0150 = 0{,}0300\\,\\text{mol}$`, por:`La ecuación ajustada produce <em>2 mol</em> de NaCl por cada mol de Na₂CO₃. El coeficiente 2 es imprescindible aquí y es el punto donde más se equivocan los estudiantes.`},
+      {n:'6', texto:`Volumen total: $V = 250 + 150 = 400\\,\\text{mL} = 0{,}400\\,\\text{L}$`, por:`El NaCl formado queda disuelto en <em>toda</em> la disolución resultante, no en uno de los dos volúmenes iniciales. El CaCO₃ ha precipitado y ya no está en disolución.`},
+      {n:'7', texto:`$[NaCl] = \\dfrac{0{,}0300}{0{,}400} = 0{,}0750\\,\\text{mol/L}$`, por:`Dividimos los moles producidos entre el volumen total de la mezcla.`},
+      {n:'8', texto:`Masa de CaCO₃: $m = 0{,}0150\\,\\text{mol} \\times 100\\,\\text{g/mol} = 1{,}50\\,\\text{g}$`, por:`Los moles de CaCO₃ son iguales a los del limitante Na₂CO₃ (relación 1:1). Multiplicamos por la masa molar del CaCO₃ para obtener los gramos del precipitado.`}
+    ],
+    resultado:'Na₂CO₃ limitante → [NaCl] = 0,0750 mol/L; m(CaCO₃) = 1,50 g'
+  }
+];
+
+/* ─── RENDER ─── */
+const main = document.getElementById('ejercicios');
+
+ejercicios.forEach(ex => {
+  const nivelLabel = { easy: 'Básico', medium: 'Intermedio', hard: 'Avanzado' }[ex.nivel];
+  const nivelClass = `badge badge-${ex.nivel}`;
+
+  const stepsHTML = ex.pasos.map(p => `
+    <div class="step">
+      <span class="step-n">${p.n}.</span>
+      <div class="step-body">
+        <div>${p.texto}</div>
+        <div class="step-why">↳ ${p.por}</div>
+      </div>
+    </div>
+  `).join('');
+
+  const card = document.createElement('div');
+  card.className = 'ex-card';
+  card.innerHTML = `
+    <div class="ex-header">
+      <div class="ex-num">${String(ex.num).padStart(2,'0')}</div>
+      <div class="ex-title">${ex.titulo}</div>
+      <span class="${nivelClass}">${nivelLabel}</span>
+    </div>
+    <div class="ex-body">
+      ${ex.enunciado}
+      <div class="datos"><strong>Datos:</strong> ${ex.datos}</div>
+      <div class="answer-block">
+        <button class="answer-toggle" onclick="toggleAnswer(this)">
+          <span class="arrow">▶</span> Ver solución razonada
+        </button>
+        <div class="answer-content">
+          <div class="strategy-block">
+            <div class="strategy-label">🧭 Estrategia</div>
+            <div class="strategy-text">${ex.estrategia}</div>
+          </div>
+          <div class="steps-wrapper">
+            <div class="step-label">📐 Desarrollo paso a paso</div>
+            ${stepsHTML}
+          </div>
+          <div class="result-box">✓ Resultado: ${ex.resultado}</div>
+        </div>
+      </div>
+    </div>
+    <div class="ex-footer">
+      <span>Concepto clave: <em>${ex.concepto}</em></span>
+    </div>
+  `;
+  main.appendChild(card);
+});
+
+function toggleAnswer(btn) {
+  btn.classList.toggle('open');
+  const content = btn.nextElementSibling;
+  content.classList.toggle('visible');
+  if (content.classList.contains('visible') && window.MathJax) {
+    MathJax.typesetPromise([content]);
+  }
+}
+</script>
+</body>
+</html>
