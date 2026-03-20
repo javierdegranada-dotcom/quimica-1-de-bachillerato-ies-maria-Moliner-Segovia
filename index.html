@@ -5,15 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Química 1º Bachillerato - IES María Moliner</title>
     <style>
-        /* Paleta de colores profesional y científica */
         :root {
-            --primary-dark: #203647; /* Azul marino profundo */
-            --secondary-dark: #34495e; /* Gris azulado */
-            --accent: #2980b9; /* Azul académico */
-            --light-bg: #fdfdfd; /* Blanco roto */
-            --border-color: #eaecef; /* Gris muy claro para bordes */
-            --text-dark: #2c3e50; /* Texto principal */
-            --text-muted: #7f8c8d; /* Texto secundario */
+            --primary-dark: #203647;
+            --secondary-dark: #34495e;
+            --accent: #2980b9;
+            --light-bg: #fdfdfd;
+            --border-color: #eaecef;
+            --text-dark: #2c3e50;
+            --text-muted: #7f8c8d;
         }
 
         body { 
@@ -28,28 +27,19 @@
             min-height: 100vh;
         }
 
-        /* Header Profesional */
         header { 
             text-align: center; 
-            margin: 60px 0 40px 0; 
+            margin: 40px 0 30px 0; 
             padding: 0 20px;
             width: 100%;
             max-width: 800px;
         }
 
         h1 { 
-            font-weight: 300; /* Fuente fina */
-            font-size: 2.8em;
+            font-weight: 300; 
+            font-size: 2.5em;
             color: var(--primary-dark); 
             margin: 0 0 10px 0;
-            letter-spacing: -0.5px;
-        }
-
-        header p.subtitle { 
-            font-size: 1.1em; 
-            color: var(--text-muted); 
-            margin: 0 auto;
-            font-weight: 400;
         }
 
         header .inst-badge {
@@ -60,25 +50,22 @@
             border-radius: 20px;
             font-size: 0.8em;
             font-weight: 600;
-            margin-top: 15px;
         }
 
-        /* Contenedor de Tarjetas */
         .container { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-            gap: 25px; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 20px; 
             width: 90%; 
-            max-width: 1000px; 
+            max-width: 1100px; 
             padding: 20px 0;
-            flex-grow: 1; /* Empuja el footer hacia abajo */
+            flex-grow: 1;
         }
 
-        /* Estilo de Tarjeta Minimalista */
         .card { 
-            background: rgb(255, 255, 255); 
-            padding: 25px; 
-            border-radius: 12px; 
+            background: white; 
+            padding: 20px; 
+            border-radius: 10px; 
             border: 1px solid var(--border-color);
             box-shadow: 0 2px 4px rgba(0,0,0,0.03); 
             transition: all 0.3s ease;
@@ -91,69 +78,52 @@
 
         .card:hover { 
             transform: translateY(-5px); 
-            box-shadow: 0 10px 20px rgba(0,0,0,0.06); 
-            border-color: #e0f2fe; /* Azul muy suave al hover */
+            box-shadow: 0 8px 15px rgba(0,0,0,0.05); 
+            border-color: var(--accent);
         }
 
         .card h3 { 
-            margin: 0 0 10px 0; 
+            margin: 0 0 8px 0; 
             color: var(--secondary-dark); 
-            font-size: 1.3em;
-            font-weight: 500;
+            font-size: 1.2em;
         }
 
         .card p { 
-            font-size: 0.95em; 
+            font-size: 0.9em; 
             color: var(--text-muted); 
-            margin: 0 0 20px 0;
-            line-height: 1.6;
+            margin-bottom: 15px;
+            line-height: 1.5;
         }
 
-        .card .badge { 
-            background: #eefbff; /* Azul muy tenue */
-            color: var(--accent); 
-            padding: 4px 10px; 
+        .badge { 
+            display: inline-block;
+            padding: 3px 8px; 
             border-radius: 4px; 
-            font-size: 0.75em; 
+            font-size: 0.7em; 
             font-weight: 700; 
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
+        
+        .badge-gases { background: #e3f2fd; color: #1976d2; }
+        .badge-disoluciones { background: #e8f5e9; color: #2e7d32; }
 
-        /* Footer con tu información */
         footer {
             width: 100%;
             background-color: white;
             border-top: 1px solid var(--border-color);
-            padding: 30px 0;
-            margin-top: 60px;
+            padding: 25px 0;
+            margin-top: 40px;
             text-align: center;
         }
 
-        footer p {
-            margin: 5px 0;
-            font-size: 0.9em;
-            color: var(--text-muted);
-        }
-
-        footer .prof-name {
-            font-weight: 600;
-            color: var(--primary-dark);
-            font-size: 1.1em;
-        }
-
-        /* Ajustes para móvil */
-        @media (max-width: 768px) {
-            h1 { font-size: 2.2em; }
-            .container { grid-template-columns: 1fr; width: 95%; }
-        }
+        footer p { margin: 3px 0; font-size: 0.85em; color: var(--text-muted); }
+        .prof-name { font-weight: 600; color: var(--primary-dark); }
     </style>
 </head>
 <body>
 
     <header>
         <h1>Laboratorio de Química</h1>
-        <p class="subtitle">Repositorio de Ejercicios Interactivos para 1º de Bachillerato</p>
         <div class="inst-badge">IES María Moliner · Segovia</div>
     </header>
 
@@ -161,32 +131,41 @@
         <a href="Ley Dalton Presiones parciales/index.html" class="card">
             <div>
                 <h3>Ley de Dalton</h3>
-                <p>Simulación interactiva y ejercicios resueltos sobre presiones parciales en mezclas de gases.</p>
+                <p>Estudio de presiones parciales y mezclas gaseosas.</p>
             </div>
-            <div>
-                <span class="badge">Gases</span>
-            </div>
+            <span class="badge badge-gases">Gases</span>
         </a>
 
         <a href="reaccciones quimicas gase gemini/index.html" class="card">
             <div>
-                <h3>Reacciones Químicas (Gemini)</h3>
-                <p>Cálculos estequiométricos completos para reacciones con sustancias gaseosas.</p>
+                <h3>Reacciones Gaseosas (Gemini)</h3>
+                <p>Cálculos estequiométricos con sustancias en fase gaseosa.</p>
             </div>
-            <div>
-                <span class="badge">IA Gemini</span>
-            </div>
+            <span class="badge badge-gases">Gases · IA</span>
         </a>
 
-        
         <a href="reacciones quimicas gases claude/index.html" class="card">
             <div>
-                <h3>Reacciones Químicas (Claude)</h3>
-                <p>Simulación y problemas sobre la estequiometría de gases.</p>
+                <h3>Reacciones Gaseosas (Claude)</h3>
+                <p>Ejercicios de estequiometría de gases interactivos.</p>
             </div>
+            <span class="badge badge-gases">Gases · IA</span>
+        </a>
+
+        <a href="disoluciones con Gemini/index.html" class="card">
             <div>
-                <span class="badge">IA Claude</span>
+                <h3>Disoluciones (Gemini)</h3>
+                <p>Cálculos de molaridad, molalidad y preparación de disoluciones.</p>
             </div>
+            <span class="badge badge-disoluciones">Disoluciones · IA</span>
+        </a>
+
+        <a href="disoluciones con Claude/index.html" class="card">
+            <div>
+                <h3>Disoluciones (Claude)</h3>
+                <p>Problemas resueltos sobre concentración y mezclas líquidas.</p>
+            </div>
+            <span class="badge badge-disoluciones">Disoluciones · IA</span>
         </a>
     </div>
 
