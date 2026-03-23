@@ -343,6 +343,150 @@
             </details>
         </div>
 
+        <!-- Ejercicio 9 -->
+        <div class="glass-card diff-4 rounded-xl p-6 shadow-sm">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-slate-800">Ejercicio 9: El Fuego Robado (Descomposición y Combustión Consecutiva)</h2>
+                <span class="bg-violet-100 text-violet-800 text-xs font-semibold px-2.5 py-0.5 rounded">Nivel 8: El Gran Químico</span>
+            </div>
+            <p class="mb-4 text-lg">En un experimento de doble fase, sometemos a calentamiento térmico una muestra de <strong>100 gramos de Clorato de Potasio ($\ce{KClO3}$) impuro</strong>. El oxígeno gas ($\ce{O2}$) liberado por la descomposición térmica se recoge sobre agua a una temperatura de 20 ºC y una presión atmosférica de 770 mmHg, ocupando un volumen de <strong>18 Litros</strong>.</p>
+            <p class="mb-4 text-lg">Inmediatamente después, utilizamos todo ese oxígeno recogido para quemar gas butano ($\ce{C4H10}$) en un reactor a 20 ºC y 1 atm de presión. Resuelve:</p>
+            <ul class="list-disc ml-6 mb-4 text-lg">
+                <li>El <strong>porcentaje de pureza</strong> de la muestra original de clorato de potasio.</li>
+                <li>El <strong>volumen de dióxido de carbono ($\ce{CO2}$)</strong> que se generará en la segunda reacción, medido en esas mismas condiciones de 20 ºC y 1 atm.</li>
+            </ul>
+            <p class="text-sm text-gray-500 mb-4"><em>Datos: P. vapor agua a 20 ºC = 17,5 mmHg. 1 atm = 760 mmHg. R = 0,082 atm·L/mol·K.<br>Masas atómicas (u): K = 39,1; Cl = 35,5; O = 16.</em></p>
+            
+            <details class="bg-slate-50 rounded-lg border border-slate-200">
+                <summary class="cursor-pointer font-semibold text-slate-700 p-4 hover:bg-slate-100 transition-colors flex justify-between items-center">
+                    Ver el desarrollo analítico completo
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="p-6 border-t border-slate-200 bg-white">
+                    <p class="italic text-slate-600 mb-4">"Las reacciones encadenadas requieren un control absoluto de los productos intermedios. Nuestro nexo de unión aquí es el oxígeno purificado."</p>
+                    
+                    <p class="font-bold mb-2">Fase A: Extracción del Oxígeno Seco</p>
+                    <p class="mb-2">El gas recogido es una mezcla de $\ce{O2}$ y vapor de agua. Purgamos el agua restando su presión (Ley de Dalton):</p>
+                    <p class="mb-2">$P_{\ce{O2}} = 770 \text{ mmHg} - 17,5 \text{ mmHg} = 752,5 \text{ mmHg}$.</p>
+                    <p class="mb-2">Convertimos a atm: $752,5 / 760 = \mathbf{0,990 \text{ atm}}$. Temperatura $T = 293 \text{ K}$.</p>
+                    <p class="mb-4">Calculamos los moles de $\ce{O2}$ reales generados: $$n(\ce{O2}) = \frac{P \cdot V}{R \cdot T} = \frac{0,990 \times 18}{0,082 \times 293} = \mathbf{0,742 \text{ moles de O}_2}$$</p>
+
+                    <p class="font-bold mb-2">Fase B: Estequiometría Inversa hacia el Clorato</p>
+                    <p class="mb-2">Reacción de descomposición: $$\ce{2KClO3(s) ->[\Delta] 2KCl(s) + 3O2(g)}$$</p>
+                    <p class="mb-2">Moles de clorato puro requeridos: $n(\ce{KClO3}) = 0,742 \text{ mol O}_2 \times \frac{2 \text{ mol KClO}_3}{3 \text{ mol O}_2} = \mathbf{0,495 \text{ moles KClO}_3}$</p>
+                    <p class="mb-2">Masa molar $\ce{KClO3}$ = $39,1 + 35,5 + (3 \times 16) = 122,6 \text{ g/mol}$.</p>
+                    <p class="mb-2">Masa pura = $0,495 \text{ mol} \times 122,6 \text{ g/mol} = \mathbf{60,69 \text{ g de KClO}_3}$ puro.</p>
+                    <p class="mb-4">$$\text{Pureza (\%)} = \left(\frac{60,69 \text{ g}}{100 \text{ g}}\right) \times 100 = \mathbf{60,69\% \text{ de pureza}}$$</p>
+
+                    <p class="font-bold mb-2">Fase C: Combustión del Butano y Rendimiento Volumétrico</p>
+                    <p class="mb-2">Reacción de combustión: $$\ce{2C4H10(g) + 13O2(g) -> 8CO2(g) + 10H2O(l)}$$</p>
+                    <p class="mb-2">Llevamos nuestros moles de $\ce{O2}$ ($0,742 \text{ mol}$) a volumen en las nuevas condiciones de reacción (20 ºC, 1 atm):</p>
+                    <p class="mb-2">$V(\ce{O2}) = \frac{0,742 \times 0,082 \times 293}{1} = \mathbf{17,82 \text{ Litros de O}_2}$ disponibles a 1 atm.</p>
+                    <p class="mb-2">Dado que operamos a $P$ y $T$ constantes, aplicamos la Ley de Volúmenes de Combinación directamente de $\ce{O2}$ a $\ce{CO2}$:</p>
+                    <p>$$V(\ce{CO2}) = 17,82 \text{ L de O}_2 \times \frac{8 \text{ L de CO}_2}{13 \text{ L de O}_2} = \mathbf{10,97 \text{ Litros de CO}_2}$$</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Ejercicio 10 -->
+        <div class="glass-card diff-4 rounded-xl p-6 shadow-sm">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-slate-800">Ejercicio 10: El Enigma del Eudiómetro (Análisis Orgánico)</h2>
+                <span class="bg-violet-100 text-violet-800 text-xs font-semibold px-2.5 py-0.5 rounded">Nivel 8: El Gran Químico</span>
+            </div>
+            <p class="mb-4 text-lg">Un método clásico para identificar hidrocarburos desconocidos ($\ce{C_xH_y}$) es la eudiometría. Introducimos <strong>10 mL de un hidrocarburo gaseoso</strong> puro y lo mezclamos con <strong>60 mL de oxígeno ($\ce{O2}$)</strong> en exceso en un tubo cerrado. Tras hacer saltar una chispa y completarse la combustión, dejamos enfriar la mezcla a la temperatura ambiente inicial (el agua generada condensa a estado líquido). El volumen de los gases residuales es de <strong>40 mL</strong>.</p>
+            <p class="mb-4 text-lg">A continuación, hacemos pasar esta mezcla gaseosa residual por una disolución concentrada de Hidróxido de Potasio ($\ce{KOH}$, que absorbe todo el $\ce{CO2}$). Tras esto, el volumen del gas se reduce a <strong>10 mL</strong>. (Todos los volúmenes medidos a las mismas P y T).</p>
+            <ul class="list-disc ml-6 mb-4 text-lg">
+                <li>Determina la <strong>fórmula molecular</strong> del hidrocarburo.</li>
+                <li>Calcula la <strong>densidad</strong> de este gas hidrocarburo si se almacenara a 50 ºC y 1,5 atm de presión.</li>
+            </ul>
+            <p class="text-sm text-gray-500 mb-4"><em>Datos: R = 0,082 atm·L/mol·K. Masas atómicas (u): C = 12; H = 1.</em></p>
+            
+            <details class="bg-slate-50 rounded-lg border border-slate-200">
+                <summary class="cursor-pointer font-semibold text-slate-700 p-4 hover:bg-slate-100 transition-colors flex justify-between items-center">
+                    Ver el desarrollo analítico completo
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="p-6 border-t border-slate-200 bg-white">
+                    <p class="italic text-slate-600 mb-4">"La eudiometría es pura elegancia deductiva. Las variaciones de volumen nos narran la historia atómica oculta en la molécula."</p>
+                    
+                    <p class="font-bold mb-2">Fase A: Análisis de los Volúmenes Residuales</p>
+                    <p class="mb-2">El volumen final tras el $\ce{KOH}$ (10 mL) corresponde únicamente al <strong>Oxígeno que NO reaccionó</strong> (exceso), ya que el agua condensó y el $\ce{CO2}$ fue absorbido.</p>
+                    <p class="mb-2">Por tanto, volumen de $\ce{O2}$ que SÍ reaccionó: $V_{\text{reaccionado}}(\ce{O2}) = 60 \text{ mL (iniciales)} - 10 \text{ mL (exceso)} = \mathbf{50 \text{ mL}}$.</p>
+                    <p class="mb-4">El volumen absorbido por el $\ce{KOH}$ es el dióxido de carbono. $V(\ce{CO2}) = 40 \text{ mL (mezcla post-combustión)} - 10 \text{ mL (O}_2\text{)} = \mathbf{30 \text{ mL de CO}_2}$.</p>
+
+                    <p class="font-bold mb-2">Fase B: Deducción de la Fórmula ($\ce{C_xH_y}$)</p>
+                    <p class="mb-2">La combustión general de un hidrocarburo responde a la siguiente relación estequiométrica (aplicable en volúmenes al ser gases a igual P y T):</p>
+                    <div class="bg-slate-50 p-4 rounded text-center mb-4 overflow-x-auto">
+                        $$\ce{C_xH_y(g) + \left(x + \frac{y}{4}\right)O2(g) -> xCO2(g) + \frac{y}{2}H2O(l)}$$
+                    </div>
+                    <p class="mb-2"><strong>Deducción de Carbonos (x):</strong> 1 mL de $\ce{C_xH_y}$ produce $x$ mL de $\ce{CO2}$.<br>
+                    Si 10 mL de HC produjeron 30 mL de $\ce{CO2} \Rightarrow x = 30 / 10 \Rightarrow \mathbf{x = 3}$.</p>
+                    <p class="mb-2"><strong>Deducción de Hidrógenos (y):</strong> 1 mL de HC reacciona con $(x + y/4)$ mL de $\ce{O2}$.<br>
+                    Si 10 mL de HC reaccionaron con 50 mL de $\ce{O2} \Rightarrow \left(3 + \frac{y}{4}\right) = \frac{50}{10} = 5$.</p>
+                    <p class="mb-4">Despejando: $\frac{y}{4} = 5 - 3 = 2 \Rightarrow \mathbf{y = 8}$.<br>
+                    La fórmula del hidrocarburo es <strong>$\mathbf{\ce{C3H8}}$ (Propano)</strong>.</p>
+
+                    <p class="font-bold mb-2">Fase C: Cálculo de Densidad</p>
+                    <p class="mb-2">Masa molar del Propano ($\ce{C3H8}$) = $(3 \times 12) + (8 \times 1) = \mathbf{44 \text{ g/mol}}$.</p>
+                    <p class="mb-2">Partiendo de $PV = \frac{m}{M_m}RT$, la densidad ($\rho = m/V$) es: $\rho = \frac{P \cdot M_m}{R \cdot T}$</p>
+                    <p>$$\rho = \frac{1,5 \text{ atm} \times 44 \text{ g/mol}}{0,082 \frac{\text{atm}\cdot\text{L}}{\text{mol}\cdot\text{K}} \times 323 \text{ K}} = \frac{66}{26,486} = \mathbf{2,49 \text{ g/L}}$$</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Ejercicio 11 -->
+        <div class="glass-card diff-4 rounded-xl p-6 shadow-sm">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-slate-800">Ejercicio 11: La Atmósfera Artificial (Proceso Industrial y Conversión)</h2>
+                <span class="bg-violet-100 text-violet-800 text-xs font-semibold px-2.5 py-0.5 rounded">Nivel 8: El Gran Químico</span>
+            </div>
+            <p class="mb-4 text-lg">En la primera etapa del Proceso Ostwald para la síntesis de ácido nítrico, se oxida amoníaco gas sobre un catalizador de platino-rodio. En un reactor continuo introducimos simultáneamente <strong>120 g de Amoníaco ($\ce{NH3}$)</strong> y <strong>250 g de Oxígeno molecular ($\ce{O2}$)</strong>. Debido a las altas velocidades del gas, la reacción solo alcanza una <strong>conversión (rendimiento) del 80%</strong> respecto al reactivo limitante.</p>
+            <p class="mb-4 text-lg">La mezcla gaseosa resultante al completo (los productos generados más los restos de gases no reaccionados) se confina en un tanque de retención de <strong>50 Litros a 150 ºC</strong> (temperatura a la cual el agua formada se mantiene en estado gaseoso). Calcula:</p>
+            <ul class="list-disc ml-6 mb-4 text-lg">
+                <li>La <strong>presión total</strong> en el interior del tanque.</li>
+                <li>La <strong>presión parcial</strong> del gas que se encuentre en mayor proporción (gas más abundante) en dicha mezcla final.</li>
+            </ul>
+            <p class="text-sm text-gray-500 mb-4"><em>Datos: Reacción sin ajustar: $\ce{NH3(g) + O2(g) -> NO(g) + H2O(g)}$.<br>R = 0,082 atm·L/mol·K. Masas atómicas (u): N = 14; H = 1; O = 16.</em></p>
+            
+            <details class="bg-slate-50 rounded-lg border border-slate-200">
+                <summary class="cursor-pointer font-semibold text-slate-700 p-4 hover:bg-slate-100 transition-colors flex justify-between items-center">
+                    Ver el desarrollo analítico completo
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="p-6 border-t border-slate-200 bg-white">
+                    <p class="italic text-slate-600 mb-4">"En la industria química rara vez operamos con rendimientos perfectos. El arte radica en dominar la composición de la caótica sopa final de gases."</p>
+                    
+                    <p class="font-bold mb-2">Fase A: Ajuste y Reactivo Limitante</p>
+                    <div class="bg-slate-50 p-4 rounded text-center mb-4 overflow-x-auto">
+                        $$\ce{4NH3(g) + 5O2(g) -> 4NO(g) + 6H2O(g)}$$
+                    </div>
+                    <p class="mb-2">Calculamos moles iniciales de cada gas:</p>
+                    <p class="mb-2">$n_0(\ce{NH3}) = 120 \text{ g} / 17 \text{ g/mol} = \mathbf{7,06 \text{ mol}}$.</p>
+                    <p class="mb-2">$n_0(\ce{O2}) = 250 \text{ g} / 32 \text{ g/mol} = \mathbf{7,81 \text{ mol}}$.</p>
+                    <p class="mb-4">Buscamos el limitante comparando con la estequiometría teórica. Relación exigida = $5/4 = 1,25$. Relación disponible = $7,81 / 7,06 = 1,106$. Como tenemos menos de 1,25 moles de $\ce{O2}$ por cada mol de $\ce{NH3}$, el <strong>$\ce{O2}$ es el Reactivo Limitante</strong>.</p>
+
+                    <p class="font-bold mb-2">Fase B: Balance de Moles en Conversión Real (80%)</p>
+                    <p class="mb-2">Moles de limitante ($\ce{O2}$) que *realmente* reaccionan: $n_r(\ce{O2}) = 7,81 \times 0,80 = \mathbf{6,248 \text{ mol}}$.</p>
+                    <p class="mb-2">Con este dato, evaluamos todo el sistema mediante proporciones estequiométricas:</p>
+                    <ul class="list-disc ml-6 mb-4">
+                        <li><strong>$\ce{O2}$ sobrante (sin reaccionar):</strong> $7,81 - 6,248 = \mathbf{1,562 \text{ mol}}$.</li>
+                        <li><strong>$\ce{NH3}$ que reacciona:</strong> $6,248 \text{ mol O}_2 \times (4/5) = 4,998 \text{ mol}$.</li>
+                        <li><strong>$\ce{NH3}$ sobrante:</strong> $7,06 - 4,998 = \mathbf{2,062 \text{ mol}}$.</li>
+                        <li><strong>$\ce{NO}$ producido:</strong> $6,248 \text{ mol O}_2 \times (4/5) = \mathbf{4,998 \text{ mol}}$.</li>
+                        <li><strong>$\ce{H2O}$ (vapor) producido:</strong> $6,248 \text{ mol O}_2 \times (6/5) = \mathbf{7,498 \text{ mol}}$.</li>
+                    </ul>
+                    <p class="mb-4"><strong>Moles totales en la mezcla final ($n_t$):</strong> $1,562 + 2,062 + 4,998 + 7,498 = \mathbf{16,12 \text{ moles totales}}$.</p>
+
+                    <p class="font-bold mb-2">Fase C: Cálculo de Presiones Finales</p>
+                    <p class="mb-2">La Presión Total se deduce del sumatorio de todos los gases confinados en $V = 50 \text{ L}$ a $T = 150 \text{ ºC} = 423 \text{ K}$:</p>
+                    <p class="mb-4">$$P_{\text{total}} = \frac{n_t \cdot R \cdot T}{V} = \frac{16,12 \times 0,082 \times 423}{50} = \mathbf{11,18 \text{ atmósferas}}$$</p>
+                    <p class="mb-2">El gas más abundante es el vapor de <strong>Agua ($\ce{H2O}$)</strong> con 7,498 moles. Su presión parcial se obtiene aplicando la fracción molar ($\chi = 7,498 / 16,12 = 0,465$):</p>
+                    <p>$$P_{\ce{H2O}} = \chi_{\ce{H2O}} \cdot P_{\text{total}} = 0,465 \times 11,18 = \mathbf{5,20 \text{ atm}}$$</p>
+                </div>
+            </details>
+        </div>
+
     </main>
 </body>
 </html>
