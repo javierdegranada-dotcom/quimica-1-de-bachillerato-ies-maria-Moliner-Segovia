@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estequiometría Avanzada: Disoluciones y Gases | Cuaderno del Químico</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Configuración robusta de MathJax -->
+    <script>
+        window.MathJax = {
+            loader: {load: ['[tex]/mhchem']},
+            tex: {
+                packages: {'[+]': ['mhchem']},
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            startup: {
+                pageReady: () => {
+                    return MathJax.startup.defaultPageReady();
+                }
+            }
+        };
+    </script>
+    <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f0f4f8; }
+        .solution-content { display: none; }
+        details > summary { list-style: none; -webkit-tap-highlight-color: transparent; }
+        details > summary::-webkit-details-marker { display: none; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+        .diff-1 { border-left: 5px solid #3b82f6; } /* Azul - Facil */
+        .diff-2 { border-left: 5px solid #10b981; } /* Verde - Medio */
+        .diff-3 { border-left: 5px solid #f59e0b; } /* Ambar - Dificil */
+        .diff-4 { border-left: 5px solid #ef4444; } /* Rojo - Maestro */
+    </style>
+</head>
+<body class="text-gray-800 antialiased min-h-screen">
+
+    <!-- Encabezado de la Clase -->
+    <header class="bg-slate-900 text-white py-12 px-6 shadow-xl mb-10">
+        <div class="max-w-5xl mx-auto">
+            <h1 class="text-4xl font-bold mb-3 font-serif tracking-wide text-blue-100">Reacciones químicas</h1>
+            <p class="text-xl text-blue-300 mb-6">Disoluciones, Gases y Rendimiento — Nivel: 1º de Bachillerato</p>
+            <div class="bg-slate-800 p-6 rounded-lg border border-slate-700 shadow-inner">
+                <p class="italic text-slate-300 leading-relaxed">"Bienvenidos de nuevo al laboratorio. En esta sesión abandonaremos los escenarios ideales para enfrentarnos a la química del mundo real. Trabajaremos con ácidos comerciales densos, disoluciones acuosas que ocultan al reactivo limitante, minerales impuros y gases que escapan burbujeando. Observad atentamente las concentraciones y no olvidéis que la masa se conserva, pero el volumen es caprichoso. Adelante, mis jóvenes teóricos."</p>
+            </div>
+            <!-- Aviso sutil para móviles -->
+            <div class="mt-4 text-xs text-blue-200 bg-slate-800/50 p-2 rounded inline-block">
+                💡 Consejo técnico: Si experimentas problemas visuales con las fórmulas en tu dispositivo móvil, ábrelo en un navegador externo (Safari/Chrome).
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-6 pb-20 space-y-8">
+
+        <!-- Ejercicio 1 -->
+        <div class="glass-card diff-1 rounded-xl p-6 transition-all hover:shadow-md">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-slate-800">Ejercicio 1: La Precipitación de Plata</h2>
+                <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-blue-200">Nivel 1: Conceptos Básicos</span>
+            </div>
+            <p class="mb-4 text-lg">En un matraz erlenmeyer disponemos de <strong>250 mL de una disolución de nitrato de plata 0,2 M</strong>. Añadimos cloruro de sodio en exceso hasta que todo el catión plata precipita en forma de cloruro de plata, un sólido blanco lechoso, quedando nitrato de sodio disuelto en el medio. ¿Qué masa en gramos de este precipitado habremos obtenido tras filtrarlo y secarlo?</p>
+            <p class="text-sm text-gray-500 mb-4"><em>Masas atómicas (u): Ag = 107,9; Cl = 35,5; N = 14; O = 16.</em></p>
+            
+            <details class="bg-slate-50 rounded-lg border border-slate-200 overflow-hidden">
+                <summary onclick="void(0)" class="cursor-pointer font-semibold text-slate-700 p-4 hover:bg-slate-100 transition-colors flex justify-between items-center">
+                    Ver la resolución del Maestro
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="p-6 border-t border-slate-200 bg-white">
+                    <p class="font-bold mb-2">1. Ecuación química ajustada:</p>
+                    <div class="bg-slate-50 p-4 rounded text-center mb-4 overflow-x-auto">
+                        $$\ce{AgNO3(aq) + NaCl(aq) -> AgCl(s) v + NaNO3(aq)}$$
+                    </div>
+                    <p class="font-bold mb-2">2. Cálculo de moles iniciales (Molaridad):</p>
+                    <p class="mb-2">La concentración Molar ($M$) nos relaciona moles ($n$) y volumen en litros ($V$). Despejamos: $n = M \times V$</p>
+                    <p class="mb-4">$$n(\ce{AgNO3}) = 0,2 \text{ mol/L} \times 0,250 \text{ L} = 0,05 \text{ moles}$$</p>
+                    <p class="font-bold mb-2">3. Estequiometría y Masa Final:</p>
+                    <p class="mb-2">La relación es 1:1. Por tanto, se formarán $0,05 \text{ moles de } \ce{AgCl}$.</p>
+                    <p class="mb-2">Masa molar del $\ce{AgCl} = 107,9 + 35,5 = 143,4 \text{ g/mol}$.</p>
+                    <p>$$\text{Masa}(\ce{AgCl}) = 0,05 \text{ mol} \times 143,4 \text{ g/mol} = \mathbf{7,17 \text{ gramos de precipitado}}$$</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Ejercicio 2 -->
+        <div class="glass-card diff-1 rounded-xl p-6 transition-all hover:shadow-md">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-slate-800">Ejercicio 2: Sólido a Disolución</h2>
+                <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-blue-200">Nivel 2: Inmersión Metálica</span>
+            </div>
+            <p class="mb-4 text-lg">Se introducen <strong>10 gramos de zinc puro</strong> en un vaso de precipitados. Queremos disolver completamente este metal haciéndolo reaccionar con una disolución de <strong>ácido clorhídrico 0,5 M</strong>, proceso que liberará gas hidrógeno y dejará cloruro de zinc acuoso en la disolución. ¿Qué <strong>volumen exacto (en mL)</strong> de esta disolución ácida necesitaremos verter para consumir hasta el último átomo de zinc?</p>
+            <p class="text-sm text-gray-500 mb-4"><em>Masa atómica (u): Zn = 65,4.</em></p>
+            
+            <details class="bg-slate-50 rounded-lg border border-slate-200 overflow-hidden">
+                <summary onclick="void(0)" class="cursor-pointer font-semibold text-slate-700 p-4 hover:bg-slate-100 transition-colors flex justify-between items-center">
+                    Ver la resolución del Maestro
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="p-6 border-t border-slate-200 bg-white">
+                    <p class="font-bold mb-2">1. La reacción de ataque ácido:</p>
+                    <div class="bg-slate-50 p-4 rounded text-center mb-4 overflow-x-auto">
+                        $$\ce{Zn(s) + 2HCl(aq) -> ZnCl2(aq) + H2(g) ^}$$
+                    </div>
+                    <p class="font-bold mb-2">2. Moles del metal:</p>
+                    <p class="mb-4">$$n(\ce{Zn}) = \frac{10 \text{ g}}{65,4 \text{ g/mol}} = 0,1529 \text{ moles}$$</p>
+                    <p class="font-bold mb-2">3. Exigencia estequiométrica de la disolución:</p>
+                    <p class="mb-2">La estequiometría (1:2) nos dicta que necesitamos el doble de moles de ácido que de metal:</p>
+                    <p class="mb-4">$$n(\ce{HCl}) = 0,1529 \text{ mol } \ce{Zn} \times 2 = 0,3058 \text{ moles de } \ce{HCl}$$</p>
+                    <p class="font-bold mb-2">4. Volumen de la disolución:</p>
+                    <p class="mb-2">Sabiendo que $V = n / M$:</p>
+                    <p>$$V = \frac{0,3058 \text{ mol}}{0,5 \text{ mol/L}} = 0,6116 \text{ Litros} = \mathbf{611,6 \text{ mL de disolución}}$$</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Ejercicio 3 -->
+        <div class="glass-card diff-2 rounded-xl p-6 transition-all hover:shadow-md">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-slate-800">Ejercicio 3: Captura del Gas Soluble</h2>
+                <span class="bg-emerald-100 text-emerald-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-emerald-200">Nivel 3: Gases a Solución</span>
+            </div>
+            <p class="mb-4 text-lg">Inyectamos <strong>11,2 Litros de gas amoníaco</strong>, medidos en Condiciones Normales (C.N.), en una cantidad de agua destilada suficiente para preparar finalmente <strong>500 mL de disolución acuosa</strong>. Posteriormente, queremos neutralizar completamente esta disolución básica empleando <strong>ácido sulfúrico 0,25 M</strong> para formar como único producto una sal soluble llamada sulfato de amonio. Calcula qué volumen (en Litros) de este ácido deberemos emplear.</p>
+            <p class="text-sm text-gray-500 mb-4"><em>Dato: Volumen molar en C.N. = 22,4 L/mol.</em></p>
+            
+            <details class="bg-slate-50 rounded-lg border border-slate-200 overflow-hidden">
+                <summary onclick="void(0)" class="cursor-pointer font-semibold text-slate-700 p-4 hover:bg-slate-100 transition-colors flex justify-between items-center">
+                    Ver la resolución del Maestro
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="p-6 border-t border-slate-200 bg-white">
+                    <p class="font-bold mb-2">1. Moles de gas y Molaridad inicial:</p>
+                    <p class="mb-2">Transformamos el volumen de gas a moles: $n(\ce{NH3}) = 11,2 \text{ L} / 22,4 \text{ L/mol} = 0,5 \text{ moles}$.</p>
+                    <p class="mb-4">Se disuelven en 0,5 L de agua. Molaridad de la base: $M = 0,5 \text{ mol} / 0,5 \text{ L} = \mathbf{1 \text{ M}}$.</p>
+                    <p class="font-bold mb-2">2. Reacción de Neutralización:</p>
+                    <div class="bg-slate-50 p-4 rounded text-center mb-4 overflow-x-auto">
+                        $$\ce{2NH3(aq) + H2SO4(aq) -> (NH4)2SO4(aq)}$$
+                    </div>
+                    <p class="font-bold mb-2">3. Cálculo de volumen necesario:</p>
+                    <p class="mb-2">Para neutralizar los 0,5 moles de $\ce{NH3}$, necesitamos la mitad de moles de ácido (relación 2:1):</p>
+                    <p class="mb-2">$$n(\ce{H2SO4}) = 0,5 \text{ mol } \ce{NH3} \times \frac{1 \text{ mol } \ce{H2SO4}}{2 \text{ mol } \ce{NH3}} = 0,25 \text{ moles de ácido}$$</p>
+                    <p class="mb-2">Calculamos el volumen de la disolución de ácido 0,25 M:</p>
+                    <p>$$V(\ce{H2SO4}) = \frac{n}{M} = \frac{0,25 \text{ mol}}{0,25 \text{ mol/L}} = \mathbf{1 \text{ Litro exacto}}$$</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Ejercicio 4 -->
+        <div class="glass-card diff-2 rounded-xl p-6 transition-all hover:shadow-md">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-slate-800">Ejercicio 4: El Conflicto de las Dos Disoluciones</h2>
+                <span class="bg-emerald-100 text-emerald-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-emerald-200">Nivel 4: Reactivo Limitante Líquido</span>
+            </div>
+            <p class="mb-4 text-lg">Mezclamos en un matraz <strong>100 mL de disolución de cloruro de bario 0,5 M</strong> con <strong>50 mL de disolución de sulfato de sodio 0,8 M</strong>. Al instante se forma un precipitado blanco insoluble de sulfato de bario, quedando cloruro de sodio disuelto en la fase acuosa. Determina:</p>
+            <ul class="list-disc ml-6 mb-4 text-lg">
+                <li>Cuál es el reactivo limitante.</li>
+                <li>Los gramos de precipitado que se formarán.</li>
+                <li>La Molaridad del ión bario sobrante en la disolución final (suponiendo volúmenes aditivos).</li>
+            </ul>
+            <p class="text-sm text-gray-500 mb-4"><em>Masas atómicas (u): Ba = 137,3; S = 32; O = 16.</em></p>
+            
+            <details class="bg-slate-50 rounded-lg border border-slate-200 overflow-hidden">
+                <summary onclick="void(0)" class="cursor-pointer font-semibold text-slate-700 p-4 hover:bg-slate-100 transition-colors flex justify-between items-center">
+                    Ver la resolución del Maestro
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="p-6 border-t border-slate-200 bg-white">
+                    <p class="font-bold mb-2">1. Ecuación y moles aportados por cada disolución:</p>
+                    <div class="bg-slate-50 p-4 rounded text-center mb-4 overflow-x-auto">
+                        $$\ce{BaCl2(aq) + Na2SO4(aq) -> BaSO4(s) v + 2NaCl(aq)}$$
+                    </div>
+                    <p class="mb-2">$n(\ce{BaCl2}) = 0,5 \text{ mol/L} \times 0,100 \text{ L} = \mathbf{0,05 \text{ moles}}$</p>
+                    <p class="mb-4">$n(\ce{Na2SO4}) = 0,8 \text{ mol/L} \times 0,050 \text{ L} = \mathbf{0,04 \text{ moles}}$</p>
+
+                    <p class="font-bold mb-2">2. Análisis del Limitante:</p>
+                    <p class="mb-4 text-emerald-800 bg-emerald-50 p-3 rounded">La reacción es 1:1. Como disponemos de 0,05 moles de Bario y solo 0,04 moles de Sulfato, el <strong>$\ce{Na2SO4}$ es el reactivo limitante</strong>. Éste se agotará por completo y dictará el avance del proceso.</p>
+
+                    <p class="font-bold mb-2">3. Cálculo de la Masa Precipitada:</p>
+                    <p class="mb-2">Se formarán 0,04 moles de precipitado. $M_m(\ce{BaSO4}) = 137,3 + 32 + (4 \times 16) = 233,3 \text{ g/mol}$.</p>
+                    <p class="mb-4">$$\text{Masa} = 0,04 \text{ mol} \times 233,3 \text{ g/mol} = \mathbf{9,332 \text{ gramos de } \ce{BaSO4}}$$</p>
+
+                    <p class="font-bold mb-2">4. Molaridad Residual del Ión Bario:</p>
+                    <p class="mb-2">Moles sobrantes de $\ce{Ba^{2+}} = 0,05 \text{ (iniciales)} - 0,04 \text{ (reaccionan)} = 0,01 \text{ moles sobrantes}$.</p>
+                    <p class="mb-2">Volumen final total de la mezcla $= 100 \text{ mL} + 50 \text{ mL} = 150 \text{ mL} = 0,150 \text{ L}$.</p>
+                    <p>$$[\ce{Ba^{2+}}] = \frac{0,01 \text{ mol}}{0,150 \text{ L}} = \mathbf{0,067 \text{ M}}$$</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Ejercicio 5 -->
+        <div class="glass-card diff-3 rounded-xl p-6 transition-all hover:shadow-md">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-slate-800">Ejercicio 5: La Disolución del Carbonato (Gases y Rendimiento)</h2>
+                <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-amber-200">Nivel 5: Sólido + Disolución + Gas</span>
+            </div>
+            <p class="mb-4 text-lg">Atacamos <strong>40 gramos de un mineral de carbonato de magnesio que posee un 80% de pureza</strong>, vertiendo sobre él <strong>300 mL de ácido nítrico 2 M</strong>. La efervescencia generada es dióxido de carbono gaseoso, y en el recipiente queda una disolución acuosa de nitrato de magnesio junto con agua líquida. Si experimentalmente el <strong>rendimiento de esta reacción es del 85%</strong>, calcula el volumen exacto de gas dióxido de carbono que podremos recoger a una presión de <strong>1 atm y 25 ºC</strong>.</p>
+            <p class="text-sm text-gray-500 mb-4"><em>Datos: R = 0,082 atm·L/mol·K. Masas atómicas (u): Mg = 24,3; C = 12; O = 16.</em></p>
+            
+            <details class="bg-slate-50 rounded-lg border border-slate-200 overflow-hidden">
+                <summary onclick="void(0)" class="cursor-pointer font-semibold text-slate-700 p-4 hover:bg-slate-100 transition-colors flex justify-between items-center">
+                    Ver la resolución del Maestro
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="p-6 border-t border-slate-200 bg-white">
+                    <p class="font-bold mb-2">1. Reacción ajustada:</p>
+                    <div class="bg-slate-50 p-4 rounded text-center mb-4 overflow-x-auto">
+                        $$\ce{MgCO3(s) + 2HNO3(aq) -> Mg(NO3)2(aq) + CO2(g) ^ + H2O(l)}$$
+                    </div>
+
+                    <p class="font-bold mb-2">2. Moles reales en juego y Reactivo Limitante:</p>
+                    <p class="mb-2"><strong>Mineral Puro:</strong> $40 \text{ g} \times 0,80 = 32 \text{ g de } \ce{MgCO3}$ puro. $M_m = 84,3 \text{ g/mol}$.<br>
+                    $n(\ce{MgCO3}) = 32 / 84,3 = \mathbf{0,380 \text{ moles}}$.</p>
+                    <p class="mb-2"><strong>Ácido:</strong> $n(\ce{HNO3}) = 2 \text{ M} \times 0,300 \text{ L} = \mathbf{0,600 \text{ moles}}$.</p>
+                    <p class="mb-4">Para consumir 0,380 moles de sal harían falta el doble de ácido ($0,760 \text{ moles de } \ce{HNO3}$). Como solo tenemos 0,600 moles, <strong>el $\ce{HNO3}$ es el reactivo limitante</strong>.</p>
+
+                    <p class="font-bold mb-2">3. Estequiometría del gas y Rendimiento:</p>
+                    <p class="mb-2">Cálculo teórico desde el limitante (relación 2:1): $n_{\text{teórico}}(\ce{CO2}) = 0,600 / 2 = 0,300 \text{ moles}$.</p>
+                    <p class="mb-4">Aplicamos el rendimiento del 85%: $n_{\text{real}}(\ce{CO2}) = 0,300 \times 0,85 = \mathbf{0,255 \text{ moles producidos}}$.</p>
+
+                    <p class="font-bold mb-2">4. Aplicación de la Ecuación de Gases:</p>
+                    <p>$$V = \frac{nRT}{P} = \frac{0,255 \times 0,082 \times 298}{1} = \mathbf{6,23 \text{ Litros de CO}_2}$$</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Ejercicio 6 -->
+        <div class="glass-card diff-3 rounded-xl p-6 transition-all hover:shadow-md">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-slate-800">Ejercicio 6: El Sistema Binario (Mezcla de Metales)</h2>
+                <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-amber-200">Nivel 6: Alta Complejidad</span>
+            </div>
+            <p class="mb-4 text-lg">Un joyero nos entrega una <strong>aleación de 20 gramos formada exclusivamente por cobre y zinc</strong>. Para analizarla, la sumergimos en una disolución concentrada de ácido clorhídrico en exceso. Sabiendo que <em>el cobre no reacciona con este ácido</em>, observamos que al reaccionar el zinc se recogen <strong>4,5 Litros de gas hidrógeno medidos a 1,1 atm y 25 ºC</strong>, formándose además cloruro de zinc acuoso en el proceso. Demuestra tus habilidades calculando el <strong>porcentaje en masa (% peso)</strong> de cobre y de zinc que componen la aleación original.</p>
+            <p class="text-sm text-gray-500 mb-4"><em>Datos: R = 0,082 atm·L/mol·K. Masa atómica (u): Zn = 65,4.</em></p>
+            
+            <details class="bg-slate-50 rounded-lg border border-slate-200 overflow-hidden">
+                <summary onclick="void(0)" class="cursor-pointer font-semibold text-slate-700 p-4 hover:bg-slate-100 transition-colors flex justify-between items-center">
+                    Ver la resolución del Maestro
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="p-6 border-t border-slate-200 bg-white">
+                    <p class="italic text-slate-600 mb-4">"En las mezclas, el silencio químico de un componente es tan revelador como la efervescencia del otro."</p>
+                    
+                    <p class="font-bold mb-2">1. Identificación del fenómeno:</p>
+                    <p class="mb-4">Dado que el Cu es inerte ante el HCl diluido/concentrado (por su potencial de reducción), el 100% del gas liberado proviene del ataque al Zinc. $$\ce{Zn(s) + 2HCl(aq) -> ZnCl2(aq) + H2(g)}$$</p>
+
+                    <p class="font-bold mb-2">2. Moles de Hidrógeno generados:</p>
+                    <p class="mb-4">$$n(\ce{H2}) = \frac{P \cdot V}{R \cdot T} = \frac{1,1 \text{ atm} \times 4,5 \text{ L}}{0,082 \frac{\text{atm}\cdot\text{L}}{\text{mol}\cdot\text{K}} \times 298 \text{ K}} = \mathbf{0,2026 \text{ moles de H}_2}$$</p>
+
+                    <p class="font-bold mb-2">3. Masa de Zinc en la aleación:</p>
+                    <p class="mb-2">Según la reacción (1:1), 0,2026 moles de gas provienen de 0,2026 moles de Zinc sólido.</p>
+                    <p class="mb-4">$$\text{Masa de } \ce{Zn} = 0,2026 \text{ mol} \times 65,4 \text{ g/mol} = \mathbf{13,25 \text{ gramos de Zn}}$$</p>
+
+                    <p class="font-bold mb-2">4. Porcentajes de la Aleación ($m_{\text{total}} = 20 \text{ g}$):</p>
+                    <p class="mb-2">$$\% \ce{Zn} = \left(\frac{13,25 \text{ g}}{20 \text{ g}}\right) \times 100 = \mathbf{66,25\%}$$</p>
+                    <p>$$\% \ce{Cu} = 100\% - 66,25\% = \mathbf{33,75\%}$$</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Ejercicio 7 -->
+        <div class="glass-card diff-4 rounded-xl p-6 transition-all hover:shadow-md">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-red-800">Ejercicio 7: El Ácido Comercial (Densidad y Riqueza)</h2>
+                <span class="bg-red-100 text-red-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-red-200">Nivel 7: Maestro Químico</span>
+            </div>
+            <p class="mb-4 text-lg">En la vitrina de reactivos encontramos una botella de <strong>ácido sulfúrico comercial, cuya etiqueta indica una riqueza del 98% en masa y una densidad de 1,84 g/mL</strong>. Extraemos con una pipeta <strong>10 mL</strong> de este ácido y los hacemos reaccionar con <strong>15 gramos de aluminio que posee un 85% de pureza</strong>.</p>
+            <p class="mb-4 text-lg">El gas hidrógeno producido (mientras se forma también sulfato de aluminio en disolución) se recoge de forma clásica <em>sobre agua</em> a una temperatura de 20 ºC, registrándose una presión exterior barométrica de 760 mmHg. Sabiendo que el rendimiento del equipo es del <strong>90%</strong>, determina el volumen medido de gas húmedo en el tubo colector.</p>
+            <p class="text-sm text-gray-500 mb-4"><em>Datos: Presión de vapor de agua a 20 ºC = 17,5 mmHg. R = 0,082. Masas atómicas (u): S = 32; O = 16; H = 1; Al = 27.</em></p>
+            
+            <details class="bg-slate-50 rounded-lg border border-slate-200 overflow-hidden">
+                <summary onclick="void(0)" class="cursor-pointer font-semibold text-slate-700 p-4 hover:bg-slate-100 transition-colors flex justify-between items-center">
+                    Ver el desarrollo analítico completo
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="p-6 border-t border-slate-200 bg-white">
+                    <p class="italic text-slate-600 mb-4">"Cuidado con los ácidos comerciales; su densidad esconde una enorme potencia molar. Debemos desentrañar su molaridad antes de proceder."</p>
+                    
+                    <p class="font-bold mb-2">Fase A: Molaridad y Moles del Ácido Comercial</p>
+                    <p class="mb-2">Partimos de la fórmula maestra para disoluciones comerciales: $M = \frac{d \cdot 1000 \cdot \%}{M_m}$. Masa molar $\ce{H2SO4} = 98 \text{ g/mol}$.</p>
+                    <p class="mb-2">$$M = \frac{1,84 \text{ g/mL} \times 1000 \text{ mL/L} \times 0,98}{98 \text{ g/mol}} = \mathbf{18,4 \text{ M}}$$</p>
+                    <p class="mb-4">Moles en la alícuota extraída: $n(\ce{H2SO4}) = 18,4 \text{ mol/L} \times 0,010 \text{ L} = \mathbf{0,184 \text{ moles}}$.</p>
+
+                    <p class="font-bold mb-2">Fase B: Limitante y Estequiometría</p>
+                    <p class="mb-2">Moles de Aluminio puro: $15 \text{ g} \times 0,85 = 12,75 \text{ g}$. $n(\ce{Al}) = 12,75 / 27 = \mathbf{0,472 \text{ moles}}$.</p>
+                    <div class="bg-slate-50 p-4 rounded text-center mb-4 overflow-x-auto">
+                        $$\ce{2Al(s) + 3H2SO4(aq) -> Al2(SO4)3(aq) + 3H2(g) ^}$$
+                    </div>
+                    <p class="mb-2">Relación exigida (Ácido/Metal) = $3/2 = 1,5$. Relación disponible = $0,184 / 0,472 = 0,39$. Claramente el ácido es insuficiente.</p>
+                    <p class="mb-4 text-red-700 bg-red-50 p-2 rounded">El <strong>$\ce{H2SO4}$ es el Reactivo Limitante</strong>.</p>
+
+                    <p class="font-bold mb-2">Fase C: Cálculo de la Recogida de Gas Húmedo</p>
+                    <p class="mb-2">Moles teóricos de $\ce{H2}$: La estequiometría ácido:gas es 3:3 (es decir, 1:1). Por tanto $0,184 \text{ moles teóricos}$.</p>
+                    <p class="mb-2">Aplicamos el 90% de rendimiento: $n_{\text{real}}(\ce{H2}) = 0,184 \times 0,90 = \mathbf{0,1656 \text{ moles}}$.</p>
+                    <p class="mb-2">Al recoger sobre agua, la presión útil del hidrógeno es la atmosférica menos el vapor de agua:</p>
+                    <p class="mb-2">$P_{\ce{H2}} = 760 - 17,5 = 742,5 \text{ mmHg} = \mathbf{0,977 \text{ atm}}$. $T = 293 \text{ K}$.</p>
+                    <p>$$V_{\text{húmedo}} = \frac{nRT}{P} = \frac{0,1656 \times 0,082 \times 293}{0,977} = \mathbf{4,07 \text{ Litros recogidos}}$$</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Ejercicio 8 -->
+        <div class="glass-card diff-4 rounded-xl p-6 transition-all hover:shadow-md">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-red-800">Ejercicio 8: Tostación y Precipitación Consecutiva</h2>
+                <span class="bg-red-100 text-red-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-red-200">Nivel 8: Maestro Químico</span>
+            </div>
+            <p class="mb-4 text-lg">Sometemos a descomposición térmica (tostación sin oxígeno) una piedra de <strong>50 gramos de carbonato de calcio con una pureza del 90%</strong>, convirtiéndose íntegramente en óxido de calcio sólido y liberando gas dióxido de carbono.</p>
+            <p class="mb-4 text-lg">Inmediatamente, canalizamos todo ese gas burbujeándolo a través de un tanque que contiene <strong>1,5 Litros de una disolución de hidróxido de sodio 1 Molar</strong>, absorbiéndose el gas por completo para formar carbonato de sodio soluble y agua líquida. Calcula:</p>
+            <ul class="list-disc ml-6 mb-4 text-lg">
+                <li>La masa en gramos de carbonato de sodio generada en el tanque.</li>
+                <li>La <strong>molaridad residual</strong> (sobrante) del hidróxido de sodio en la disolución final, asumiendo que el volumen no se altera por el burbujeo.</li>
+            </ul>
+            <p class="text-sm text-gray-500 mb-4"><em>Masas atómicas (u): Ca = 40; C = 12; O = 16; Na = 23.</em></p>
+            
+            <details class="bg-slate-50 rounded-lg border border-slate-200 overflow-hidden">
+                <summary onclick="void(0)" class="cursor-pointer font-semibold text-slate-700 p-4 hover:bg-slate-100 transition-colors flex justify-between items-center">
+                    Ver el desarrollo analítico completo
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="p-6 border-t border-slate-200 bg-white">
+                    <p class="font-bold mb-2">Fase A: El Horno de Tostación</p>
+                    <p class="mb-2">Reacción térmica: $$\ce{CaCO3(s) ->[\Delta] CaO(s) + CO2(g)}$$</p>
+                    <p class="mb-2">Masa pura = $50 \times 0,90 = 45 \text{ g de } \ce{CaCO3}$. Masa molar = $100 \text{ g/mol}$.</p>
+                    <p class="mb-4">Moles térmicos producidos: $n(\ce{CO2}) = 45 \text{ g} / 100 \text{ g/mol} = \mathbf{0,45 \text{ moles de CO}_2}$.</p>
+
+                    <p class="font-bold mb-2">Fase B: La Absorción Alcalina y Reactivo Limitante</p>
+                    <div class="bg-slate-50 p-4 rounded text-center mb-4 overflow-x-auto">
+                        $$\ce{CO2(g) + 2NaOH(aq) -> Na2CO3(aq) + H2O(l)}$$
+                    </div>
+                    <p class="mb-2">Moles de gas inyectados = 0,45 moles.</p>
+                    <p class="mb-2">Moles de $\ce{NaOH}$ en el tanque: $1,5 \text{ L} \times 1 \text{ mol/L} = \mathbf{1,5 \text{ moles}}$.</p>
+                    <p class="mb-4 text-red-700 bg-red-50 p-2 rounded">Para absorber 0,45 moles de gas, se requieren $0,45 \times 2 = 0,90 \text{ moles de } \ce{NaOH}$. Al disponer de 1,5 moles, el $\ce{NaOH}$ está en exceso y el <strong>$\ce{CO2}$ es el Reactivo Limitante</strong>.</p>
+
+                    <p class="font-bold mb-2">Fase C: Cálculo de Masas y Molaridad Residual</p>
+                    <p class="mb-2">Moles formados de $\ce{Na2CO3}$: Equivale (1:1) a los moles de limitante $\Rightarrow 0,45 \text{ moles}$.</p>
+                    <p class="mb-2">Masa molar $\ce{Na2CO3} = (2 \times 23) + 12 + (3 \times 16) = 106 \text{ g/mol}$.</p>
+                    <p class="mb-4">Masa final generada = $0,45 \text{ mol} \times 106 \text{ g/mol} = \mathbf{47,7 \text{ gramos de Carbonato de Sodio}}$.</p>
+                    
+                    <p class="mb-2">Análisis del $\ce{NaOH}$ sobrante:</p>
+                    <p class="mb-2">$n(\ce{NaOH})_{\text{sobrante}} = 1,5 \text{ (iniciales)} - 0,90 \text{ (reaccionados)} = \mathbf{0,60 \text{ moles sin reaccionar}}$.</p>
+                    <p>$$M_{\text{residual}} = \frac{0,60 \text{ mol}}{1,5 \text{ L}} = \mathbf{0,4 \text{ M}}$$</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Ejercicio 9 -->
+        <div class="glass-card diff-4 rounded-xl p-6 transition-all hover:shadow-md">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-red-800">Ejercicio 9: Sistema Mixto de Precipitación y Gases</h2>
+                <span class="bg-red-100 text-red-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-red-200">Nivel 9: Maestro Químico</span>
+            </div>
+            <p class="mb-4 text-lg">En el laboratorio procedemos a tratar una <strong>roca de 50 gramos</strong> que contiene cierta cantidad de carbonato de bario mezclado con tierra inerte. Vertemos sobre ella <strong>200 mL de una disolución de ácido nítrico al 10% en masa y densidad 1,05 g/mL</strong>. Todo el carbonato presente reacciona, desprendiéndose dióxido de carbono gaseoso y dejando en el vaso una disolución acuosa de nitrato de bario y agua. Capturamos el gas en un recinto cerrado de <strong>2 Litros</strong>.</p>
+            <p class="mb-4 text-lg">Tras la estabilización, el manómetro de la cámara de 2L marca una presión generada por este gas de <strong>1,2 atm a 25 ºC</strong>. Sabiendo que la reacción tuvo un rendimiento perfecto (100%), deduce como un verdadero químico analítico:</p>
+            <ul class="list-disc ml-6 mb-4 text-lg">
+                <li>El reactivo limitante de este proceso (demuéstralo matemáticamente).</li>
+                <li>El <strong>% de pureza</strong> (riqueza) de carbonato de bario presente en la roca original.</li>
+                <li>La <strong>Molaridad residual</strong> del ácido en los 200 mL de líquido sobrante en el vaso de precipitados.</li>
+            </ul>
+            <p class="text-sm text-gray-500 mb-4"><em>Datos: R = 0,082. Masas atómicas (u): Ba = 137,3; C = 12; O = 16; N = 14; H = 1.</em></p>
+            
+            <details class="bg-slate-50 rounded-lg border border-slate-200 overflow-hidden">
+                <summary onclick="void(0)" class="cursor-pointer font-semibold text-slate-700 p-4 hover:bg-slate-100 transition-colors flex justify-between items-center">
+                    Ver el desarrollo analítico completo
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="p-6 border-t border-slate-200 bg-white">
+                    <p class="italic text-slate-600 mb-4">"Aquí es la presión del producto gaseoso la que nos cuenta retrospectivamente cuánta materia reaccionó. Es estequiometría deductiva de alto nivel."</p>
+                    
+                    <p class="font-bold mb-2">Fase A: Ajuste y Moles del Producto (Estequiometría Inversa)</p>
+                    <div class="bg-slate-50 p-4 rounded text-center mb-4 overflow-x-auto">
+                        $$\ce{BaCO3(s) + 2HNO3(aq) -> Ba(NO3)2(aq) + CO2(g) ^ + H2O(l)}$$
+                    </div>
+                    <p class="mb-4">Moles reales de gas formado: $n(\ce{CO2}) = \frac{1,2 \times 2}{0,082 \times 298} = \mathbf{0,098 \text{ moles}}$.</p>
+
+                    <p class="font-bold mb-2">Fase B: Moles del Ácido Comercial y Demostración del Limitante</p>
+                    <p class="mb-2">Molaridad del $\ce{HNO3}$ ($M_m = 63 \text{ g/mol}$): $M = \frac{1,05 \times 1000 \times 0,10}{63} = \mathbf{1,667 \text{ M}}$.</p>
+                    <p class="mb-2">Moles totales aportados al vaso: $n_0(\ce{HNO3}) = 1,667 \text{ mol/L} \times 0,200 \text{ L} = \mathbf{0,333 \text{ moles iniciales}}$.</p>
+                    <p class="mb-2">Para generar los 0,098 moles de gas, la estequiometría exigió el consumo de $0,098 \times 2 = \mathbf{0,196 \text{ moles de } \ce{HNO3}}$.</p>
+                    <p class="mb-4 text-red-700 bg-red-50 p-2 rounded">Como disponíamos de 0,333 moles y solo reaccionaron 0,196, el ácido está en exceso. Queda demostrado que el <strong>$\ce{BaCO3}$ de la roca fue el Reactivo Limitante</strong>.</p>
+
+                    <p class="font-bold mb-2">Fase C: Pureza de la Roca y Molaridad Residual</p>
+                    <p class="mb-2">Masa molar del $\ce{BaCO3} = 137,3 + 12 + (3 \times 16) = 197,3 \text{ g/mol}$.</p>
+                    <p class="mb-2">Dado que el carbonato es el limitante, todo él reaccionó, produciendo 0,098 moles (relación 1:1 con el $\ce{CO2}$).</p>
+                    <p class="mb-2">Masa de $\ce{BaCO3}$ puro en la roca = $0,098 \text{ mol} \times 197,3 \text{ g/mol} = \mathbf{19,33 \text{ gramos}}$.</p>
+                    <p class="mb-4">$$\text{Pureza (\%)} = \left(\frac{19,33}{50}\right) \times 100 = \mathbf{38,66\% \text{ de pureza}}$$</p>
+
+                    <p class="mb-2">Por último, el balance del ácido en la fase acuosa:</p>
+                    <p class="mb-2">$n(\ce{HNO3})_{\text{sobrante}} = 0,333 - 0,196 = \mathbf{0,137 \text{ moles residuales}}$.</p>
+                    <p>$$M_{\text{residual}} = \frac{0,137 \text{ mol}}{0,200 \text{ L}} = \mathbf{0,685 \text{ M}}$$</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Ejercicio 10 -->
+        <div class="glass-card diff-4 rounded-xl p-6 transition-all hover:shadow-md">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-red-800">Ejercicio 10: El Magnum Opus (Titulación Indirecta)</h2>
+                <span class="bg-red-100 text-red-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-red-200">Nivel 10: Gran Maestro Químico</span>
+            </div>
+            <p class="mb-4 text-lg">Nos enfrentamos al reto definitivo. Poseemos una disolución acuosa incognita de ácido clorhídrico de la que tomamos exactamente <strong>500 mL</strong>. En ella, disolvemos completamente una cápsula sólida de <strong>12 gramos compuesta por una mezcla de hidróxido de sodio y carbonato de sodio</strong> en proporciones desconocidas.</p>
+            <p class="mb-4 text-lg">Durante el ataque ácido, se observa efervescencia debido a la liberación de gas dióxido de carbono, generándose también en el proceso cloruro de sodio acuoso y agua como productos en el medio líquido. El gas recogido (a 1 atm y 27 ºC) tiene un volumen de <strong>1,23 Litros</strong>. Posteriormente, al medir el ácido residual sobrante en el vaso de 500 mL, se descubre que la disolución resultante tiene una <strong>molaridad de 0,4 M</strong>.</p>
+            <p class="mb-4 text-lg">Como arquitectos moleculares, resolved este sistema y calculad:</p>
+            <ul class="list-disc ml-6 mb-4 text-lg">
+                <li>El <strong>porcentaje en masa</strong> de cada compuesto en la cápsula sólida de 12 gramos.</li>
+                <li>La <strong>Molaridad original</strong> de la disolución incógnita de ácido clorhídrico antes de introducir la cápsula.</li>
+            </ul>
+            <p class="text-sm text-gray-500 mb-4"><em>Datos: R = 0,082 atm·L/mol·K. Masas atómicas (u): Na = 23; C = 12; O = 16; H = 1.</em></p>
+            
+            <details class="bg-slate-50 rounded-lg border border-slate-200 overflow-hidden">
+                <summary onclick="void(0)" class="cursor-pointer font-semibold text-slate-700 p-4 hover:bg-slate-100 transition-colors flex justify-between items-center">
+                    Ver el desarrollo analítico completo
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="p-6 border-t border-slate-200 bg-white">
+                    <p class="italic text-slate-600 mb-4">"El genio químico resuelve lo desconocido apoyándose en la firma única de cada molécula. El gas es nuestro testigo; el ácido residual, nuestra balanza."</p>
+                    
+                    <p class="font-bold mb-2">Fase A: Análisis de las Reacciones Competitivas</p>
+                    <p class="mb-2">Ambos sólidos reaccionan, pero solo el carbonato produce efervescencia:</p>
+                    <div class="bg-slate-50 p-4 rounded mb-4 overflow-x-auto text-sm">
+                        <p class="mb-2">(1) Neutralización: $$\ce{NaOH(s) + HCl(aq) -> NaCl(aq) + H2O(l)}$$</p>
+                        <p>(2) Ataque carbónico: $$\ce{Na2CO3(s) + 2HCl(aq) -> 2NaCl(aq) + CO2(g) ^ + H2O(l)}$$</p>
+                    </div>
+
+                    <p class="font-bold mb-2">Fase B: Desencriptar la Mezcla Sólida a través del Gas</p>
+                    <p class="mb-2">El volumen del gas nos chiva inmediatamente los moles de Carbonato presentes.</p>
+                    <p class="mb-2">$n(\ce{CO2}) = \frac{1 \times 1,23}{0,082 \times 300} = \mathbf{0,05 \text{ moles de CO}_2}$.</p>
+                    <p class="mb-2">Por la relación (1:1), había 0,05 moles de $\ce{Na2CO3}$ en la mezcla.</p>
+                    <p class="mb-2">Masa molar $\ce{Na2CO3} = 106 \text{ g/mol} \Rightarrow 0,05 \times 106 = \mathbf{5,3 \text{ gramos de Carbonato}}$.</p>
+                    <p class="mb-2">El resto de la cápsula (hasta los 12 g) debe ser el $\ce{NaOH}$ puro:</p>
+                    <p class="mb-4">Masa de $\ce{NaOH} = 12 - 5,3 = \mathbf{6,7 \text{ gramos}}$.<br>
+                    $\% \ce{Na2CO3} = (5,3/12) \times 100 = \mathbf{44,17\%}$  |  $\% \ce{NaOH} = (6,7/12) \times 100 = \mathbf{55,83\%}$.</p>
+
+                    <p class="font-bold mb-2">Fase C: Balance de Moles de Ácido (Buscando la Molaridad Original)</p>
+                    <p class="mb-2">Vamos a contabilizar todo el ácido consumido y el ácido sobrante para hallar el total.</p>
+                    <ul class="list-disc ml-6 mb-4 text-sm">
+                        <li>Ácido gastado por el $\ce{Na2CO3}$: $0,05 \text{ mol} \times 2 = \mathbf{0,10 \text{ moles de HCl}}$.</li>
+                        <li>Moles de $\ce{NaOH}$ presentes ($M_m = 40$): $6,7 / 40 = \mathbf{0,1675 \text{ moles}}$.</li>
+                        <li>Ácido gastado por el $\ce{NaOH}$ (relación 1:1): $\mathbf{0,1675 \text{ moles de HCl}}$.</li>
+                        <li>Ácido total consumido $= 0,10 + 0,1675 = \mathbf{0,2675 \text{ moles gastados}}$.</li>
+                    </ul>
+                    <p class="mb-2">Ácido sobrante en el vaso de 0,5 L a 0,4 M: $n_{\text{sobrante}} = 0,4 \text{ mol/L} \times 0,5 \text{ L} = \mathbf{0,20 \text{ moles}}$.</p>
+                    <p class="mb-4">Moles INICIALES totales $= 0,2675 \text{ (gastados)} + 0,20 \text{ (sobrantes)} = \mathbf{0,4675 \text{ moles en el frasco}}$.</p>
+
+                    <p class="font-bold mb-2">Fase D: Molaridad Incógnita</p>
+                    <p>$$M_{\text{inicial}} = \frac{n_{\text{iniciales}}}{V} = \frac{0,4675 \text{ mol}}{0,500 \text{ L}} = \mathbf{0,935 \text{ M}}$$</p>
+                </div>
+            </details>
+        </div>
+
+    </main>
+</body>
+</html>
