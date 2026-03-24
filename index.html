@@ -9,115 +9,63 @@
             --primary-dark: #203647;
             --secondary-dark: #34495e;
             --accent: #2980b9;
+            --video-accent: #e74c3c; /* Rojo para destacar los vídeos */
             --light-bg: #fdfdfd;
             --border-color: #eaecef;
             --text-dark: #2c3e50;
             --text-muted: #7f8c8d;
         }
 
-    
         body { 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             background-color: var(--light-bg); 
             color: var(--text-dark); 
-            margin: 0; 
-            padding: 0; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            min-height: 100vh;
+            margin: 0; padding: 0; 
+            display: flex; flex-direction: column; align-items: center; min-height: 100vh;
         }
 
-        header { 
-            text-align: center; 
-            margin: 40px 0 30px 0; 
-            padding: 0 20px;
-            width: 100%;
-            max-width: 800px;
-        }
+        header { text-align: center; margin: 40px 0 20px 0; padding: 0 20px; width: 100%; max-width: 800px; }
+        h1 { font-weight: 300; font-size: 2.5em; color: var(--primary-dark); margin: 0; }
+        .inst-badge { display: inline-block; background-color: #f1f3f5; color: var(--accent); padding: 5px 12px; border-radius: 20px; font-size: 0.8em; font-weight: 600; margin-top: 10px; }
 
-        h1 { 
-            font-weight: 300; 
-            font-size: 2.5em;
-            color: var(--primary-dark); 
-            margin: 0 0 10px 0;
+        /* Estilo para el botón del PDF de Vídeos */
+        .video-resource {
+            margin: 20px 0;
+            background: #fff5f5;
+            border: 2px dashed var(--video-accent);
+            padding: 15px 25px;
+            border-radius: 15px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            max-width: 600px;
         }
-
-        header .inst-badge {
-            display: inline-block;
-            background-color: #f1f3f5;
-            color: var(--accent);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.8em;
-            font-weight: 600;
-        }
+        .video-resource:hover { background: #fee2e2; transform: scale(1.02); }
+        .video-resource-text h4 { color: var(--video-accent); margin: 0; font-size: 1.1em; }
+        .video-resource-text p { color: #666; margin: 5px 0 0 0; font-size: 0.9em; }
 
         .container { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 20px; 
-            width: 90%; 
-            max-width: 1100px; 
-            padding: 20px 0;
-            flex-grow: 1;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 20px; width: 90%; max-width: 1200px; padding: 20px 0; flex-grow: 1;
         }
 
         .card { 
-            background: white; 
-            padding: 20px; 
-            border-radius: 10px; 
-            border: 1px solid var(--border-color);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.03); 
-            transition: all 0.3s ease;
-            text-decoration: none; 
-            color: inherit; 
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            background: white; padding: 20px; border-radius: 10px; border: 1px solid var(--border-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03); transition: all 0.3s ease;
+            text-decoration: none; color: inherit; display: flex; flex-direction: column; justify-content: space-between;
         }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0,0,0,0.05); border-color: var(--accent); }
+        .card h3 { margin: 0 0 8px 0; color: var(--secondary-dark); font-size: 1.1em; }
+        .card p { font-size: 0.85em; color: var(--text-muted); margin-bottom: 15px; line-height: 1.4; }
 
-        .card:hover { 
-            transform: translateY(-5px); 
-            box-shadow: 0 8px 15px rgba(0,0,0,0.05); 
-            border-color: var(--accent);
-        }
-
-        .card h3 { 
-            margin: 0 0 8px 0; 
-            color: var(--secondary-dark); 
-            font-size: 1.2em;
-        }
-
-        .card p { 
-            font-size: 0.9em; 
-            color: var(--text-muted); 
-            margin-bottom: 15px;
-            line-height: 1.5;
-        }
-
-        .badge { 
-            display: inline-block;
-            padding: 3px 8px; 
-            border-radius: 4px; 
-            font-size: 0.7em; 
-            font-weight: 700; 
-            text-transform: uppercase;
-        }
-        
+        .badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 0.65em; font-weight: 700; text-transform: uppercase; }
         .badge-gases { background: #e3f2fd; color: #1976d2; }
-        .badge-disoluciones { background: #e8f5e9; color: #2e7d32; }
+        .badge-diso { background: #e8f5e9; color: #2e7d32; }
+        .badge-reac { background: #fff3e0; color: #e65100; }
+        .badge-form { background: #f3e5f5; color: #7b1fa2; }
 
-        footer {
-            width: 100%;
-            background-color: white;
-            border-top: 1px solid var(--border-color);
-            padding: 25px 0;
-            margin-top: 40px;
-            text-align: center;
-        }
-
-        footer p { margin: 3px 0; font-size: 0.85em; color: var(--text-muted); }
+        footer { width: 100%; background-color: white; border-top: 1px solid var(--border-color); padding: 25px 0; margin-top: 40px; text-align: center; }
         .prof-name { font-weight: 600; color: var(--primary-dark); }
     </style>
 </head>
@@ -126,54 +74,53 @@
     <header>
         <h1>Laboratorio de Química</h1>
         <div class="inst-badge">IES María Moliner · Segovia</div>
+        
+        <a href="ejercicios_resueltos.pdf" class="video-resource" target="_blank">
+            <div style="font-size: 2em; margin-right: 15px;">🎬</div>
+            <div class="video-resource-text">
+                <h4>Ejercicios Resueltos en Vídeo</h4>
+                <p>Accede al documento PDF con enlaces explicativos de todo el curso.</p>
+            </div>
+        </a>
     </header>
 
     <div class="container">
         <a href="Ley Dalton Presiones parciales/index.html" class="card">
-            <div>
-                <h3>Ley de Dalton</h3>
-                <p>Estudio de presiones parciales y mezclas gaseosas.</p>
-            </div>
+            <div><h3>Ley de Dalton</h3><p>Presiones parciales y mezclas.</p></div>
             <span class="badge badge-gases">Gases</span>
         </a>
 
-        <a href="reaccciones quimicas gase gemini/index.html" class="card">
-            <div>
-                <h3>Reacciones Gaseosas (Gemini)</h3>
-                <p>Cálculos estequiométricos con sustancias en fase gaseosa.</p>
-            </div>
-            <span class="badge badge-gases">Gases · IA</span>
-        </a>
-
-        <a href="reacciones quimicas gases claude/index.html" class="card">
-            <div>
-                <h3>Reacciones Gaseosas (Claude)</h3>
-                <p>Ejercicios de estequiometría de gases interactivos.</p>
-            </div>
-            <span class="badge badge-gases">Gases · IA</span>
-        </a>
-
         <a href="disoluciones con Gemini/index.html" class="card">
-            <div>
-                <h3>Disoluciones (Gemini)</h3>
-                <p>Cálculos de molaridad, molalidad y preparación de disoluciones.</p>
-            </div>
-            <span class="badge badge-disoluciones">Disoluciones · IA</span>
+            <div><h3>Disoluciones (Gemini)</h3><p>Molaridad y concentraciones.</p></div>
+            <span class="badge badge-diso">Disoluciones</span>
+        </a>
+        <a href="disoluciones con Claude/index.html" class="card">
+            <div><h3>Disoluciones (Claude)</h3><p>Preparación y mezclas.</p></div>
+            <span class="badge badge-diso">Disoluciones</span>
         </a>
 
-        <a href="disoluciones con Claude/index.html" class="card">
-            <div>
-                <h3>Disoluciones (Claude)</h3>
-                <p>Problemas resueltos sobre concentración y mezclas líquidas.</p>
-            </div>
-            <span class="badge badge-disoluciones">Disoluciones · IA</span>
+        <a href="reacciones quimicas gemini/index.html" class="card">
+            <div><h3>Reacciones Químicas (Gemini)</h3><p>Estequiometría y ajustes.</p></div>
+            <span class="badge badge-reac">Reacciones</span>
+        </a>
+        <a href="reacciones quimicas claude/index.html" class="card">
+            <div><h3>Reacciones Químicas (Claude)</h3><p>Cálculos de reactivo limitante.</p></div>
+            <span class="badge badge-reac">Reacciones</span>
+        </a>
+
+        <a href="formulas empiricas gemini/index.html" class="card">
+            <div><h3>Fórmulas Empíricas (Gemini)</h3><p>Cálculo de composición centesimal.</p></div>
+            <span class="badge badge-form">Fórmulas</span>
+        </a>
+        <a href="formulas empiricas claude/index.html" class="card">
+            <div><h3>Fórmulas Empíricas (Claude)</h3><p>Determinación de fórmula molecular.</p></div>
+            <span class="badge badge-form">Fórmulas</span>
         </a>
     </div>
 
     <footer>
         <p class="prof-name">Javier Gijón</p>
-        <p>Profesor de Física y Química</p>
-        <p>IES María Moliner · Segovia</p>
+        <p>Profesor de Física y Química · IES María Moliner</p>
     </footer>
 
 </body>
