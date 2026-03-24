@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio Virtual: Fórmulas Empíricas y Moleculares</title>
+    <!-- Tailwind CSS para el diseño -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Configuración de MathJax para renderizado profesional de LaTeX -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['$$', '$$']],
+                tags: 'none'
+            },
+            startup: {
+                typeset: false // Lo ejecutaremos manualmente tras inyectar el HTML
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        quimica: {
+                            light: '#e0f2fe',
+                            DEFAULT: '#0284c7',
+                            dark: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .solucion-contenido {
+            display: none;
+            transition: all 0.3s ease-in-out;
+        }
+        .solucion-contenido.activa {
+            display: block;
+        }
+        body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+        
+        /* Estilo para suavizar la carga de las fórmulas matemáticas */
+        mjx-container {
+            margin-top: 0.5em !important;
+            margin-bottom: 0.5em !important;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Encabezado -->
+    <header class="bg-quimica-dark text-white shadow-lg py-8 px-4 mb-8">
+        <div class="max-w-5xl mx-auto text-center">
+            <i class="fa-solid fa-flask text-5xl mb-4 text-cyan-300"></i>
+            <h1 class="text-3xl md:text-4xl font-bold mb-2">Fórmulas empíricas y moleculares</h1>
+            <p class="text-lg text-quimica-light">Nivel: 1º de Bachillerato | Método de Combustión y Amoniaco</p>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 pb-12">
+        <div class="bg-white p-6 rounded-lg shadow-md mb-8 border-l-4 border-yellow-400">
+            <h2 class="text-xl font-bold text-gray-800 mb-2"><i class="fa-solid fa-circle-info text-yellow-500 mr-2"></i>Instrucciones para el Alumno</h2>
+            <p class="mb-2">Resuelve cada problema en tu cuaderno. Recuerda los pasos fundamentales:</p>
+            <ol class="list-decimal list-inside space-y-1 text-gray-700 ml-4">
+                <li>Calcula la masa de <strong>Carbono</strong> aplicando el factor de conversión a partir del \( \mathrm{CO_2} \).</li>
+                <li>Calcula la masa de <strong>Hidrógeno</strong> aplicando el factor de conversión a partir del \( \mathrm{H_2O} \).</li>
+                <li>Calcula la masa de <strong>Nitrógeno</strong> a partir del amoniaco (\( \mathrm{NH_3} \)).</li>
+                <li>¡Ojo! Comprueba siempre si hay <strong>Oxígeno</strong> restando la masa total o sumando porcentajes.</li>
+                <li>Halla los moles de cada elemento y divídelos por el menor valor para obtener la relación estequiométrica de la fórmula.</li>
+            </ol>
+        </div>
+
+        <div id="ejercicios-container" class="space-y-6">
+            <!-- Los ejercicios se inyectarán aquí por JavaScript -->
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-300 text-center py-6">
+        <p><i class="fa-solid fa-atom mr-2"></i> Creado para dominar la estequiometría y los factores de conversión.</p>
+    </footer>
+
+    <script>
+        const ejercicios = [
+            {
+                nivel: "1 - Calentamiento",
+                dificultad: "⭐",
+                titulo: "La Amina Clásica (Volumen en C.N.)",
+                enunciado: "Se sospecha que un compuesto orgánico líquido está formado únicamente por C, H y N. Al quemar una muestra de 1.18 g se obtienen 2.64 g de \\( \\mathrm{CO_2} \\) y 1.62 g de \\( \\mathrm{H_2O} \\). Para averiguar la cantidad de nitrógeno, se toma una segunda muestra de 0.59 g del mismo compuesto y se convierte su nitrógeno en gas amoniaco (\\( \\mathrm{NH_3} \\)), obteniendo 224 mL medidos en Condiciones Normales (1 atm y 0 ºC).<br><br>Sabiendo que su masa molar es 59 g/mol, determina su fórmula empírica y molecular.",
+                solucion: `
+                    <p class="font-bold text-quimica-dark mb-2">1. Cálculo de Carbono (Muestra 1: 1.18 g):</p>
+                    <div class="overflow-x-auto">
+                    $$ \\begin{align*}
+                    \\text{Masa C} &= 2.64 \\text{ g } \\mathrm{CO_2} \\times \\frac{12 \\text{ g C}}{44 \\text{ g } \\mathrm{CO_2}} = 0.72 \\text{ g C} \\\\
+                    \\%\\text{C} &= \\frac{0.72 \\text{ g}}{1.18 \\text{ g}} \\times 100 = 61.02\\%
+                    \\end{align*} $$
+                    </div>
+                    
+                    <p class="font-bold text-quimica-dark mt-4 mb-2">2. Cálculo de Hidrógeno (Muestra 1: 1.18 g):</p>
+                    <div class="overflow-x-auto">
+                    $$ \\begin{align*}
+                    \\text{Masa H} &= 1.62 \\text{ g } \\mathrm{H_2O} \\times \\frac{2 \\text{ g H}}{18 \\text{ g } \\mathrm{H_2O}} = 0.18 \\text{ g H} \\\\
+                    \\%\\text{H} &= \\frac{0.18 \\text{ g}}{1.18 \\text{ g}} \\times 100 = 15.25\\%
+                    \\end{align*} $$
+                    </div>
+
+                    <p class="font-bold text-quimica-dark mt-4 mb-2">3. Cálculo de Nitrógeno (Muestra 2: 0.59 g):</p>
+                    <div class="overflow-x-auto">
+                    $$ \\begin{align*}
+                    n(\\mathrm{NH_3}) &= \\frac{0.224 \\text{ L}}{22.4 \\text{ L/mol}} = 0.01 \\text{ mol } \\mathrm{NH_3} \\\\
+                    \\text{Masa N} &= 0.01 \\text{ mol} \\times \\frac{14 \\text{ g N}}{1 \\text{ mol}} = 0.14 \\text{ g N} \\\\
+                    \\%\\text{N} &= \\frac{0.14 \\text{ g}}{0.59 \\text{ g}} \\times 100 = 23.73\\%
+                    \\end{align*} $$
+                    </div>
+                    <p class="text-sm italic mt-2 text-gray-600">Comprobación: \\( 61.02\\% + 15.25\\% + 23.73\\% = 100\\% \\). No hay oxígeno.</p>
+
+                    <p class="font-bold text-quimica-dark mt-4 mb-2">4. Fórmula Empírica (base 100 g):</p>
+                    <div class="overflow-x-auto">
+                    $$ \\begin{align*}
+                    \\text{C: } & \\frac{61.02 \\text{ g}}{12 \\text{ g/mol}} = 5.085 \\text{ mol} \\implies \\frac{5.085}{1.695} = 3 \\\\
+                    \\text{H: } & \\frac{15.25 \\text{ g}}{1 \\text{ g/mol}} = 15.25 \\text{ mol} \\implies \\frac{15.25}{1.695} = 9 \\\\
+                    \\text{N: } & \\frac{23.73 \\text{ g}}{14 \\text{ g/mol}} = 1.695 \\text{ mol} \\implies \\frac{1.695}{1.695} = 1
+                    \\end{align*} $$
+                    $$ \\mathbf{F.E. = C_3H_9N} $$
+                    </div>
+
+                    <p class="font-bold text-quimica-dark mt-4 mb-2">5. Fórmula Molecular:</p>
+                    <div class="overflow-x-auto">
+                    $$ \\text{Masa F.E.} = (3 \\times 12) + (9 \\times 1) + 14 = 59 \\text{ g/mol} $$
+                    <p>Como la masa empírica coincide con la masa molar real, \\( \\mathbf{F.M. = C_3H_9N} \\).</p>
+                    </div>
+                `
+            },
+            {
+                nivel: "2 - Básico",
+                dificultad: "⭐",
+                titulo: "Todo en una sola muestra (Masas directas)",
+                enunciado: "Se analiza 1.00 g de una amina simple (solo C, H, N). Su combustión completa produce 1.42 g de \\( \\mathrm{CO_2} \\) y 1.45 g de \\( \\mathrm{H_2O} \\). En un experimento paralelo con la misma cantidad exacta de muestra (1.00 g), todo su nitrógeno se convierte en 0.548 g de amoniaco (\\( \\mathrm{NH_3} \\)).<br><br>Sabiendo que su masa molar es 31 g/mol, halla su fórmula molecular.",
+                solucion: `
+                    <p class="mb-2">Como las muestras son iguales (1.00 g), podemos trabajar directamente con masas en gramos sin necesidad de calcular porcentajes.</p>
+                    <div class="overflow-x-auto">
+                    $$ \\begin{align*}
+                    \\text{Masa C} &= 1.42 \\text{ g } \\mathrm{CO_2} \\times \\frac{12 \\text{ g C}}{44 \\text{ g } \\mathrm{CO_2}} = 0.387 \\text{ g C} \\\\
+                    \\text{Masa H} &= 1.45 \\text{ g } \\mathrm{H_2O} \\times \\frac{2 \\text{ g H}}{18 \\text{ g } \\mathrm{H_2O}} = 0.161 \\text{ g H} \\\\
+                    \\text{Masa N} &= 0.548 \\text{ g } \\mathrm{NH_3} \\times \\frac{14 \\text{ g N}}{17 \\text{ g } \\mathrm{NH_3}} = 0.451 \\text{ g N}
+                    \\end{align*} $$
+                    </div>
+                    <p class="text-sm italic my-2 text-gray-600">Suma total: \\( 0.387 + 0.161 + 0.451 = 0.999 \\approx 1.00 \\text{ g} \\) (Confirmamos la ausencia de Oxígeno).</p>
+                    
+                    <p class="font-bold text-quimica-dark mt-4 mb-2">Moles y Fórmula Empírica:</p>
+                    <div class="overflow-x-auto">
+                    $$ \\begin{align*}
+                    \\text{C: } & \\frac{0.387 \\text{ g}}{12 \\text{ g/mol}} = 0.0322 \\text{ mol} \\implies \\frac{0.0322}{0.0322} = 1 \\\\
+                    \\text{H: } & \\frac{0.161 \\text{ g}}{1 \\text{ g/mol}} = 0.161 \\text{ mol} \\implies \\frac{0.161}{0.0322} = 5 \\\\
+                    \\text{N: } & \\frac{0.451 \\text{ g}}{14 \\text{ g/mol}} = 0.0322 \\text{ mol} \\implies \\frac{0.0322}{0.0322} = 1
+                    \\end{align*} $$
+                    $$ \\mathbf{F.E. = CH_5N} $$
+                    </div>
+
+                    <p class="font-bold text-quimica-dark mt-4 mb-2">Fórmula Molecular:</p>
+                    <div class="overflow-x-auto">
+                    $$ \\text{Masa F.E.} = 12 + 5 + 14 = 31 \\text{ g/mol} $$
+                    <p>Coincide con la Masa Molar dada, por lo tanto: \\( \\mathbf{F.M. = CH_5N} \\) (Metilamina).</p>
+                    </div>
+                `
+            },
+            {
+                nivel: "3 - Intermedio",
+                dificultad: "⭐⭐",
+                titulo: "El misterio del Oxígeno Oculto",
+                enunciado: "Un aminoácido contiene C, H, N y O. Al someter a combustión 1.50 g de este compuesto se forman 1.76 g de \\( \\mathrm{CO_2} \\) y 0.90 g de \\( \\mathrm{H_2O} \\). Otra muestra de 1.50 g se trata para liberar su nitrógeno en forma de amoniaco, obteniéndose 0.34 g de \\( \\mathrm{NH_3} \\).<br><br>Su masa molar es de 75 g/mol. Calcula su fórmula molecular.",
+                solucion: `
+                    <p class="mb-2">El compuesto contiene oxígeno. Como ambas muestras son de 1.50 g, calcularemos la masa del oxígeno por diferencia.</p>
+                    <div class="overflow-x-auto">
+                    $$ \\begin{align*}
+                    \\text{Masa C} &= 1.76 \\text{ g } \\mathrm{CO_2} \\times \\frac{12 \\text{ g C}}{44 \\text{ g } \\mathrm{CO_2}} = 0.48 \\text{ g C} \\\\
+                    \\text{Masa H} &= 0.90 \\text{ g } \\mathrm{H_2O} \\times \\frac{2 \\text{ g H}}{18 \\text{ g } \\mathrm{H_2O}} = 0.10 \\text{ g H} \\\\
+                    \\text{Masa N} &= 0.34 \\text{ g } \\mathrm{NH_3} \\times \\frac{14 \\text{ g N}}{17 \\text{ g } \\mathrm{NH_3}} = 0.28 \\text{ g N}
+                    \\end{align*} $$
+                    </div>
+                    
+                    <p class="font-bold text-quimica-dark mt-4 mb-2">Cálculo del Oxígeno:</p>
+                    <div class="overflow-x-auto">
+                    $$ \\begin{align*}
+                    \\text{Masa O} &= \\text{Masa Total} - (\\text{Masa C} + \\text{Masa H} + \\text{Masa N}) \\\\
+                    \\text{Masa O} &= 1.50 \\text{ g} - (0.48 + 0.10 + 0.28) \\text{ g} = 0.64 \\text{ g O}
+                    \\end{align*} $$
+                    </div>
+
+                    <p class="font-bold text-quimica-dark mt-4 mb-2">Fórmula Empírica:</p>
+                    <div class="overflow-x-auto">
+                    $$ \\begin{align*}
+                    \\text{C: } & \\frac{0.48 \\text{ g}}{12 \\text{ g/mol}} = 0.04 \\text{ mol} \\implies \\frac{0.04}{0.02} = 2 \\\\
+                    \\text{H: } & \\frac{0.10 \\text{ g}}{1 \\text{ g/mol}} = 0.10 \\text{ mol} \\implies \\frac{0.10}{0.02} = 5 \\\\
+                    \\text{N: } & \\frac{0.28 \\text{ g}}{14 \\text{ g/mol}} = 0.02 \\text{ mol} \\implies \\frac{0.02}{0.02} = 1 \\\\
+                    \\text{O: } & \\frac{0.64 \\text{ g}}{16 \\text{ g/mol}} = 0.04 \\text{ mol} \\implies \\frac{0.04}{0.02} = 2
+                    \\end{align*} $$
+                    $$ \\mathbf{F.E. = C_2H_5NO_2} $$
+                    </div>
+
+                    <p class="font-bold text-quimica-dark mt-4 mb-2">Fórmula Molecular:</p>
+                    <div class="overflow-x-auto">
+                    $$ \\text{Masa F.E.} = (2 \\times 12) + 5 + 14 + (2 \\times 16) = 75 \\text{ g/mol} $$
+                    <p>Coincide exactamente. Por tanto, \\( \\mathbf{F.M. = C_2H_5NO_2} \\) (Glicina).</p>
+                    </div>
+                `
+            },
+            {
+                nivel: "4 - Intermedio Alto",
+                dificultad: "⭐⭐",
+                titulo: "Diferentes Muestras con Oxígeno",
+                enunciado: "Se analiza Serina (C, H, O, N). Por un lado, se queman 2.10 g obteniendo 2.64 g de \\( \\mathrm{CO_2} \\) y 1.26 g de \\( \\mathrm{H_2O} \\). Por otro lado, mediante el método de Kjeldahl aplicado a una muestra distinta de 1.05 g, se obtienen 0.17 g de \\( \\mathrm{NH_3} \\).<br><br>Halla la fórmula empírica sabiendo que no hay más elementos.",
+                solucion: `
+                    <p class="mb-2">Al ser muestras distintas, obligatoriamente debemos unificar los datos pasándolos a porcentajes en masa.</p>
+                    <div class="overflow-x-auto">
+                    $$ \\begin{align*}
+                    \\text{Masa C} &= 2.64 \\text{ g } \\mathrm{CO_2} \\times \\frac{12 \\text{ g C}}{44 \\text{ g } \\mathrm{CO_2}} = 0.72 \\text{ g C} \\implies \\%\\text{C} = \\frac{0.72}{2.10} \\times 100 = 34.29\\% \\\\
+                    \\text{Masa H} &= 1.26 \\text{ g } \\mathrm{H_2O} \\times \\frac{2 \\text{ g H}}{18 \\text{ g } \\mathrm{H_2O}} = 0.14 \\text{ g H} \\implies \\%\\text{H} = \\frac{0.14}{2.10} \\times 100 = 6.67\\% \\\\
+                    \\text{Masa N} &= 0.17 \\text{ g } \\mathrm{NH_3} \\times \\frac{14 \\text{ g N}}{17 \\text{ g } \\mathrm{NH_3}} = 0.14 \\text{ g N} \\implies \\%\\text{N} = \\frac{0.14}{1.05} \\times 100 = 13.33\\%
+                    \\end{align*} $$
+                    </div>
+                    
+                    <p class="font-bold text-quimica-dark mt-4 mb-2">Porcentaje de Oxígeno:</p>
+                    <div class="overflow-x-auto">
+                    $$ \\begin{align*}
+                    \\%\\text{O} &= 100\\% - (\\%\\text{C} + \\%\\text{H} + \\%\\text{N}) \\\\
+                    \\%\\text{O} &= 100\\% - (34.29\\% + 6.67\\% + 13.33\\%) = 45.71\\%
+                    \\end{align*} $$
+                    </div>
+
+                    <p class="font-bold text-quimica-dark mt-4 mb-2">Fórmula Empírica (base 100 g):</p>
+                    <div class="overflow-x-auto">
+                    $$ \\begin{align*}
+                    \\text{C: } & \\frac{34.29 \\text{ g}}{12 \\text{ g/mol}} = 2.857 \\text{ mol} \\implies \\frac{2.857}{0.952} = 3 \\\\
+                    \\text{H: } & \\frac{6.67 \\text{ g}}{1 \\text{ g/mol}} = 6.67 \\text{ mol} \\implies \\frac{6.67}{0.952} = 7 \\\\
+                    \\text{N: } & \\frac{13.33 \\text{ g}}{14 \\text{ g/mol}} = 0.952 \\text{ mol} \\implies \\frac{0.952}{0.952} = 1 \\\\
+                    \\text{O: } & \\frac{45.71 \\text{ g}}{16 \\text{ g/mol}} = 2.857 \\text{ mol} \\implies \\frac{2.857}{0.952} = 3
+                    \\end{align*} $$
+                    $$ \\mathbf{F.E. = C_3H_7NO_3} $$
+                    </div>
+                `
+            },
+            {
+                nivel: "5 - Avanzado",
+                dificultad: "⭐⭐⭐",
+                titulo: "Gases Ideales (P y T fuera de C.N.)",
+                enunciado: "Al analizar un compuesto de C, H y N de masa molar 79 g/mol:<br>- Se queman 0.79 g dando 2.20 g de \\( \\mathrm{CO_2} \\) y 0.45 g de \\( \\mathrm{H_2O} \\).<br>- Una muestra de 1.58 g se trata para liberar amoniaco, el cual se recoge ocupando un volumen de 488 mL a una temperatura de 25 ºC y una presión de 1 atm.<br><br>Determina su fórmula molecular. (Dato: R = 0.082 atm·L/mol·K)",
+                solucion: `
+                    <p class="font-bold text-quimica-dark mb-2">1. Porcentajes de Carbono e Hidrógeno:</p>
+                    <div class="overflow-x-auto">
+                    $$ \\begin{align*}
+                    \\text{Masa C} &= 2.20 \\text{ g } \\mathrm{CO_2} \\times \\frac{12 \\text{ g C}}{44 \\text{ g } \\mathrm{CO_2}} = 0.60 \\text{ g C} \\implies \\%\\text{C} = \\frac{0.60}{0.79} \\times 100 = 75.95\\% \\\\
+                    \\text{Masa H} &= 0.45 \\text{ g } \\mathrm{H_2O} \\times \\frac{2 \\text{ g H}}{18 \\text{ g } \\mathrm{H_2O}} = 0.05 \\text{ g H} \\implies \\%\\text{H} = \\frac{0.05}{0.79} \\times 100 = 6.33\\%
+                    \\end{align*} $$
+                    </div>
+
+                    <p class="font-bold text-quimica-dark mt-4 mb-2">2. Nitrógeno usando Ecuación de Gases Ideales:</p>
+                    <div class="overflow-x-auto">
+                    $$ P \\cdot V = n \\cdot R \\cdot T \\implies n = \\frac{P \\cdot V}{R \\cdot T} $$
+                    $$ \\begin{align*}
+                    T &= 25 + 273 = 298 \\text{ K} \\\\
+                    n(\\mathrm{NH_3}) &= \\frac{1 \\text{ atm} \\times 0.488 \\text{ L}}{0.082 \\frac{\\text{atm}\\cdot\\text{L}}{\\text{mol}\\cdot\\text{K}} \\times 298 \\text{ K}} = 0.02 \\text{ mol } \\mathrm{NH_3} \\\\
+                    \\text{Masa N} &= 0.02 \\text{ mol} \\times 14 \\text{ g/mol} = 0.28 \\text{ g N} \\implies \\%\\text{N} = \\frac{0.28}{1.58} \\times 100 = 17.72\\%
+                    \\end{align*} $$
+                    </div>
+
+                    <p class="font-bold text-quimica-dark mt-4 mb-2">3. Fórmula Empírica y Molecular:</p>
+                    <div class="overflow-x-auto">
+                    $$ \\begin{align*}
+                    \\text{C: } & \\frac{75.95}{12} = 6.33 \\text{ mol} \\implies \\frac{6.33}{1.265} = 5 \\\\
+                    \\text{H: } & \\frac{6.33}{1} = 6.33 \\text{ mol} \\implies \\frac{6.33}{1.265} = 5 \\\\
+                    \\text{N: } & \\frac{17.72}{14} = 1.265 \\text{ mol} \\implies \\frac{1.265}{1.265} = 1
+                    \\end{align*} $$
+                    $$ \\mathbf{F.E. = C_5H_5N} $$
+                    $$ \\text{Masa F.E.} = (5 \\times 12) + 5 + 14 = 79 \\text{ g/mol} $$
+                    <p>Coincide perfectamente: \\( \\mathbf{F.M. = C_5H_5N} \\) (Piridina).</p>
+                    </div>
+                `
+            },
+            {
+                nivel: "6 - Avanzado",
+                dificultad: "⭐⭐⭐",
+                titulo: "Más de un átomo de Nitrógeno y Densidad",
+                enunciado: "Una feromona de insectos (formada por C, H y N) tiene una densidad en estado gaseoso de 3.93 g/L medidos a 0 ºC y 1 atm. <br>La combustión de 0.88 g de sustancia rinde 1.76 g de \\( \\mathrm{CO_2} \\) y 1.08 g de \\( \\mathrm{H_2O} \\). Del tratamiento químico de la misma cantidad (0.88 g) se desprenden 0.34 g de \\( \\mathrm{NH_3} \\). <br><br>Halla la fórmula empírica y molecular.",
+                solucion: `
+                    <p class="mb-2">Muestras iguales (0.88 g), trabajamos con masas directamente.</p>
+                    <div class="overflow-x-auto">
+                    $$ \\begin{align*}
+                    \\text{Masa C} &= 1.76 \\text{ g } \\mathrm{CO_2} \\times \\frac{12 \\text{ g C}}{44 \\text{ g } \\mathrm{CO_2}} = 0.48 \\text{ g C} \\\\
+                    \\text{Masa H} &= 1.08 \\text{ g } \\mathrm{H_2O} \\times \\frac{2 \\text{ g H}}{18 \\text{ g } \\mathrm{H_2O}} = 0.12 \\text{ g H} \\\\
+                    \\text{Masa N} &= 0.34 \\text{ g } \\mathrm{NH_3} \\times \\frac{14 \\text{ g N}}{17 \\text{ g } \\mathrm{NH_3}} = 0.28 \\text{ g N}
+                    \\end{align*} $$
+                    </div>
+                    
+                    <p class="font-bold text-quimica-dark mt-4 mb-2">Fórmula Empírica:</p>
+                    <div class="overflow-x-auto">
+                    $$ \\begin{align*}
+                    \\text{C: } & \\frac{0.48 \\text{ g}}{12 \\text{ g/mol}} = 0.04 \\text{ mol} \\implies \\frac{0.04}{0.02} = 2 \\\\
+                    \\text{H: } & \\frac{0.12 \\text{ g}}{1 \\text{ g/mol}} = 0.12 \\text{ mol} \\implies \\frac{0.12}{0.02} = 6 \\\\
+                    \\text{N: } & \\frac{0.28 \\text{ g}}{14 \\text{ g/mol}} = 0.02 \\text{ mol} \\implies \\frac{0.02}{0.02} = 1
+                    \\end{align*} $$
+                    $$ \\mathbf{F.E. = C_2H_6N} $$
+                    </div>
+
+                    <p class="font-bold text-quimica-dark mt-4 mb-2">Cálculo de la Masa Molar (Ley de gases):</p>
+                    <div class="overflow-x-auto">
+                    $$ d = \\frac{P \\cdot MM}{R \\cdot T} \\implies MM = \\frac{d \\cdot R \\cdot T}{P} $$
+                    $$ MM = \\frac{3.93 \\text{ g/L} \\times 0.082 \\frac{\\text{atm}\\cdot\\text{L}}{\\text{mol}\\cdot\\text{K}} \\times 273 \\text{ K}}{1 \\text{ atm}} = 87.97 \\approx 88 \\text{ g/mol} $$
+                    </div>
+
+                    <p class="font-bold text-quimica-dark mt-4 mb-2">Fórmula Molecular:</p>
+                    <div class="overflow-x-auto">
+                    $$ \\text{Masa F.E.} = (2 \\times 12) + 6 + 14 = 44 \\text{ g/mol} $$
+                    $$ n = \\frac{88 \\text{ g/mol}}{44 \\text{ g/mol}} = 2 $$
+                    <p>Multiplicamos la F.E. por 2: \\( \\mathbf{F.M. = C_4H_{12}N_2} \\) (Putrescina).</p>
+                    </div>
+                `
+            },
+            {
+                nivel: "7 - Muy Avanzado",
+                dificultad: "⭐⭐⭐⭐",
+                titulo: "Amoniaco medido en moléculas",
+                enunciado: "De un compuesto (C, H, N, O) de uso agrícola se extrae la siguiente información:<br>Combustión de 1.20 g: 0.88 g de \\( \\mathrm{CO_2} \\) y 0.72 g de \\( \\mathrm{H_2O} \\).<br>Tratamiento de 0.60 g: Produce exactamente \\( 1.2 \\times 10^{22} \\) moléculas de gas amoniaco.<br><br>Si su masa molar es 60 g/mol, ¿de qué molécula se trata? (Dato: Número de Avogadro = \\( 6.022 \\times 10^{23} \\)).",
+                solucion: `
+                    <p class="font-bold text-quimica-dark mb-2">1. Nitrógeno (usando número de Avogadro):</p>
+                    <div class="overflow-x-auto">
+                    $$ \\begin{align*}
+                    n(\\mathrm{NH_3}) &= \\frac{1.2 \\times 10^{22} \\text{ mol\\text{é}culas}}{6.022 \\times 10^{23} \\text{ mol\\text{é}culas/mol}} = 0.0199 \\approx 0.02 \\text{ mol } \\mathrm{NH_3} \\\\
+                    \\text{Masa N} &= 0.02 \\text{ mol} \\times 14 \\text{ g/mol} = 0.28 \\text{ g N} \\implies \\%\\text{N} = \\frac{0.28}{0.60} \\times 100 = 46.67\\%
+                    \\end{align*} $$
+                    </div>
+
+                    <p class="font-bold text-quimica-dark mt-4 mb-2">2. Carbono e Hidrógeno (en muestra de 1.20 g):</p>
+                    <div class="overflow-x-auto">
+                    $$ \\begin{align*}
+                    \\text{Masa C} &= 0.88 \\text{ g } \\mathrm{CO_2} \\times \\frac{12 \\text{ g C}}{44 \\text{ g } \\mathrm{CO_2}} = 0.24 \\text{ g C} \\implies \\%\\text{C} = \\frac{0.24}{1.20} \\times 100 = 20.00\\% \\\\
+                    \\text{Masa H} &= 0.72 \\text{ g } \\mathrm{H_2O} \\times \\frac{2 \\text{ g H}}{18 \\text{ g } \\mathrm{H_2O}} = 0.08 \\text{ g H} \\implies \\%\\text{H} = \\frac{0.08}{1.20} \\times 100 = 6.67\\%
+                    \\end{align*} $$
+                    </div>
+
+                    <p class="font-bold text-quimica-dark mt-4 mb-2">3. Oxígeno y Fórmula Empírica:</p>
+                    <div class="overflow-x-auto">
+                    $$ \\%\\text{O} = 100\\% - (46.67\\% + 20.00\\% + 6.67\\%) = 26.66\\% $$
+                    $$ \\begin{align*}
+                    \\text{C: } & \\frac{20.00}{12} = 1.66 \\implies \\frac{1.66}{1.66} = 1 \\\\
+                    \\text{H: } & \\frac{6.67}{1} = 6.67 \\implies \\frac{6.67}{1.66} = 4 \\\\
+                    \\text{N: } & \\frac{46.67}{14} = 3.33 \\implies \\frac{3.33}{1.66} = 2 \\\\
+                    \\text{O: } & \\frac{26.66}{16} = 1.66 \\implies \\frac{1.66}{1.66} = 1
+                    \\end{align*} $$
+                    $$ \\mathbf{F.E. = CH_4N_2O} $$
+                    </div>
+
+                    <p class="font-bold text-quimica-dark mt-4 mb-2">4. Fórmula Molecular:</p>
+                    <div class="overflow-x-auto">
+                    $$ \\text{Masa F.E.} = 12 + 4 + (2 \\times 14) + 16 = 60 \\text{ g/mol} $$
+                    <p>Coincide con M.M. real. \\( \\mathbf{F.M. = CH_4N_2O} \\) (Urea).</p>
+                    </div>
+                `
+            },
+            {
+                nivel: "8 - Reto Kjeldahl",
+                dificultad: "⭐⭐⭐⭐",
+                titulo: "Neutralización del Amoniaco (Volumetría)",
+                enunciado: "Para averiguar la fórmula de un alcaloide extraído del tabaco (solo C, H, N, masa molar 162 g/mol):<br>- Se queman 3.24 g, originando 8.80 g de \\( \\mathrm{CO_2} \\) y 2.52 g de \\( \\mathrm{H_2O} \\).<br>- Se emplea el método de Kjeldahl con 1.62 g del compuesto. El amoniaco gaseoso generado se recoge y se neutraliza exactamente con 40 mL de una disolución de Ácido Clorhídrico (\\( \\mathrm{HCl} \\)) 0.5 M.<br><br>Halla la fórmula empírica y molecular.",
+                solucion: `
+                    <p class="mb-2">Este ejercicio introduce una valoración ácido-base. Ecuación de neutralización:</p>
+                    <div class="overflow-x-auto">
+                    $$ \\mathrm{NH_3 + HCl \\longrightarrow NH_4Cl} $$
+                    $$ \\begin{align*}
+                    n(\\mathrm{HCl}) &= M \\times V = 0.5 \\text{ mol/L} \\times 0.040 \\text{ L} = 0.02 \\text{ mol} \\\\
+                    n(\\mathrm{NH_3}) &= n(\\mathrm{HCl}) = 0.02 \\text{ mol de N} \\\\
+                    \\text{Masa N} &= 0.02 \\times 14 = 0.28 \\text{ g N} \\implies \\%\\text{N} = \\frac{0.28}{1.62} \\times 100 = 17.28\\%
+                    \\end{align*} $$
+                    </div>
+
+                    <p class="font-bold text-quimica-dark mt-4 mb-2">Carbono e Hidrógeno (en 3.24 g):</p>
+                    <div class="overflow-x-auto">
+                    $$ \\begin{align*}
+                    \\text{Masa C} &= 8.80 \\text{ g } \\mathrm{CO_2} \\times \\frac{12 \\text{ g C}}{44 \\text{ g } \\mathrm{CO_2}} = 2.40 \\text{ g C} \\implies \\%\\text{C} = \\frac{2.40}{3.24} \\times 100 = 74.07\\% \\\\
+                    \\text{Masa H} &= 2.52 \\text{ g } \\mathrm{H_2O} \\times \\frac{2 \\text{ g H}}{18 \\text{ g } \\mathrm{H_2O}} = 0.28 \\text{ g H} \\implies \\%\\text{H} = \\frac{0.28}{3.24} \\times 100 = 8.64\\%
+                    \\end{align*} $$
+                    </div>
+
+                    <p class="font-bold text-quimica-dark mt-4 mb-2">Fórmula Empírica y Molecular:</p>
+                    <div class="overflow-x-auto">
+                    $$ \\begin{align*}
+                    \\text{C: } & \\frac{74.07}{12} = 6.17 \\implies \\frac{6.17}{1.23} = 5 \\\\
+                    \\text{H: } & \\frac{8.64}{1} = 8.64 \\implies \\frac{8.64}{1.23} = 7 \\\\
+                    \\text{N: } & \\frac{17.28}{14} = 1.23 \\implies \\frac{1.23}{1.23} = 1
+                    \\end{align*} $$
+                    $$ \\mathbf{F.E. = C_5H_7N} \\quad (\\text{Masa } = 81 \\text{ g/mol}) $$
+                    $$ n = \\frac{162}{81} = 2 \\implies \\mathbf{F.M. = C_{10}H_{14}N_2} \\quad (\\text{Nicotina}) $$
+                    </div>
+                `
+            },
+            {
+                nivel: "9 - Experto",
+                dificultad: "⭐⭐⭐⭐⭐",
+                titulo: "Todo en Uno: Gases + Neutralización Diprótica + Oxígeno",
+                enunciado: "Analizamos un conocido analgésico (C, H, N, O):<br>1. <strong>Combustión:</strong> 3.02 g producen 7.04 g de \\( \\mathrm{CO_2} \\) y 1.62 g de \\( \\mathrm{H_2O} \\).<br>2. <strong>Nitrógeno:</strong> 1.51 g se procesan hasta dar amoniaco. Éste requiere para su completa neutralización 20 mL de Ácido Sulfúrico (\\( \\mathrm{H_2SO_4} \\)) 0.25 M. ¡Cuidado, es un ácido diprótico!<br>3. <strong>Masa Molar:</strong> 1.51 g del compuesto vaporizado a 250 ºC y 750 mmHg ocupan un volumen de 435 mL.<br><br>Determina su fórmula molecular.",
+                solucion: `
+                    <p class="font-bold text-quimica-dark mb-2">1. Cálculo de Masa Molar:</p>
+                    <div class="overflow-x-auto">
+                    $$ \\begin{align*}
+                    MM &= \\frac{m \\cdot R \\cdot T}{P \\cdot V} \\\\
+                    MM &= \\frac{1.51 \\text{ g} \\times 0.082 \\frac{\\text{atm}\\cdot\\text{L}}{\\text{mol}\\cdot\\text{K}} \\times 523 \\text{ K}}{(\\frac{750}{760} \\text{ atm}) \\times 0.435 \\text{ L}} \\approx 151 \\text{ g/mol}
+                    \\end{align*} $$
+                    </div>
+
+                    <p class="font-bold text-quimica-dark mt-4 mb-2">2. Nitrógeno (Ácido Diprótico):</p>
+                    <div class="overflow-x-auto">
+                    $$ \\mathrm{2 NH_3 + H_2SO_4 \\longrightarrow (NH_4)_2SO_4} $$
+                    $$ \\begin{align*}
+                    n(\\mathrm{H_2SO_4}) &= 0.25 \\text{ mol/L} \\times 0.020 \\text{ L} = 0.005 \\text{ mol} \\\\
+                    n(\\mathrm{NH_3}) &= 2 \\times n(\\mathrm{H_2SO_4}) = 0.01 \\text{ mol} \\\\
+                    \\text{Masa N} &= 0.01 \\times 14 = 0.14 \\text{ g N} \\implies \\%\\text{N} = \\frac{0.14}{1.51} \\times 100 = 9.27\\%
+                    \\end{align*} $$
+                    </div>
+
+                    <p class="font-bold text-quimica-dark mt-4 mb-2">3. Resto de Elementos y Fórmula:</p>
+                    <div class="overflow-x-auto">
+                    $$ \\begin{align*}
+                    \\text{Masa C} &= 7.04 \\times \\frac{12}{44} = 1.92 \\text{ g} \\implies \\%\\text{C} = \\frac{1.92}{3.02} \\times 100 = 63.58\\% \\\\
+                    \\text{Masa H} &= 1.62 \\times \\frac{2}{18} = 0.18 \\text{ g} \\implies \\%\\text{H} = \\frac{0.18}{3.02} \\times 100 = 5.96\\% \\\\
+                    \\%\\text{O} &= 100\\% - (63.58 + 5.96 + 9.27)\\% = 21.19\\%
+                    \\end{align*} $$
+                    $$ \\begin{align*}
+                    \\text{C: } & \\frac{63.58}{12} = 5.298 \\implies \\frac{5.298}{0.662} = 8 \\\\
+                    \\text{H: } & \\frac{5.96}{1} = 5.96 \\implies \\frac{5.96}{0.662} = 9 \\\\
+                    \\text{N: } & \\frac{9.27}{14} = 0.662 \\implies \\frac{0.662}{0.662} = 1 \\\\
+                    \\text{O: } & \\frac{21.19}{16} = 1.324 \\implies \\frac{1.324}{0.662} = 2
+                    \\end{align*} $$
+                    $$ \\mathbf{F.M. = C_8H_9NO_2} \\quad (\\text{Paracetamol}) $$
+                    </div>
+                `
+            },
+            {
+                nivel: "10 - Olimpiada Química",
+                dificultad: "☠️",
+                titulo: "Presión Parcial de Agua en la Recogida",
+                enunciado: "Una diamina volátil (solo C, H, N) se analiza quemando 0.44 g para obtener 0.88 g de \\( \\mathrm{CO_2} \\) y 0.54 g de \\( \\mathrm{H_2O} \\).<br>El nitrógeno se evalúa con otros 0.44 g, transformándolo en \\( \\mathrm{NH_3} \\). Este gas se recoge <em>sobre agua</em> a 20 ºC. El volumen total recogido es de 250 mL y la presión barométrica es de 760 mmHg.<br><br>(Dato extra: La presión de vapor del agua a 20 ºC es 17.5 mmHg).<br>Sabiendo que su masa molar es próxima a 88 g/mol, determina la fórmula molecular.",
+                solucion: `
+                    <p class="font-bold text-quimica-dark mb-2">1. Presión real del Amoniaco (Ley de Dalton):</p>
+                    <div class="overflow-x-auto">
+                    $$ \\begin{align*}
+                    P_{\\text{total}} &= P_{\\mathrm{NH_3}} + P_{\\text{vapor de agua}} \\\\
+                    P_{\\mathrm{NH_3}} &= 760 \\text{ mmHg} - 17.5 \\text{ mmHg} = 742.5 \\text{ mmHg} \\\\
+                    P_{\\mathrm{NH_3}} &= 742.5 \\text{ mmHg} \\times \\frac{1 \\text{ atm}}{760 \\text{ mmHg}} = 0.977 \\text{ atm}
+                    \\end{align*} $$
+                    </div>
+
+                    <p class="font-bold text-quimica-dark mt-4 mb-2">2. Nitrógeno, Carbono e Hidrógeno:</p>
+                    <div class="overflow-x-auto">
+                    $$ \\begin{align*}
+                    n(\\mathrm{NH_3}) &= \\frac{0.977 \\text{ atm} \\times 0.25 \\text{ L}}{0.082 \\frac{\\text{atm}\\cdot\\text{L}}{\\text{mol}\\cdot\\text{K}} \\times 293 \\text{ K}} = 0.0101 \\text{ mol } \\mathrm{NH_3} \\\\
+                    \\text{Masa N} &= 0.0101 \\times 14 = 0.142 \\text{ g N} \\implies \\%\\text{N} = \\frac{0.142}{0.44} \\times 100 = 32.27\\% \\\\
+                    \\text{Masa C} &= 0.88 \\times \\frac{12}{44} = 0.24 \\text{ g C} \\implies \\%\\text{C} = \\frac{0.24}{0.44} \\times 100 = 54.55\\% \\\\
+                    \\text{Masa H} &= 0.54 \\times \\frac{2}{18} = 0.06 \\text{ g H} \\implies \\%\\text{H} = \\frac{0.06}{0.44} \\times 100 = 13.64\\%
+                    \\end{align*} $$
+                    </div>
+
+                    <p class="font-bold text-quimica-dark mt-4 mb-2">3. Fórmula Empírica y Molecular:</p>
+                    <div class="overflow-x-auto">
+                    $$ \\begin{align*}
+                    \\text{C: } & \\frac{54.55}{12} = 4.54 \\implies \\frac{4.54}{2.30} = 1.97 \\approx 2 \\\\
+                    \\text{H: } & \\frac{13.64}{1} = 13.64 \\implies \\frac{13.64}{2.30} = 5.93 \\approx 6 \\\\
+                    \\text{N: } & \\frac{32.27}{14} = 2.30 \\implies \\frac{2.30}{2.30} = 1
+                    \\end{align*} $$
+                    $$ \\mathbf{F.E. = C_2H_6N} \\quad (\\text{Masa } = 44 \\text{ g/mol}) $$
+                    $$ n = \\frac{88}{44} = 2 \\implies \\mathbf{F.M. = C_4H_{12}N_2} $$
+                    </div>
+                `
+            }
+        ];
+
+        const container = document.getElementById('ejercicios-container');
+
+        ejercicios.forEach((ej, index) => {
+            const num = index + 1;
+            const tarjeta = document.createElement('div');
+            tarjeta.className = "bg-white rounded-xl shadow border border-gray-200 overflow-hidden";
+            tarjeta.innerHTML = `
+                <div class="bg-gray-100 px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                    <div>
+                        <span class="text-sm font-bold text-quimica uppercase tracking-wider">Ejercicio ${num} | ${ej.nivel}</span>
+                        <h3 class="text-lg font-bold text-gray-800">${ej.titulo}</h3>
+                    </div>
+                    <div class="text-xl" title="Dificultad">${ej.dificultad}</div>
+                </div>
+                <div class="p-6">
+                    <p class="text-gray-700 leading-relaxed mb-4 text-lg">${ej.enunciado}</p>
+                    <button onclick="toggleSolucion(${num})" class="bg-quimica text-white px-5 py-2.5 rounded shadow hover:bg-quimica-dark transition font-semibold flex items-center">
+                        <i class="fa-solid fa-eye mr-2" id="icono-${num}"></i> <span id="texto-btn-${num}">Ver Solución Paso a Paso</span>
+                    </button>
+                    <div id="solucion-${num}" class="solucion-contenido mt-6 bg-quimica-light p-6 rounded border border-cyan-200 text-gray-800 text-base">
+                        <h4 class="font-bold mb-4 border-b border-cyan-300 pb-2 text-xl text-quimica-dark"><i class="fa-solid fa-check-double text-green-600 mr-2"></i>Desarrollo y Ecuaciones:</h4>
+                        ${ej.solucion}
+                    </div>
+                </div>
+            `;
+            container.appendChild(tarjeta);
+        });
+
+        // Asegurar que MathJax procese las fórmulas dinámicas una vez cargadas en el DOM
+        window.addEventListener('load', () => {
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        });
+
+        function toggleSolucion(id) {
+            const divSolucion = document.getElementById(`solucion-${id}`);
+            const btnTexto = document.getElementById(`texto-btn-${id}`);
+            const icono = document.getElementById(`icono-${id}`);
+
+            if (divSolucion.classList.contains('activa')) {
+                divSolucion.classList.remove('activa');
+                btnTexto.innerText = "Ver Solución Paso a Paso";
+                icono.classList.replace('fa-eye-slash', 'fa-eye');
+            } else {
+                divSolucion.classList.add('activa');
+                btnTexto.innerText = "Ocultar Solución";
+                icono.classList.replace('fa-eye', 'fa-eye-slash');
+            }
+        }
+    </script>
+</body>
+</html>
