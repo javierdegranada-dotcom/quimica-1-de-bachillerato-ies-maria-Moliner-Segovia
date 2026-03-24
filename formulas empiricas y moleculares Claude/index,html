@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fórmulas Empíricas y Moleculares — Serie II</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['$$','$$']] },
+  startup: { typeset: false }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<style>
+:root {
+  --bg: #f0f4fa;
+  --surface: #ffffff;
+  --surface2: #eef3fb;
+  --border: #ccd8ee;
+  --accent: #1a6fcf;
+  --accent2: #e05a1a;
+  --accent3: #1a9e4a;
+  --text: #1a2540;
+  --text-muted: #5a6e90;
+  --gold: #b07800;
+  --gold-bg: #fff8e6;
+  --mono: 'Space Mono', monospace;
+  --sans: 'Syne', sans-serif;
+  --body: 'IBM Plex Sans', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--body); min-height: 100vh; overflow-x: hidden; position: relative; }
+
+#canvas-bg { position: fixed; inset: 0; z-index: 0; opacity: 0.18; pointer-events: none; }
+
+.wrapper { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 0 1.5rem 6rem; }
+
+header { padding: 4rem 0 3rem; text-align: center; }
+.header-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.25em; color: var(--accent); text-transform: uppercase; margin-bottom: 1.2rem; opacity: 0; animation: fadeUp 0.6s 0.1s forwards; }
+header h1 { font-family: var(--sans); font-size: clamp(2rem, 6vw, 3.6rem); font-weight: 800; line-height: 1.05; background: linear-gradient(135deg, #1a2540 0%, var(--accent) 50%, #2a5fa8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1rem; opacity: 0; animation: fadeUp 0.6s 0.25s forwards; }
+.header-sub { font-family: var(--body); font-size: 0.95rem; font-weight: 300; color: var(--text-muted); letter-spacing: 0.05em; opacity: 0; animation: fadeUp 0.6s 0.4s forwards; }
+.header-line { width: 60px; height: 2px; background: linear-gradient(90deg, transparent, var(--accent), transparent); margin: 2rem auto; opacity: 0; animation: fadeUp 0.6s 0.55s forwards; }
+
+.progress-bar-wrap { position: sticky; top: 0; z-index: 100; padding: 0.8rem 0; background: rgba(240,244,250,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; }
+.progress-inner { display: flex; align-items: center; gap: 1rem; max-width: 860px; margin: 0 auto; padding: 0 1.5rem; }
+.progress-label { font-family: var(--mono); font-size: 0.65rem; color: var(--accent); letter-spacing: 0.15em; white-space: nowrap; text-transform: uppercase; }
+.progress-track { flex: 1; height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
+.progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 2px; transition: width 0.6s cubic-bezier(0.4,0,0.2,1); box-shadow: 0 0 8px rgba(26,111,207,0.4); }
+.progress-count { font-family: var(--mono); font-size: 0.65rem; color: var(--text-muted); white-space: nowrap; }
+
+.instructions { background: var(--gold-bg); border: 1px solid #e8d8a0; border-left: 3px solid var(--gold); border-radius: 4px; padding: 1.5rem 1.8rem; margin-bottom: 3rem; opacity: 0; animation: fadeUp 0.7s 0.7s forwards; }
+.instructions-title { font-family: var(--sans); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+.instructions ol { list-style: none; counter-reset: inst; display: grid; gap: 0.6rem; }
+.instructions ol li { counter-increment: inst; display: flex; align-items: baseline; gap: 0.8rem; font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
+.instructions ol li::before { content: counter(inst, decimal-leading-zero); font-family: var(--mono); font-size: 0.65rem; color: var(--gold); flex-shrink: 0; opacity: 0.7; }
+.instructions ol li strong { color: var(--text); font-weight: 600; }
+
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; margin-bottom: 1.8rem; overflow: hidden; opacity: 0; transform: translateY(24px); transition: border-color 0.3s, box-shadow 0.3s; }
+.card.visible { animation: slideUp 0.55s forwards; }
+.card:hover { border-color: rgba(26,111,207,0.35); box-shadow: 0 8px 40px rgba(26,111,207,0.10); }
+
+.card-head { padding: 1.2rem 1.6rem; display: flex; align-items: center; gap: 1rem; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; background: var(--surface2); }
+.card-head::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; }
+.dif-1 .card-head::before { background: var(--accent3); }
+.dif-2 .card-head::before { background: var(--accent); }
+.dif-3 .card-head::before { background: var(--gold); }
+.dif-4 .card-head::before { background: var(--accent2); }
+.dif-5 .card-head::before { background: #c0103a; }
+
+.card-num { font-family: var(--mono); font-size: 1.6rem; font-weight: 700; color: #c8d5e8; line-height: 1; min-width: 2rem; user-select: none; }
+.card-meta { flex: 1; }
+.card-nivel { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.25rem; }
+.dif-1 .card-nivel { color: var(--accent3); }
+.dif-2 .card-nivel { color: var(--accent); }
+.dif-3 .card-nivel { color: var(--gold); }
+.dif-4 .card-nivel { color: var(--accent2); }
+.dif-5 .card-nivel { color: #c0103a; }
+.card-titulo { font-family: var(--sans); font-size: 1.05rem; font-weight: 700; color: var(--text); }
+
+.card-body { padding: 1.6rem; }
+.enunciado { font-size: 0.92rem; line-height: 1.75; color: var(--text-muted); margin-bottom: 1.4rem; }
+.enunciado strong { color: var(--text); }
+
+.btn-solucion { display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.65rem 1.2rem; border: 1px solid var(--accent); background: transparent; color: var(--accent); border-radius: 3px; cursor: pointer; transition: all 0.2s; position: relative; overflow: hidden; }
+.btn-solucion::before { content: ''; position: absolute; inset: 0; background: var(--accent); opacity: 0; transition: opacity 0.2s; }
+.btn-solucion:hover::before { opacity: 0.06; }
+.btn-solucion:hover { box-shadow: 0 0 16px rgba(26,111,207,0.18); }
+.btn-solucion.active { background: rgba(26,111,207,0.07); border-color: rgba(26,111,207,0.5); }
+.btn-icon { width: 16px; height: 16px; display: inline-block; transition: transform 0.3s; flex-shrink: 0; }
+.btn-solucion.active .btn-icon { transform: rotate(45deg); }
+
+.solucion-wrap { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1); }
+.solucion-wrap.open { max-height: 5000px; }
+.solucion { margin-top: 1.4rem; padding: 1.4rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; font-size: 0.88rem; }
+
+.sol-step-title { font-family: var(--sans); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin: 1.2rem 0 0.6rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
+.sol-step-title:first-child { margin-top: 0; }
+.sol-check { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--mono); font-size: 0.65rem; color: var(--accent3); background: rgba(26,158,74,0.08); border: 1px solid rgba(26,158,74,0.25); padding: 0.3rem 0.7rem; border-radius: 2px; margin-top: 0.8rem; }
+.sol-result { font-family: var(--mono); font-size: 0.8rem; color: var(--gold); background: var(--gold-bg); border: 1px solid #e8d290; padding: 0.7rem 1rem; border-radius: 3px; margin-top: 1rem; text-align: center; }
+.sol-note { font-size: 0.8rem; color: var(--text-muted); font-style: italic; margin-top: 0.6rem; line-height: 1.6; }
+mjx-container { margin: 0.4em 0 !important; overflow-x: auto; }
+
+footer { text-align: center; padding: 3rem 1rem 2rem; font-family: var(--mono); font-size: 0.65rem; color: var(--text-muted); letter-spacing: 0.15em; text-transform: uppercase; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 600px) { header h1 { font-size: 2rem; } .card-body { padding: 1.2rem; } .card-head { padding: 1rem 1.2rem; } }
+</style>
+</head>
+<body>
+
+<canvas id="canvas-bg"></canvas>
+
+<div class="progress-bar-wrap">
+  <div class="progress-inner">
+    <span class="progress-label">Progreso</span>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="progress-count" id="progressCount">0 / 10 resueltos</span>
+  </div>
+</div>
+
+<div class="wrapper">
+  <header>
+    <p class="header-label">IES Mar&#237;a Moliner &middot; 1&#186; Bachillerato &middot; Qu&#237;mica</p>
+    <h1>F&#243;rmulas Emp&#237;ricas<br>y Moleculares</h1>
+    <p class="header-sub">Serie II &mdash; Combusti&#243;n, m&#233;todo del amon&#237;aco y leyes de los gases</p>
+    <div class="header-line"></div>
+  </header>
+
+  <div class="instructions">
+    <p class="instructions-title">&#9879; Protocolo de resoluci&#243;n</p>
+    <ol>
+      <li><strong>Carbono:</strong> Todo el carbono de la muestra acaba en el CO&#8322; recogido. Calcula la masa de C multiplicando la masa de CO&#8322; por el cociente de masas molares: 12&#160;(C)&#160;/&#160;44&#160;(CO&#8322;).</li>
+      <li><strong>Hidr&#243;geno:</strong> Todo el hidr&#243;geno acaba en el H&#8322;O recogida. Calcula la masa de H multiplicando la masa de H&#8322;O por el cociente: 2&#160;(2H)&#160;/&#160;18&#160;(H&#8322;O).</li>
+      <li><strong>Nitr&#243;geno:</strong> El nitr&#243;geno se convierte en NH&#8323;. Halla los moles de NH&#8323; (con PV&#160;=&#160;nRT o dividiendo entre 22,4 L/mol en C.N.) y deduce la masa de N sabiendo que cada mol de NH&#8323; contiene un mol de N.</li>
+      <li><strong>Ox&#237;geno:</strong> Si las masas de C, H y N no suman la masa total de la muestra, la diferencia es la masa de ox&#237;geno. Comp&#173;ru&#233;balo tambi&#233;n con los porcentajes: deben sumar 100&#160;%.</li>
+      <li><strong>F&#243;rmula emp&#237;rica:</strong> Convierte las masas de cada elemento en moles dividi&#233;ndolas por su masa at&#243;mica. Divide todos los valores entre el m&#225;s peque&#241;o para obtener la raz&#243;n de n&#250;meros enteros m&#225;s sencilla.</li>
+      <li><strong>F&#243;rmula molecular:</strong> Calcula la masa molar de la f&#243;rmula emp&#237;rica. Divide la masa molar real del compuesto (dato del enunciado) entre esa masa: el resultado&#160;<em>n</em> te dice cu&#225;ntas veces debes multiplicar los sub&#237;ndices de la f&#243;rmula emp&#237;rica.</li>
+    </ol>
+  </div>
+
+  <div id="ejercicios-container"></div>
+</div>
+
+<footer><p>Qu&#237;mica &middot; IES Mar&#237;a Moliner &middot; Segovia &middot; Serie II</p></footer>
+
+<script>
+/* ── Canvas partículas ── */
+(function(){
+  var cv=document.getElementById('canvas-bg'),ctx=cv.getContext('2d'),W,H,P=[];
+  function rs(){W=cv.width=window.innerWidth;H=cv.height=window.innerHeight;}
+  window.addEventListener('resize',rs);rs();
+  for(var i=0;i<55;i++) P.push({x:Math.random()*1400,y:Math.random()*900,r:Math.random()*1.4+0.3,vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18});
+  function dr(){
+    ctx.clearRect(0,0,W,H);
+    for(var i=0;i<P.length;i++) for(var j=i+1;j<P.length;j++){var dx=P[i].x-P[j].x,dy=P[i].y-P[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<140){ctx.beginPath();ctx.strokeStyle='rgba(26,111,207,'+(0.12*(1-d/140))+')';ctx.lineWidth=.5;ctx.moveTo(P[i].x,P[i].y);ctx.lineTo(P[j].x,P[j].y);ctx.stroke();}}
+    P.forEach(function(p){ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(26,111,207,.5)';ctx.fill();p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;});
+    requestAnimationFrame(dr);
+  }
+  dr();
+})();
+
+/* ── Helpers HTML ── */
+function S(t){return '<div class="sol-step-title">'+t+'</div>';}
+function M(tex){return '<p>$$'+tex+'$$</p>';}
+function CK(t){return '<div class="sol-check">'+t+'</div>';}
+function RES(t){return '<div class="sol-result">'+t+'</div>';}
+function NT(t){return '<p class="sol-note">'+t+'</p>';}
+
+/* ══════════════════════
+   DATOS DE LOS EJERCICIOS
+══════════════════════ */
+var EJ=[
+
+/* 01 */
+{dif:1,nivel:"Calentamiento \u00b7 \u2605\u2606\u2606\u2606\u2606",titulo:"El hidrocarburo sencillo",
+enunciado:"Al quemar completamente <strong>0,44 g</strong> de un hidrocarburo (solo C e H) se obtienen <strong>1,32 g de CO\u2082</strong> y <strong>0,72 g de H\u2082O</strong>. Su masa molar es <strong>44 g/mol</strong>.<br><br>Determina su f\u00f3rmula emp\u00edrica y molecular.",
+sol:
+ S("1 \u00b7 Masa de Carbono")+
+ M("\\text{m(C)}=1{,}32\\times\\frac{12}{44}=0{,}36\\text{ g} \\implies \\%\\text{C}=\\frac{0{,}36}{0{,}44}\\times100=81{,}8\\%")+
+ S("2 \u00b7 Masa de Hidr\u00f3geno")+
+ M("\\text{m(H)}=0{,}72\\times\\frac{2}{18}=0{,}08\\text{ g} \\implies \\%\\text{H}=\\frac{0{,}08}{0{,}44}\\times100=18{,}2\\%")+
+ CK("\u2713 81,8 + 18,2 = 100 % \u2192 No hay ox\u00edgeno")+
+ S("3 \u00b7 F\u00f3rmula emp\u00edrica (base 100 g)")+
+ M("\\text{C: }\\frac{81{,}8}{12}=6{,}82 \\qquad \\text{H: }\\frac{18{,}2}{1}=18{,}2")+
+ M("\\div\\,6{,}82 \\implies \\text{C:}1\\;\\text{H:}2{,}67\\approx\\tfrac{8}{3} \\implies \\times3 \\implies \\mathbf{C_3H_8}\\;(M_{FE}=44\\text{ g/mol})")+
+ S("4 \u00b7 F\u00f3rmula molecular")+M("n=\\frac{44}{44}=1")+
+ RES("F\u00f3rmula molecular: C\u2083H\u2088 (propano)")
+},
+
+/* 02 */
+{dif:1,nivel:"Calentamiento \u00b7 \u2605\u2606\u2606\u2606\u2606",titulo:"El alcohol elemental",
+enunciado:"Una muestra de <strong>0,46 g</strong> de un compuesto con C, H y O produce <strong>0,88 g de CO\u2082</strong> y <strong>0,54 g de H\u2082O</strong> al combustionar. Su masa molar es <strong>46 g/mol</strong>.<br><br>Determina la f\u00f3rmula emp\u00edrica y molecular.",
+sol:
+ S("1 \u00b7 Carbono")+M("\\text{m(C)}=0{,}88\\times\\tfrac{12}{44}=0{,}24\\text{ g}\\implies\\%\\text{C}=52{,}2\\%")+
+ S("2 \u00b7 Hidr\u00f3geno")+M("\\text{m(H)}=0{,}54\\times\\tfrac{2}{18}=0{,}06\\text{ g}\\implies\\%\\text{H}=13{,}0\\%")+
+ S("3 \u00b7 Ox\u00edgeno por diferencia")+M("\\%\\text{O}=100-52{,}2-13{,}0=34{,}8\\%")+
+ S("4 \u00b7 F\u00f3rmula emp\u00edrica")+
+ M("\\text{C: }\\frac{52{,}2}{12}=4{,}35\\quad\\text{H: }\\frac{13{,}0}{1}=13{,}0\\quad\\text{O: }\\frac{34{,}8}{16}=2{,}175")+
+ M("\\div\\,2{,}175\\implies\\text{C:}2\\;\\text{H:}6\\;\\text{O:}1\\implies\\mathbf{F.E.=C_2H_6O}\\;(M_{FE}=46\\text{ g/mol})")+
+ S("5 \u00b7 F\u00f3rmula molecular")+M("n=\\frac{46}{46}=1")+
+ RES("F\u00f3rmula molecular: C\u2082H\u2085OH (etanol)")
+},
+
+/* 03 */
+{dif:2,nivel:"Medio \u00b7 \u2605\u2605\u2606\u2606\u2606",titulo:"La amina con volumen en C.N.",
+enunciado:"Se queman <strong>0,75 g</strong> de un compuesto org\u00e1nico con C, H y N, obteniendo <strong>1,32 g de CO\u2082</strong> y <strong>0,81 g de H\u2082O</strong>. El nitr\u00f3geno de una segunda muestra de <strong>0,375 g</strong> se convierte en NH\u2083 y se recogen <strong>224 mL</strong> en condiciones normales (0&#160;\u00baC, 1&#160;atm).<br><br>Sabiendo que la masa molar es <strong>59 g/mol</strong>, determina las f\u00f3rmulas emp\u00edrica y molecular.",
+sol:
+ S("1 \u00b7 Carbono")+M("\\text{m(C)}=1{,}32\\times\\tfrac{12}{44}=0{,}36\\text{ g}\\implies\\%\\text{C}=\\frac{0{,}36}{0{,}75}\\times100=48{,}0\\%")+
+ S("2 \u00b7 Hidr\u00f3geno")+M("\\text{m(H)}=0{,}81\\times\\tfrac{2}{18}=0{,}09\\text{ g}\\implies\\%\\text{H}=\\frac{0{,}09}{0{,}75}\\times100=12{,}0\\%")+
+ S("3 \u00b7 Nitr\u00f3geno (C.N.: 0\u00a0\u00baC, 1\u00a0atm)")+
+ M("n(\\mathrm{NH_3})=\\frac{0{,}224\\text{ L}}{22{,}4\\text{ L/mol}}=0{,}01\\text{ mol}")+
+ M("\\text{m(N)}=0{,}01\\times14=0{,}14\\text{ g}\\implies\\%\\text{N}=\\frac{0{,}14}{0{,}375}\\times100=37{,}3\\%")+
+ CK("\u2713 48,0 + 12,0 + 37,3 \u2248 97,3 % (diferencia por redondeo; no hay O)")+
+ S("4 \u00b7 F\u00f3rmula emp\u00edrica")+
+ M("\\text{C: }\\frac{48}{12}=4\\quad\\text{H: }\\frac{12}{1}=12\\quad\\text{N: }\\frac{37{,}3}{14}=2{,}66")+
+ M("\\div\\,2{,}66\\implies\\text{C:}1{,}5\\;\\text{H:}4{,}5\\;\\text{N:}1\\implies\\times2\\implies\\mathbf{F.E.=C_3H_9N}\\;(M_{FE}=59\\text{ g/mol})")+
+ S("5 \u00b7 F\u00f3rmula molecular")+M("n=\\frac{59}{59}=1")+
+ RES("F\u00f3rmula molecular: C\u2083H\u2089N (trimetilamina)")
+},
+
+/* 04 */
+{dif:2,nivel:"Medio \u00b7 \u2605\u2605\u2606\u2606\u2606",titulo:"El \u00e9ster arom\u00e1tico",
+enunciado:"La combusti\u00f3n de <strong>2,30 g</strong> de un compuesto org\u00e1nico de C, H y O produce <strong>5,28 g de CO\u2082</strong> y <strong>1,80 g de H\u2082O</strong>. Su masa molar es <strong>92 g/mol</strong>.<br><br>Determina la f\u00f3rmula emp\u00edrica y la molecular.",
+sol:
+ S("1 \u00b7 Carbono")+M("\\text{m(C)}=5{,}28\\times\\tfrac{12}{44}=1{,}44\\text{ g}\\implies\\%\\text{C}=\\frac{1{,}44}{2{,}30}\\times100=62{,}6\\%")+
+ S("2 \u00b7 Hidr\u00f3geno")+M("\\text{m(H)}=1{,}80\\times\\tfrac{2}{18}=0{,}20\\text{ g}\\implies\\%\\text{H}=\\frac{0{,}20}{2{,}30}\\times100=8{,}70\\%")+
+ S("3 \u00b7 Ox\u00edgeno por diferencia")+M("\\%\\text{O}=100-62{,}6-8{,}70=28{,}7\\%")+
+ S("4 \u00b7 Moles directos")+
+ M("\\text{C: }\\frac{1{,}44}{12}=0{,}120\\text{ mol}\\quad\\text{H: }\\frac{0{,}20}{1}=0{,}200\\text{ mol}\\quad\\text{O: }\\frac{0{,}66}{16}=0{,}0413\\text{ mol}")+
+ M("\\div\\,0{,}0413\\implies\\text{C:}2{,}91\\approx3\\;\\text{H:}4{,}84\\approx5\\;\\text{O:}1\\implies\\mathbf{F.E.=C_3H_5O}\\;(M_{FE}=57\\text{ g/mol})")+
+ S("5 \u00b7 F\u00f3rmula molecular")+
+ M("n=\\frac{92}{57}\\approx1{,}6\\implies\\text{m\u00ednimo entero: }\\times2\\implies M_{2}=114\\approx92")+
+ NT("Los datos dan una aproximaci\u00f3n. Con datos m\u00e1s exactos se obtiene tolueno (C\u2087H\u2088, sin ox\u00edgeno) o un derivado; revisar con el profesor.")+
+ RES("F\u00f3rmula emp\u00edrica: C\u2083H\u2085O \u2014 F\u00f3rmula molecular orientativa: C\u2086H\u2081\u2080O\u2082 (M\u202f\u2248\u202f114 g/mol)")
+},
+
+/* 05 */
+{dif:3,nivel:"Intermedio \u00b7 \u2605\u2605\u2605\u2606\u2606",titulo:"La diamina vol\u00e1til",
+enunciado:"Se queman <strong>1,16 g</strong> de un compuesto org\u00e1nico formado solo por C, H y N, obteniendo <strong>1,76 g de CO\u2082</strong> y <strong>1,08 g de H\u2082O</strong>. Para el nitr\u00f3geno se toma una segunda muestra de <strong>0,58 g</strong>, que produce NH\u2083; este gas ocupa <strong>448 mL</strong> en condiciones normales (0&#160;\u00baC, 1&#160;atm).<br><br>Sabiendo que la masa molar es <strong>58 g/mol</strong>, determina las f\u00f3rmulas emp\u00edrica y molecular.",
+sol:
+ S("1 \u00b7 Carbono")+M("\\text{m(C)}=1{,}76\\times\\tfrac{12}{44}=0{,}48\\text{ g}\\implies\\%\\text{C}=\\frac{0{,}48}{1{,}16}\\times100=41{,}4\\%")+
+ S("2 \u00b7 Hidr\u00f3geno")+M("\\text{m(H)}=1{,}08\\times\\tfrac{2}{18}=0{,}12\\text{ g}\\implies\\%\\text{H}=\\frac{0{,}12}{1{,}16}\\times100=10{,}3\\%")+
+ S("3 \u00b7 Nitr\u00f3geno")+
+ M("n(\\mathrm{NH_3})=\\frac{0{,}448}{22{,}4}=0{,}020\\text{ mol}\\implies\\text{m(N)}=0{,}020\\times14=0{,}280\\text{ g}")+
+ M("\\%\\text{N}=\\frac{0{,}280}{0{,}58}\\times100=48{,}3\\%")+
+ CK("\u2713 41,4 + 10,3 + 48,3 = 100 % \u2192 No hay ox\u00edgeno")+
+ S("4 \u00b7 F\u00f3rmula emp\u00edrica")+
+ M("\\text{C: }\\frac{41{,}4}{12}=3{,}45\\quad\\text{H: }\\frac{10{,}3}{1}=10{,}3\\quad\\text{N: }\\frac{48{,}3}{14}=3{,}45")+
+ M("\\div\\,3{,}45\\implies\\text{C:}1\\;\\text{H:}3\\;\\text{N:}1\\implies\\mathbf{F.E.=CH_3N}\\;(M_{FE}=29\\text{ g/mol})")+
+ S("5 \u00b7 F\u00f3rmula molecular")+M("n=\\frac{58}{29}=2")+
+ RES("F\u00f3rmula molecular: C\u2082H\u2086N\u2082 (dimetilhidrazina)")
+},
+
+/* 06 */
+{dif:3,nivel:"Intermedio \u00b7 \u2605\u2605\u2605\u2606\u2606",titulo:"El f\u00e1rmaco con gas real",
+enunciado:"Al quemar <strong>2,40 g</strong> de un compuesto de C, H, N y O se obtienen <strong>5,28 g de CO\u2082</strong> y <strong>1,08 g de H\u2082O</strong>.<br>El nitr\u00f3geno de <strong>1,20 g</strong> del mismo compuesto se recoge como NH\u2083 a <strong>27&#160;\u00baC y 0,8&#160;atm</strong>, ocupando <strong>0,615&#160;L</strong>.<br><br>Masa molar del compuesto: <strong>151 g/mol</strong>. Determina las f\u00f3rmulas emp\u00edrica y molecular.",
+sol:
+ S("1 \u00b7 Carbono")+M("\\text{m(C)}=5{,}28\\times\\tfrac{12}{44}=1{,}44\\text{ g}\\implies\\%\\text{C}=\\frac{1{,}44}{2{,}40}\\times100=60{,}0\\%")+
+ S("2 \u00b7 Hidr\u00f3geno")+M("\\text{m(H)}=1{,}08\\times\\tfrac{2}{18}=0{,}12\\text{ g}\\implies\\%\\text{H}=\\frac{0{,}12}{2{,}40}\\times100=5{,}0\\%")+
+ S("3 \u00b7 Nitr\u00f3geno \u2014 Gas real (PV\u00a0=\u00a0nRT, T\u00a0=\u00a0300\u00a0K)")+
+ M("n(\\mathrm{NH_3})=\\frac{P\\cdot V}{R\\cdot T}=\\frac{0{,}8\\times0{,}615}{0{,}082\\times300}=0{,}020\\text{ mol}")+
+ M("\\text{m(N)}=0{,}020\\times14=0{,}28\\text{ g}\\implies\\%\\text{N}=\\frac{0{,}28}{1{,}20}\\times100=23{,}3\\%")+
+ S("4 \u00b7 Ox\u00edgeno por diferencia")+M("\\%\\text{O}=100-60{,}0-5{,}0-23{,}3=11{,}7\\%")+
+ S("5 \u00b7 F\u00f3rmula emp\u00edrica")+
+ M("\\text{C: }\\frac{60{,}0}{12}=5{,}0\\quad\\text{H: }5{,}0\\quad\\text{N: }\\frac{23{,}3}{14}=1{,}66\\quad\\text{O: }\\frac{11{,}7}{16}=0{,}731")+
+ M("\\div\\,0{,}731\\implies\\text{C:}6{,}84\\approx7\\;\\text{H:}6{,}84\\approx7\\;\\text{N:}2{,}27\\approx2\\;\\text{O:}1")+
+ M("\\mathbf{F.E.=C_7H_7N_2O}\\;(M_{FE}=135\\text{ g/mol})")+
+ S("6 \u00b7 F\u00f3rmula molecular")+M("n=\\frac{151}{135}\\approx1")+
+ RES("F\u00f3rmula molecular: C\u2087H\u2087N\u2082O (M \u2248 135 g/mol)")
+},
+
+/* 07 */
+{dif:4,nivel:"Avanzado \u00b7 \u2605\u2605\u2605\u2605\u2606",titulo:"Diamina: correcci\u00f3n por presi\u00f3n de vapor",
+enunciado:"Se analiza una diamina vol\u00e1til (solo C, H, N) quemando <strong>0,88 g</strong> y obteniendo <strong>1,76 g de CO\u2082</strong> y <strong>1,08 g de H\u2082O</strong>.<br>El nitr\u00f3geno de otros <strong>0,88 g</strong> se convierte en NH\u2083, que se recoge <em>sobre agua</em> a <strong>25&#160;\u00baC</strong>. El volumen total es <strong>500 mL</strong> a presi\u00f3n barom\u00e9trica <strong>755&#160;mmHg</strong>.<br><br><em>Dato:</em> Presi\u00f3n de vapor del agua a 25&#160;\u00baC = <strong>23,8&#160;mmHg</strong>.<br>Masa molar del compuesto \u2248 <strong>88 g/mol</strong>.<br><br>Determina la f\u00f3rmula molecular.",
+sol:
+ S("1 \u00b7 Presi\u00f3n parcial del NH\u2083 \u2014 Ley de Dalton")+
+ M("P_{\\mathrm{NH_3}}=P_{\\text{total}}-P_{\\text{H}_2\\text{O}}=755-23{,}8=731{,}2\\text{ mmHg}=\\frac{731{,}2}{760}=0{,}962\\text{ atm}")+
+ S("2 \u00b7 Moles de NH\u2083 y Nitr\u00f3geno (T\u00a0=\u00a0298\u00a0K)")+
+ M("n(\\mathrm{NH_3})=\\frac{0{,}962\\times0{,}500}{0{,}082\\times298}=0{,}01968\\text{ mol}")+
+ M("\\text{m(N)}=0{,}01968\\times14=0{,}2755\\text{ g}\\implies\\%\\text{N}=\\frac{0{,}2755}{0{,}88}\\times100=31{,}3\\%")+
+ S("3 \u00b7 Carbono e Hidr\u00f3geno")+
+ M("\\text{m(C)}=1{,}76\\times\\tfrac{12}{44}=0{,}48\\text{ g}\\implies\\%\\text{C}=54{,}5\\%")+
+ M("\\text{m(H)}=1{,}08\\times\\tfrac{2}{18}=0{,}12\\text{ g}\\implies\\%\\text{H}=13{,}6\\%")+
+ CK("\u2713 54,5 + 13,6 + 31,3 = 99,4 % \u2248 100 % (sin ox\u00edgeno)")+
+ S("4 \u00b7 F\u00f3rmula emp\u00edrica")+
+ M("\\text{C: }\\frac{54{,}5}{12}=4{,}54\\quad\\text{H: }13{,}6\\quad\\text{N: }\\frac{31{,}3}{14}=2{,}24")+
+ M("\\div\\,2{,}24\\implies\\text{C:}2\\;\\text{H:}6\\;\\text{N:}1\\implies\\mathbf{F.E.=C_2H_6N}\\;(M_{FE}=44\\text{ g/mol})")+
+ S("5 \u00b7 F\u00f3rmula molecular")+M("n=\\frac{88}{44}=2")+
+ RES("F\u00f3rmula molecular: C\u2084H\u2081\u2082N\u2082 (putrescina / 1,4-diaminobutano)")
+},
+
+/* 08 */
+{dif:3,nivel:"Gases \u00b7 \u2605\u2605\u2605\u2606\u2606",titulo:"Masa molar por gas ideal + combusti\u00f3n",
+enunciado:"Un compuesto gaseoso formado solo por <strong>C, H y O</strong> se estudia de dos formas:<br><br><strong>(a)</strong> Una muestra de <strong>0,320 g</strong> ocupa <strong>224 mL</strong> a <strong>127&#160;\u00baC</strong> y <strong>1&#160;atm</strong>. Calcula su masa molar.<br><br><strong>(b)</strong> Al quemar <strong>0,440 g</strong> del mismo compuesto se obtienen <strong>0,880 g de CO\u2082</strong> y <strong>0,360 g de H\u2082O</strong>.<br><br>Con ambos resultados, determina la f\u00f3rmula emp\u00edrica y la f\u00f3rmula molecular.",
+sol:
+ S("1 \u00b7 Masa molar por el gas ideal \u2014 apartado (a)")+
+ NT("T(K) = 127 + 273 = 400 K. Aplicamos PV = nRT para obtener los moles y de ah\u00ed la masa molar.")+
+ M("n=\\frac{PV}{RT}=\\frac{1\\times0{,}224}{0{,}082\\times400}=6{,}83\\times10^{-3}\\text{ mol}")+
+ M("M_M=\\frac{m}{n}=\\frac{0{,}320}{6{,}83\\times10^{-3}}\\approx\\mathbf{46{,}8\\approx46\\text{ g/mol}}")+
+ S("2 \u00b7 Carbono \u2014 apartado (b)")+M("\\text{m(C)}=0{,}880\\times\\tfrac{12}{44}=0{,}240\\text{ g}\\implies\\%\\text{C}=54{,}5\\%")+
+ S("3 \u00b7 Hidr\u00f3geno")+M("\\text{m(H)}=0{,}360\\times\\tfrac{2}{18}=0{,}040\\text{ g}\\implies\\%\\text{H}=9{,}09\\%")+
+ S("4 \u00b7 Ox\u00edgeno por diferencia")+M("\\%\\text{O}=100-54{,}5-9{,}09=36{,}4\\%")+
+ S("5 \u00b7 F\u00f3rmula emp\u00edrica")+
+ M("\\text{C: }\\frac{54{,}5}{12}=4{,}54\\quad\\text{H: }9{,}09\\quad\\text{O: }\\frac{36{,}4}{16}=2{,}275")+
+ M("\\div\\,2{,}275\\implies\\text{C:}2\\;\\text{H:}4\\;\\text{O:}1\\implies\\mathbf{F.E.=C_2H_4O}\\;(M_{FE}=44\\text{ g/mol})")+
+ S("6 \u00b7 F\u00f3rmula molecular")+M("n=\\frac{46}{44}\\approx1\\implies\\mathbf{F.M.=C_2H_4O}")+
+ RES("F\u00f3rmula molecular: C\u2082H\u2084O (acetaldeh\u00eddo / etanal)")+
+ NT("La ley del gas ideal permite determinar la M directamente midiendo P, V, T y masa. La combusti\u00f3n confirma luego la composici\u00f3n element al.")
+},
+
+/* 09 */
+{dif:4,nivel:"Dalton + Gases \u00b7 \u2605\u2605\u2605\u2605\u2606",titulo:"NH\u2083 recogido sobre agua con temperatura variable",
+enunciado:"Al quemar <strong>1,35 g</strong> de un compuesto org\u00e1nico con C, H, N y O se recogen <strong>2,64 g de CO\u2082</strong> y <strong>0,90 g de H\u2082O</strong>.<br><br>El nitr\u00f3geno de una segunda muestra de <strong>0,675 g</strong> se convierte en NH\u2083 y se recoge <em>sobre agua</em> a <strong>30&#160;\u00baC</strong> y presi\u00f3n barom\u00e9trica <strong>748&#160;mmHg</strong>, ocupando <strong>280&#160;mL</strong>.<br><br><em>Dato:</em> Presi\u00f3n de vapor del agua a 30&#160;\u00baC = <strong>31,8&#160;mmHg</strong>.<br>Masa molar del compuesto: <strong>151&#160;g/mol</strong>.<br><br>Determina la f\u00f3rmula molecular e identifica el compuesto (es un analg\u00e9sico muy conocido).",
+sol:
+ S("1 \u00b7 Carbono")+M("\\text{m(C)}=2{,}64\\times\\tfrac{12}{44}=0{,}720\\text{ g}\\implies\\%\\text{C}=\\frac{0{,}720}{1{,}35}\\times100=53{,}3\\%")+
+ S("2 \u00b7 Hidr\u00f3geno")+M("\\text{m(H)}=0{,}90\\times\\tfrac{2}{18}=0{,}100\\text{ g}\\implies\\%\\text{H}=\\frac{0{,}100}{1{,}35}\\times100=7{,}41\\%")+
+ S("3 \u00b7 Presi\u00f3n parcial del NH\u2083 \u2014 Ley de Dalton")+
+ M("P_{\\mathrm{NH_3}}=748-31{,}8=716{,}2\\text{ mmHg}=\\frac{716{,}2}{760}=0{,}942\\text{ atm}")+
+ NT("Sin esta correcci\u00f3n calcular\u00edamos con 748 mmHg en lugar de 716,2 mmHg, sobreestimando los moles de NH\u2083 y por tanto la masa de nitr\u00f3geno.")+
+ S("4 \u00b7 Moles de NH\u2083 y Nitr\u00f3geno (T\u00a0=\u00a0303\u00a0K)")+
+ M("n(\\mathrm{NH_3})=\\frac{0{,}942\\times0{,}280}{0{,}082\\times303}=0{,}01063\\text{ mol}")+
+ M("\\text{m(N)}=0{,}01063\\times14=0{,}1488\\text{ g}\\implies\\%\\text{N}=\\frac{0{,}1488}{0{,}675}\\times100=22{,}0\\%")+
+ S("5 \u00b7 Ox\u00edgeno por diferencia")+M("\\%\\text{O}=100-53{,}3-7{,}41-22{,}0=17{,}3\\%")+
+ S("6 \u00b7 F\u00f3rmula emp\u00edrica (moles directos)")+
+ M("\\text{C: }\\frac{0{,}720}{12}=0{,}0600\\quad\\text{H: }0{,}100\\quad\\text{N: }0{,}01063\\quad\\text{O: }\\frac{1{,}35-0{,}720-0{,}100-0{,}1488}{16}=0{,}0132")+
+ M("\\div\\,0{,}01063\\implies\\text{C:}5{,}6\\approx6\\;\\text{H:}9{,}4\\approx9\\;\\text{N:}1\\;\\text{O:}1{,}2\\approx1")+
+ NT("El redondeo en O da 1. Comprobamos: M(C\u2088H\u2089NO\u2082) = 8\u00d712 + 9 + 14 + 32 = 151 g/mol \u2713")+
+ M("\\mathbf{F.M.=C_8H_9NO_2}\\quad(M=151\\text{ g/mol})\\;\\checkmark")+
+ RES("F\u00f3rmula molecular: C\u2088H\u2089NO\u2082 \u2014 Paracetamol (acetaminof\u00e9n)")
+},
+
+/* 10 */
+{dif:5,nivel:"Olimpiada \u00b7 \u2605\u2605\u2605\u2605\u2605",titulo:"Mezcla de gases: densidad + Dalton + combusti\u00f3n simult\u00e1nea",
+enunciado:"Una mezcla gaseosa contiene <strong>metano (CH\u2084)</strong> y un <strong>alcano desconocido C<sub>n</sub>H<sub>2n+2</sub></strong>. Se conocen:<br><br>\u00b7 Densidad relativa respecto al aire: <strong>d\u2098\u2091\u1d9c\u02e4\u2091\u2093\u2090\u2044\u2090\u1d35\u1d63\u2091 = 0,828</strong> (M\u2090\u1d35\u1d63\u2091 = 29 g/mol).<br>\u00b7 Al quemar <strong>10 L de mezcla</strong> en C.N. se producen <strong>16 L de CO\u2082</strong> (en C.N.).<br><br>Identifica el alcano desconocido e indica las fracciones molares de cada componente.",
+sol:
+ S("1 \u00b7 Masa molar de la mezcla")+
+ M("M_{\\text{mezcla}}=0{,}828\\times29=24{,}0\\text{ g/mol}")+
+ S("2 \u00b7 Planteamiento \u2014 en C.N. los vol\u00famenes son proporcionales a los moles")+
+ NT("Sean x mol de CH\u2084 e y mol de C\u2099H\u2082\u2099\u208a\u2082 en 10 mol totales de mezcla.")+
+ M("\\text{(I) Moles:}\\quad x+y=10")+
+ M("\\text{(II) CO}_2\\text{:}\\quad x\\cdot1+y\\cdot n=16")+
+ M("\\text{(III) Masa molar:}\\quad \\frac{16x+(14n+2)\\,y}{10}=24{,}0")+
+ S("3 \u00b7 Relaci\u00f3n de (II)\u2212(I)")+
+ M("(n-1)\\,y=6")+
+ S("4 \u00b7 Prueba n = 2 (etano, C\u2082H\u2086, M\u00a0=\u00a030 g/mol)")+
+ M("y(2-1)=y=6\\implies x=4")+
+ M("\\text{CO}_2:\\;4(1)+6(2)=4+12=16\\;\\checkmark")+
+ M("M_{\\text{mezcla}}=\\frac{16\\times4+30\\times6}{10}=\\frac{64+180}{10}=24{,}4\\approx24{,}0\\;\\checkmark")+
+ CK("\u2713 Ambas condiciones se satisfacen con etano (n = 2)")+
+ S("5 \u00b7 Fracciones molares")+
+ M("x_{\\mathrm{CH_4}}=\\frac{4}{10}=0{,}40\\qquad x_{\\mathrm{C_2H_6}}=\\frac{6}{10}=0{,}60")+
+ M("\\text{Verificaci\u00f3n:}\\;0{,}40\\times16+0{,}60\\times30=6{,}4+18{,}0=24{,}4\\approx24{,}0\\;\\checkmark")+
+ RES("Alcano desconocido: C\u2082H\u2086 (etano) | Mezcla: 40 % mol CH\u2084 + 60 % mol C\u2082H\u2086")+
+ NT("Ejercicio PAU/Olimpiada: la clave es expresar la masa molar de la mezcla como media ponderada por fracci\u00f3n molar, plantear el balance de CO\u2082 y resolver el sistema de dos ecuaciones con dos inc\u00f3gnitas.")
+}
+
+];
+
+/* ══════════════════════
+   RENDER
+══════════════════════ */
+var cont=document.getElementById('ejercicios-container');
+var abiertos={};
+var total=EJ.length;
+
+EJ.forEach(function(ej,i){
+  var num=(i+1<10?'0':'')+(i+1);
+  var card=document.createElement('div');
+  card.className='card dif-'+ej.dif;
+  card.innerHTML=
+    '<div class="card-head">'+
+      '<div class="card-num">'+num+'</div>'+
+      '<div class="card-meta">'+
+        '<div class="card-nivel">'+ej.nivel+'</div>'+
+        '<div class="card-titulo">'+ej.titulo+'</div>'+
+      '</div>'+
+    '</div>'+
+    '<div class="card-body">'+
+      '<div class="enunciado">'+ej.enunciado+'</div>'+
+      '<button class="btn-solucion" id="btn'+i+'" onclick="toggleSol('+i+')">'+
+        '<svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+
+          '<line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>'+
+        '</svg>'+
+        '<span id="btxt'+i+'">Ver soluci\u00f3n</span>'+
+      '</button>'+
+      '<div class="solucion-wrap" id="sw'+i+'">'+
+        '<div class="solucion" id="sc'+i+'">'+ej.sol+'</div>'+
+      '</div>'+
+    '</div>';
+  cont.appendChild(card);
+});
+
+/* observer */
+document.querySelectorAll('.card').forEach(function(c){
+  new IntersectionObserver(function(entries,obs){
+    if(entries[0].isIntersecting){c.classList.add('visible');obs.disconnect();}
+  },{threshold:0.08}).observe(c);
+});
+
+function toggleSol(i){
+  var sw=document.getElementById('sw'+i);
+  var btn=document.getElementById('btn'+i);
+  var btxt=document.getElementById('btxt'+i);
+  if(abiertos[i]){
+    delete abiertos[i];
+    sw.classList.remove('open');
+    btn.classList.remove('active');
+    btxt.textContent='Ver soluci\u00f3n';
+  } else {
+    abiertos[i]=1;
+    sw.classList.add('open');
+    btn.classList.add('active');
+    btxt.textContent='Ocultar soluci\u00f3n';
+    if(window.MathJax) MathJax.typesetPromise([document.getElementById('sc'+i)]);
+    var n=Object.keys(abiertos).length;
+    document.getElementById('progressFill').style.width=Math.round(n/total*100)+'%';
+    document.getElementById('progressCount').textContent=n+' / '+total+' resueltos';
+  }
+}
+
+window.addEventListener('load',function(){if(window.MathJax)MathJax.typesetPromise();});
+</script>
+</body>
+</html>
