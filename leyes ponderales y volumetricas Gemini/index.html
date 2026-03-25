@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estequiometría Clásica: Leyes Ponderales y Volumétricas | Cuaderno del Químico</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Configuración robusta de MathJax -->
+    <script>
+        window.MathJax = {
+            loader: {load: ['[tex]/mhchem']},
+            tex: {
+                packages: {'[+]': ['mhchem']},
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            startup: {
+                pageReady: () => {
+                    return MathJax.startup.defaultPageReady();
+                }
+            }
+        };
+    </script>
+    <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f0f4f8; }
+        .solution-content { display: none; }
+        details > summary { list-style: none; -webkit-tap-highlight-color: transparent; }
+        details > summary::-webkit-details-marker { display: none; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+        .diff-1 { border-left: 5px solid #3b82f6; } /* Azul - Nivel 1-2 */
+        .diff-2 { border-left: 5px solid #10b981; } /* Verde - Nivel 3-4 */
+        .diff-3 { border-left: 5px solid #f59e0b; } /* Ambar - Nivel 5-7 */
+        .diff-4 { border-left: 5px solid #ef4444; } /* Rojo - Nivel 8-10 */
+    </style>
+</head>
+<body class="text-gray-800 antialiased min-h-screen">
+
+    <!-- Encabezado de la Clase -->
+    <header class="bg-slate-900 text-white py-12 px-6 shadow-xl mb-10">
+        <div class="max-w-5xl mx-auto">
+            <h1 class="text-4xl font-bold mb-3 font-serif tracking-wide text-blue-100">Leyes Ponderales y Volumétricas</h1>
+            <p class="text-xl text-blue-300 mb-6">Los Cimientos de la Química — Nivel: 1º de Bachillerato</p>
+            <div class="bg-slate-800 p-6 rounded-lg border border-slate-700 shadow-inner">
+                <p class="italic text-slate-300 leading-relaxed">"Bienvenidos a los albores de la química moderna. Antes de que existiera el concepto de 'mol' o conociéramos la estructura de los átomos, gigantes como Lavoisier, Proust, Dalton y Gay-Lussac desentrañaron los secretos de la materia usando únicamente balanzas precisas y recipientes de gas. En esta sesión, retrocederemos en el tiempo para pensar como ellos. Aquí no hay fórmulas moleculares mágicas; solo la pureza de la masa, el volumen y la lógica deductiva. Adelante, mis jóvenes teóricos."</p>
+            </div>
+            <!-- Aviso sutil para móviles -->
+            <div class="mt-4 text-xs text-blue-200 bg-slate-800/50 p-2 rounded inline-block">
+                💡 Consejo técnico: Si experimentas problemas visuales con las fórmulas en tu dispositivo móvil, ábrelo en un navegador externo.
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-6 pb-20 space-y-8">
+
+        <!-- Ejercicio 1 -->
+        <div class="glass-card diff-1 rounded-xl p-6 transition-all hover:shadow-md">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-slate-800">Ejercicio 1: El Matraz de Lavoisier</h2>
+                <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-blue-200">Nivel 1: Conservación de la masa</span>
+            </div>
+            <p class="mb-4 text-lg">Antoine Lavoisier calentó cuidadosamente <strong>100 gramos de óxido de mercurio (II)</strong>, un polvo rojizo, en un recipiente cerrado herméticamente. Tras el calentamiento prolongado, observó la aparición de unas gotas brillantes de mercurio metálico cuya masa resultó ser de <strong>92,6 gramos</strong>, y comprobó que el resto de la masa se había transformado en un gas invisible (oxígeno).</p>
+            <ul class="list-disc ml-6 mb-4 text-lg">
+                <li>¿Qué masa de gas oxígeno se liberó en el interior del recipiente?</li>
+                <li>¿Qué ley fundamental de la química justifica tu cálculo? Enúnciala brevemente.</li>
+            </ul>
+            
+            <details class="bg-slate-50 rounded-lg border border-slate-200 overflow-hidden">
+                <summary onclick="void(0)" class="cursor-pointer font-semibold text-slate-700 p-4 hover:bg-slate-100 transition-colors flex justify-between items-center">
+                    Ver la resolución del Maestro
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="p-6 border-t border-slate-200 bg-white">
+                    <p class="font-bold mb-2">1. Aplicación de la Ley:</p>
+                    <p class="mb-4">Este problema se resuelve mediante la <strong>Ley de Conservación de la Masa (Ley de Lavoisier)</strong>, que establece que: <em>"En un sistema cerrado, durante una reacción química ordinaria, la masa total de los reactivos es igual a la masa total de los productos".</em> La materia ni se crea ni se destruye, solo se transforma.</p>
+                    <p class="font-bold mb-2">2. Cálculo matemático:</p>
+                    <p class="mb-2">Masa inicial (Reactivos) = Masa final (Productos)</p>
+                    <p class="mb-2">$$\text{Masa de Óxido} = \text{Masa de Mercurio} + \text{Masa de Oxígeno}$$</p>
+                    <p class="mb-2">$$100 \text{ g} = 92,6 \text{ g} + \text{Masa de Oxígeno}$$</p>
+                    <p>$$\text{Masa de Oxígeno} = 100 \text{ g} - 92,6 \text{ g} = \mathbf{7,4 \text{ gramos de gas oxígeno}}$$</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Ejercicio 2 -->
+        <div class="glass-card diff-1 rounded-xl p-6 transition-all hover:shadow-md">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-slate-800">Ejercicio 2: El Fuego del Magnesio</h2>
+                <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-blue-200">Nivel 2: Proporciones Definidas</span>
+            </div>
+            <p class="mb-4 text-lg">En el laboratorio comprobamos que <strong>24 gramos de cinta de magnesio reaccionan exactamente con 16 gramos de oxígeno</strong> del aire para formar una ceniza blanca llamada óxido de magnesio, sin que sobre nada de ninguno de los dos reactivos.</p>
+            <ul class="list-disc ml-6 mb-4 text-lg">
+                <li>¿Cuántos gramos de óxido de magnesio se habrán formado en total?</li>
+                <li>Si quisiéramos hacer reaccionar completamente <strong>6 gramos de magnesio</strong>, ¿cuántos gramos de oxígeno necesitaríamos y cuánto óxido obtendríamos?</li>
+                <li>¿Qué ley ponderal gobierna el apartado anterior?</li>
+            </ul>
+            
+            <details class="bg-slate-50 rounded-lg border border-slate-200 overflow-hidden">
+                <summary onclick="void(0)" class="cursor-pointer font-semibold text-slate-700 p-4 hover:bg-slate-100 transition-colors flex justify-between items-center">
+                    Ver la resolución del Maestro
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="p-6 border-t border-slate-200 bg-white">
+                    <p class="font-bold mb-2">1. Cálculo de la ceniza (Lavoisier):</p>
+                    <p class="mb-4">Por conservación de masa: $\text{Masa óxido} = 24 \text{ g (Mg)} + 16 \text{ g (O)} = \mathbf{40 \text{ gramos de óxido}}$.</p>
+
+                    <p class="font-bold mb-2">2. Proporcionalidad (Proust):</p>
+                    <p class="mb-2">Aplicamos la <strong>Ley de las Proporciones Definidas (Ley de Proust)</strong>: <em>"Cuando dos o más elementos se combinan para formar un compuesto determinado, lo hacen siempre en una relación de masa constante y definida"</em>.</p>
+                    <p class="mb-2">La relación constante de combinación es: $\frac{\text{Masa Mg}}{\text{Masa O}} = \frac{24}{16} = \mathbf{1,5}$</p>
+                    <p class="mb-2">Si ahora tenemos 6 g de Mg: $\frac{6}{\text{Masa O}} = 1,5 \implies \text{Masa O} = \frac{6}{1,5} = \mathbf{4 \text{ gramos de Oxígeno}}$.</p>
+                    <p>Masa total del nuevo óxido formado = $6 \text{ g} + 4 \text{ g} = \mathbf{10 \text{ gramos de óxido}}$.</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Ejercicio 3 -->
+        <div class="glass-card diff-2 rounded-xl p-6 transition-all hover:shadow-md">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-slate-800">Ejercicio 3: El Excedente en el Crisol</h2>
+                <span class="bg-emerald-100 text-emerald-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-emerald-200">Nivel 3: Reactivo Limitante Clásico</span>
+            </div>
+            <p class="mb-4 text-lg">Retomando los datos del experimento del magnesio (sabemos que la proporción de combinación es siempre de <strong>24 g de Mg por cada 16 g de Oxígeno</strong>). En un nuevo ensayo, un alumno distraído introduce <strong>3 gramos de magnesio junto con 5 gramos de oxígeno</strong> dentro de un recipiente cerrado y provoca la reacción.</p>
+            <ul class="list-disc ml-6 mb-4 text-lg">
+                <li>Razona matemáticamente si se consumirán todos los reactivos.</li>
+                <li>¿Cuántos gramos de óxido de magnesio se formarán realmente?</li>
+                <li>¿Qué elemento sobra al final del experimento y en qué cantidad?</li>
+            </ul>
+            
+            <details class="bg-slate-50 rounded-lg border border-slate-200 overflow-hidden">
+                <summary onclick="void(0)" class="cursor-pointer font-semibold text-slate-700 p-4 hover:bg-slate-100 transition-colors flex justify-between items-center">
+                    Ver la resolución del Maestro
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="p-6 border-t border-slate-200 bg-white">
+                    <p class="italic text-slate-600 mb-4">"La naturaleza es estricta. Nunca combinará elementos al azar; tomará lo que necesite según la receta de Proust y dejará intacto el resto."</p>
+                    
+                    <p class="font-bold mb-2">1. Análisis de la Proporción Necesaria:</p>
+                    <p class="mb-2">La "receta" exige una proporción de masas: $\frac{24 \text{ g Mg}}{16 \text{ g O}} = \frac{3}{2} = 1,5$. (Por cada gramo de oxígeno, hacen falta 1,5 gramos de Mg).</p>
+
+                    <p class="font-bold mb-2">2. Comprobación del caso del alumno:</p>
+                    <p class="mb-2">El alumno tiene 3 g de Mg. Calculemos cuánto oxígeno "pide" ese magnesio para reaccionar:</p>
+                    <p class="mb-4">$$\text{Oxígeno necesario} = 3 \text{ g Mg} \times \left( \frac{16 \text{ g O}}{24 \text{ g Mg}} \right) = \mathbf{2 \text{ gramos de Oxígeno}}.$$</p>
+
+                    <p class="font-bold mb-2">3. Conclusiones:</p>
+                    <p class="mb-2">Como el alumno introdujo 5 g de oxígeno, y solo se necesitan 2 g para reaccionar con todo el magnesio, el <strong>Magnesio se agota primero (Reactivo Limitante)</strong> y el oxígeno está en exceso.</p>
+                    <p class="mb-2">Masa de óxido formada = $3 \text{ g (Mg reaccionado)} + 2 \text{ g (O reaccionado)} = \mathbf{5 \text{ gramos de óxido}}$.</p>
+                    <p>Masa sobrante = $5 \text{ g (O inicial)} - 2 \text{ g (O reaccionado)} = \mathbf{3 \text{ gramos de Oxígeno sin reaccionar}}$.</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Ejercicio 4 -->
+        <div class="glass-card diff-2 rounded-xl p-6 transition-all hover:shadow-md">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-slate-800">Ejercicio 4: Los Dos Cloruros del Cromo</h2>
+                <span class="bg-emerald-100 text-emerald-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-emerald-200">Nivel 4: Proporciones Múltiples (Dalton)</span>
+            </div>
+            <p class="mb-4 text-lg">Los elementos cromo y cloro pueden reaccionar bajo diferentes condiciones de temperatura para formar dos compuestos sólidos distintos:</p>
+            <ul class="list-disc ml-6 mb-4 text-lg">
+                <li><strong>Compuesto A (verde):</strong> En un análisis, descubrimos que 4,3 g de cromo están combinados exactamente con 8,8 g de cloro.</li>
+                <li><strong>Compuesto B (púrpura):</strong> En un análisis distinto, 7,6 g de cromo se combinan con 10,4 g de cloro.</li>
+            </ul>
+            <p class="mb-4 text-lg">Demuestra matemáticamente que estos dos compuestos obedecen a la <strong>Ley de las Proporciones Múltiples de Dalton</strong>.</p>
+            
+            <details class="bg-slate-50 rounded-lg border border-slate-200 overflow-hidden">
+                <summary onclick="void(0)" class="cursor-pointer font-semibold text-slate-700 p-4 hover:bg-slate-100 transition-colors flex justify-between items-center">
+                    Ver la resolución del Maestro
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="p-6 border-t border-slate-200 bg-white">
+                    <p class="font-bold mb-2">1. Enunciado de la Ley de Dalton:</p>
+                    <p class="mb-4"><em>"Cuando dos elementos se combinan para originar más de un compuesto, las cantidades de uno de ellos que se unen a una cantidad fija del otro, guardan entre sí una relación de números enteros sencillos."</em></p>
+
+                    <p class="font-bold mb-2">2. Estandarización de las masas (Fijar el Cromo):</p>
+                    <p class="mb-2">Vamos a calcular en ambos compuestos cuántos gramos de Cloro se combinan por cada <strong>1 gramo de Cromo</strong>.</p>
+                    <p class="mb-2"><strong>Compuesto A:</strong> $\frac{8,8 \text{ g de Cl}}{4,3 \text{ g de Cr}} = \mathbf{2,046 \text{ g de Cl / 1 g de Cr}}$</p>
+                    <p class="mb-4"><strong>Compuesto B:</strong> $\frac{10,4 \text{ g de Cl}}{7,6 \text{ g de Cr}} = \mathbf{1,368 \text{ g de Cl / 1 g de Cr}}$</p>
+
+                    <p class="font-bold mb-2">3. Comprobación de la relación:</p>
+                    <p class="mb-2">Dividimos la cantidad mayor de cloro entre la menor para ver si el resultado es un número entero sencillo o una fracción simple:</p>
+                    <p class="mb-2">$$\frac{\text{Cloro en A}}{\text{Cloro en B}} = \frac{2,046}{1,368} = 1,495 \approx \mathbf{1,5}$$</p>
+                    <p class="mb-2">Un resultado de 1,5 equivale exactamente a la fracción <strong>3/2</strong>.</p>
+                    <p class="text-emerald-700 bg-emerald-50 p-2 rounded">Como la relación entre las masas de cloro es de 3 a 2 (números enteros sencillos), <strong>queda demostrada la Ley de las Proporciones Múltiples de Dalton</strong>.</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Ejercicio 5 -->
+        <div class="glass-card diff-3 rounded-xl p-6 transition-all hover:shadow-md">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-slate-800">Ejercicio 5: La Síntesis Volumétrica del Amoniaco</h2>
+                <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-amber-200">Nivel 5: Ley de Gay-Lussac Básica</span>
+            </div>
+            <p class="mb-4 text-lg">Gay-Lussac observó que los gases, al reaccionar, lo hacen en proporciones de volumen muy exactas si se mantienen a presión y temperatura constantes. Se sabe que para sintetizar amoniaco gaseoso: <strong>1 litro de gas nitrógeno reacciona con 3 litros de gas hidrógeno para producir exactamente 2 litros de gas amoniaco</strong>.</p>
+            <p class="mb-4 text-lg">Si en un tanque de acero, a presión y temperatura constantes, introducimos <strong>5 litros de nitrógeno y 12 litros de hidrógeno</strong> y provocamos la reacción completa:</p>
+            <ul class="list-disc ml-6 mb-4 text-lg">
+                <li>¿Qué volumen de amoniaco se formará?</li>
+                <li>¿Sobrará algún gas sin reaccionar? ¿Cuál y en qué volumen?</li>
+                <li>¿Cuál será el volumen total de gas en el tanque al terminar la reacción?</li>
+            </ul>
+            
+            <details class="bg-slate-50 rounded-lg border border-slate-200 overflow-hidden">
+                <summary onclick="void(0)" class="cursor-pointer font-semibold text-slate-700 p-4 hover:bg-slate-100 transition-colors flex justify-between items-center">
+                    Ver la resolución del Maestro
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="p-6 border-t border-slate-200 bg-white">
+                    <p class="font-bold mb-2">1. Ley de Volúmenes de Combinación:</p>
+                    <p class="mb-4">La proporción volumétrica de la reacción es fija: <strong>1V Nitrógeno : 3V Hidrógeno $\rightarrow$ 2V Amoniaco</strong>.</p>
+
+                    <p class="font-bold mb-2">2. Búsqueda del Limitante (en volúmenes):</p>
+                    <p class="mb-2">Tenemos 5L de $N_2$. Según la proporción (1:3), necesitaríamos: $5 \text{ L} \times 3 = 15 \text{ L de } H_2$. Como solo tenemos 12 L de $H_2$, este no es suficiente.</p>
+                    <p class="mb-4">Por tanto, el <strong>hidrógeno es el reactivo limitante</strong>. Todo el cálculo debe basarse en sus 12 L.</p>
+
+                    <p class="font-bold mb-2">3. Cálculos de consumo y producción:</p>
+                    <p class="mb-2"><strong>Nitrógeno consumido:</strong> Si reaccionan 12 L de $H_2$, consumen la tercera parte de $N_2$: $12 / 3 = \mathbf{4 \text{ L de Nitrógeno consumido}}$.</p>
+                    <p class="mb-2"><strong>Nitrógeno sobrante:</strong> $5 \text{ L (iniciales)} - 4 \text{ L (reaccionan)} = \mathbf{1 \text{ L de } N_2 \text{ sin reaccionar}}$.</p>
+                    <p class="mb-4"><strong>Amoniaco producido:</strong> Se producen 2 L de amoniaco por cada 3 L de hidrógeno: $12 \text{ L } H_2 \times (2 / 3) = \mathbf{8 \text{ L de Amoniaco formados}}$.</p>
+
+                    <p class="font-bold mb-2">4. Volumen Total Final:</p>
+                    <p>Volumen final = Volumen de amoniaco + Volumen de nitrógeno sobrante = $8 \text{ L} + 1 \text{ L} = \mathbf{9 \text{ Litros totales en el tanque}}$.</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Ejercicio 6 -->
+        <div class="glass-card diff-3 rounded-xl p-6 transition-all hover:shadow-md">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-slate-800">Ejercicio 6: El Enigma de los Porcentajes (Tres Óxidos)</h2>
+                <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-amber-200">Nivel 6: Dalton Complejo</span>
+            </div>
+            <p class="mb-4 text-lg">El elemento A y el elemento B pueden formar tres compuestos gaseosos diferentes. El laboratorio ha determinado la composición centesimal en masa de cada uno de ellos:</p>
+            <ul class="list-disc ml-6 mb-4 text-lg">
+                <li><strong>Compuesto 1:</strong> 46,67% del elemento A y 53,33% del elemento B.</li>
+                <li><strong>Compuesto 2:</strong> 30,43% del elemento A y 69,57% del elemento B.</li>
+                <li><strong>Compuesto 3:</strong> 25,93% del elemento A y 74,07% del elemento B.</li>
+            </ul>
+            <p class="mb-4 text-lg">Demuestra que estos tres compuestos cumplen la Ley de las Proporciones Múltiples. <em>Pista: Suponer 100 g de cada compuesto simplifica enormemente el inicio del razonamiento.</em></p>
+            
+            <details class="bg-slate-50 rounded-lg border border-slate-200 overflow-hidden">
+                <summary onclick="void(0)" class="cursor-pointer font-semibold text-slate-700 p-4 hover:bg-slate-100 transition-colors flex justify-between items-center">
+                    Ver la resolución del Maestro
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="p-6 border-t border-slate-200 bg-white">
+                    <p class="italic text-slate-600 mb-4">"Para comparar múltiples compuestos, la clave absoluta es la inmovilidad de un elemento. Anclamos la masa de A, y observamos cómo fluctúa la masa de B."</p>
+
+                    <p class="font-bold mb-2">1. Transformar porcentajes en masas combinadas:</p>
+                    <p class="mb-2">Supongamos 100 g de cada compuesto. Calcularemos cuántos gramos de B se combinan por cada <strong>1 gramo de A</strong> en cada caso.</p>
+                    <p class="mb-2"><strong>Comp 1:</strong> $46,67 \text{ g A} \longleftrightarrow 53,33 \text{ g B} \implies \frac{53,33}{46,67} = \mathbf{1,142 \text{ g de B / 1 g de A}}$</p>
+                    <p class="mb-2"><strong>Comp 2:</strong> $30,43 \text{ g A} \longleftrightarrow 69,57 \text{ g B} \implies \frac{69,57}{30,43} = \mathbf{2,286 \text{ g de B / 1 g de A}}$</p>
+                    <p class="mb-4"><strong>Comp 3:</strong> $25,93 \text{ g A} \longleftrightarrow 74,07 \text{ g B} \implies \frac{74,07}{25,93} = \mathbf{2,856 \text{ g de B / 1 g de A}}$</p>
+
+                    <p class="font-bold mb-2">2. Relación de Proporciones Múltiples:</p>
+                    <p class="mb-2">Tomamos la cantidad más pequeña de B (1,142 g) como base y dividimos las demás entre ella para encontrar la relación entera:</p>
+                    <ul class="list-disc ml-6 mb-4 text-sm">
+                        <li>Relación Comp 1: $1,142 / 1,142 = \mathbf{1}$</li>
+                        <li>Relación Comp 2: $2,286 / 1,142 \approx \mathbf{2}$</li>
+                        <li>Relación Comp 3: $2,856 / 1,142 \approx \mathbf{2,5}$ (es decir, $5/2$)</li>
+                    </ul>
+                    <p class="mb-4">Para evitar fracciones y usar "números enteros sencillos", multiplicamos todos los resultados por 2.</p>
+                    <p class="text-amber-800 bg-amber-50 p-3 rounded border border-amber-200">La relación de las masas del elemento B que se unen a 1 g de A en los compuestos 1, 2 y 3 es exactamente <strong>2 : 4 : 5</strong>. Siendo números enteros sencillos, la Ley de Dalton queda sobradamente demostrada.</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Ejercicio 7 -->
+        <div class="glass-card diff-4 rounded-xl p-6 transition-all hover:shadow-md">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-red-800">Ejercicio 7: El Frasco Abierto y Cerrado</h2>
+                <span class="bg-red-100 text-red-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-red-200">Nivel 7: Unión de Lavoisier y Proust</span>
+            </div>
+            <p class="mb-4 text-lg">En una primera experiencia, cerramos un recipiente de vidrio que contiene <strong>40 gramos de un metal X y una cantidad desconocida de gas cloro</strong>. Provocamos la reacción mediante chispa eléctrica, y comprobamos que todo el metal y todo el gas desaparecen, originando exactamente <strong>111 gramos del compuesto cloruro del metal X</strong>.</p>
+            <p class="mb-4 text-lg">En una segunda experiencia, colocamos <strong>150 gramos del mismo metal X</strong> en un crisol abierto al ambiente. Hacemos pasar una corriente inagotable de gas cloro sobre él hasta que la reacción se detiene por completo.</p>
+            <ul class="list-disc ml-6 mb-4 text-lg">
+                <li>¿Qué masa de gas cloro reaccionó en la primera experiencia?</li>
+                <li>¿Qué masa final de compuesto se recogerá en el crisol en la segunda experiencia? ¿Qué ley nos permite saber esto?</li>
+            </ul>
+            
+            <details class="bg-slate-50 rounded-lg border border-slate-200 overflow-hidden">
+                <summary onclick="void(0)" class="cursor-pointer font-semibold text-slate-700 p-4 hover:bg-slate-100 transition-colors flex justify-between items-center">
+                    Ver el desarrollo analítico completo
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="p-6 border-t border-slate-200 bg-white">
+                    <p class="font-bold mb-2">Fase A: Primera Experiencia (Lavoisier)</p>
+                    <p class="mb-2">Como reacciona "todo" y no sobra nada, aplicamos la conservación de la masa de Lavoisier de forma directa:</p>
+                    <p class="mb-2">$\text{Masa Metal} + \text{Masa Cloro} = \text{Masa Compuesto}$</p>
+                    <p class="mb-4">$40 \text{ g} + \text{Masa Cloro} = 111 \text{ g} \implies \text{Masa Cloro} = 111 - 40 = \mathbf{71 \text{ gramos de Cloro}}.$</p>
+
+                    <p class="font-bold mb-2">Fase B: Deducción de la Proporción (Proust)</p>
+                    <p class="mb-2">Esta primera experiencia nos revela la "receta" de la naturaleza para este compuesto (Ley de Proust). La proporción de masa que se combina es siempre:</p>
+                    <p class="mb-4">$\frac{40 \text{ g de Metal}}{71 \text{ g de Cloro}}$. Esto significa que 1 gramo de metal necesita $\frac{71}{40} = \mathbf{1,775 \text{ gramos de Cloro}}$.</p>
+
+                    <p class="font-bold mb-2">Fase C: Segunda Experiencia</p>
+                    <p class="mb-2">Tenemos 150 gramos de Metal X en un flujo "inagotable" de Cloro. Esto significa que el Metal es el Reactivo Limitante puro, reaccionará en su totalidad.</p>
+                    <p class="mb-2">Calculamos el Cloro que consumirá: $150 \text{ g Metal} \times 1,775 = \mathbf{266,25 \text{ gramos de Cloro consumidos}}$.</p>
+                    <p class="mb-2">Masa total del compuesto final (Lavoisier otra vez) = $150 \text{ g (Metal)} + 266,25 \text{ g (Cloro)} = \mathbf{416,25 \text{ gramos de Cloruro de X}}$.</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Ejercicio 8 -->
+        <div class="glass-card diff-4 rounded-xl p-6 transition-all hover:shadow-md">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-red-800">Ejercicio 8: La Contracción Volumétrica</h2>
+                <span class="bg-red-100 text-red-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-red-200">Nivel 8: Gay-Lussac con Reducción de Volumen</span>
+            </div>
+            <p class="mb-4 text-lg">La combustión del gas monóxido de carbono (CO) sigue esta relación volumétrica descubierta por Gay-Lussac a P y T constantes: <strong>2 volúmenes de monóxido de carbono reaccionan con 1 volumen de oxígeno, para dar 2 volúmenes de gas dióxido de carbono ($CO_2$)</strong>.</p>
+            <p class="mb-4 text-lg">En un tubo de eudiómetro transparente detonamos una mezcla formada por <strong>40 mL de monóxido de carbono y 40 mL de gas oxígeno</strong>. Después de la reacción, permitimos que el sistema vuelva exactamente a las condiciones de presión y temperatura iniciales.</p>
+            <ul class="list-disc ml-6 mb-4 text-lg">
+                <li>¿Qué volumen de gas final hay dentro del tubo en total?</li>
+                <li>¿Se ha cumplido la "conservación del volumen"? Explica por qué el volumen de gas en química no se conserva como la masa.</li>
+            </ul>
+            
+            <details class="bg-slate-50 rounded-lg border border-slate-200 overflow-hidden">
+                <summary onclick="void(0)" class="cursor-pointer font-semibold text-slate-700 p-4 hover:bg-slate-100 transition-colors flex justify-between items-center">
+                    Ver el desarrollo analítico completo
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="p-6 border-t border-slate-200 bg-white">
+                    <p class="italic text-slate-600 mb-4">"A diferencia de la masa, el volumen de los gases es maleable estequiométricamente. Tres volúmenes reactivos pueden colapsar en dos volúmenes de producto. Esto descolocó a Dalton, pero iluminó a Avogadro."</p>
+
+                    <p class="font-bold mb-2">1. Estequiometría de Volúmenes (Limitante):</p>
+                    <p class="mb-2">Relación teórica: $2V(CO) + 1V(O_2) \rightarrow 2V(CO_2)$.</p>
+                    <p class="mb-2">Disponemos de 40 mL de CO. Para reaccionar con todo él, se requiere exactamente la mitad de oxígeno: $40 / 2 = \mathbf{20 \text{ mL de } O_2}$.</p>
+                    <p class="mb-4">Como tenemos 40 mL de oxígeno y solo usamos 20 mL, <strong>el CO es el limitante y sobran 20 mL de Oxígeno sin reaccionar</strong>.</p>
+
+                    <p class="font-bold mb-2">2. Volumen de Producto:</p>
+                    <p class="mb-4">Como 2 volúmenes de CO originan 2 volúmenes de $CO_2$ (relación 1:1), los 40 mL de CO generarán <strong>40 mL de dióxido de carbono</strong>.</p>
+
+                    <p class="font-bold mb-2">3. El Volumen Final en el Tubo:</p>
+                    <p class="mb-2">Volumen final = Volumen $CO_2$ producido + Volumen $O_2$ sobrante.</p>
+                    <p class="mb-4">Volumen final = $40 \text{ mL} + 20 \text{ mL} = \mathbf{60 \text{ mL totales}}$.</p>
+                    
+                    <p class="font-bold mb-2">4. Análisis de la "No Conservación del Volumen":</p>
+                    <p class="text-red-800 bg-red-50 p-2 rounded">Al inicio teníamos 80 mL de mezcla gaseosa ($40 + 40$). Al final tenemos 60 mL. <strong>El volumen NO se conserva</strong>. Esto ocurre porque las moléculas de producto (aunque pesen lo mismo) ocupan menos espacio estequiométrico a nivel de número de partículas finales resultantes, un concepto que explicaría maravillosamente la Ley de Avogadro poco después de Gay-Lussac.</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Ejercicio 9 -->
+        <div class="glass-card diff-4 rounded-xl p-6 transition-all hover:shadow-md">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-red-800">Ejercicio 9: La Predicción de Dalton (Estequiometría Deductiva)</h2>
+                <span class="bg-red-100 text-red-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-red-200">Nivel 9: Uso inverso de la Ley de Proporciones Múltiples</span>
+            </div>
+            <p class="mb-4 text-lg">Sabemos por experiencia previa que un metal M forma dos óxidos puros diferentes. El <strong>Óxido I</strong> se sintetiza haciendo reaccionar exactamente <strong>28 gramos del metal M con 8 gramos de oxígeno</strong>.</p>
+            <p class="mb-4 text-lg">Teorema de la pizarra: Sabemos que la relación matemática de "Proporciones Múltiples" que dicta Dalton para las masas de oxígeno que se combinan con una cantidad fija de metal en el Óxido II frente al Óxido I, es exactamente de <strong>3 a 1 (Relación = 3)</strong>.</p>
+            <p class="mb-4 text-lg">Si en nuestro laboratorio disponemos de una muestra de <strong>7 gramos del metal M</strong>, ¿cuántos gramos exactos de gas oxígeno debemos insuflarle para asegurarnos de sintetizar única y exclusivamente el <strong>Óxido II</strong>, sin que sobre nada de ningún elemento?</p>
+            
+            <details class="bg-slate-50 rounded-lg border border-slate-200 overflow-hidden">
+                <summary onclick="void(0)" class="cursor-pointer font-semibold text-slate-700 p-4 hover:bg-slate-100 transition-colors flex justify-between items-center">
+                    Ver el desarrollo analítico completo
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="p-6 border-t border-slate-200 bg-white">
+                    <p class="font-bold mb-2">Paso 1: Normalizar el Óxido I (Ley de Proust)</p>
+                    <p class="mb-2">Averigüemos la proporción intrínseca del primer óxido por cada gramo de metal.</p>
+                    <p class="mb-4">$\frac{8 \text{ g de Oxígeno}}{28 \text{ g de Metal}} = \mathbf{0,2857 \text{ gramos de O por cada 1 g de Metal M}}$.</p>
+
+                    <p class="font-bold mb-2">Paso 2: Aplicación del teorema de Dalton para predecir el Óxido II</p>
+                    <p class="mb-2">El enunciado nos da el factor multiplicador de Dalton (relación = 3). Esto indica que, para la misma masa de metal, el Óxido II "carga" tres veces más masa de oxígeno que el Óxido I.</p>
+                    <p class="mb-4">Oxígeno en Óxido II (por 1 g de M) = $0,2857 \text{ g} \times 3 = \mathbf{0,8571 \text{ gramos de O por cada 1 g de Metal M}}$.</p>
+
+                    <p class="font-bold mb-2">Paso 3: Escalado a nuestra muestra (Proust nuevamente)</p>
+                    <p class="mb-2">En el laboratorio tenemos 7 gramos de Metal M. Para formar el Óxido II de forma exacta, multiplicamos nuestra masa base por la proporción hallada:</p>
+                    <p class="mb-4">Masa de Oxígeno necesaria = $7 \text{ g Metal} \times 0,8571 \text{ (g O/g Metal)} = \mathbf{5,9997 \approx 6 \text{ gramos de Oxígeno}}$.</p>
+
+                    <p class="text-red-800 bg-red-50 p-2 rounded">Para sintetizar el Óxido II perfecto, debemos insuflar exactamente <strong>6 gramos de gas oxígeno</strong> sobre nuestros 7 gramos de metal.</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Ejercicio 10 -->
+        <div class="glass-card diff-4 rounded-xl p-6 transition-all hover:shadow-md">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-red-800">Ejercicio 10: El Sistema Integral (El Crisol de Lavoisier-Proust)</h2>
+                <span class="bg-red-100 text-red-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-red-200">Nivel 10: Gran Maestro Químico</span>
+            </div>
+            <p class="mb-4 text-lg">Acabamos de sintetizar dos haluros del elemento A usando el elemento halógeno B.</p>
+            <ul class="list-disc ml-6 mb-4 text-lg">
+                <li>En el frasco X (Haluro menor), sabemos empíricamente que <strong>10 gramos del elemento A reaccionan exactamente con 15 gramos de B</strong>.</li>
+                <li>En el frasco Y (Haluro mayor), <strong>10 gramos de A reaccionan exactamente con 30 gramos de B</strong>.</li>
+            </ul>
+            <p class="mb-4 text-lg">Un experimentador toma <strong>50 gramos exactos del polvo del compuesto X</strong> y lo coloca en un reactor cerrado. Su objetivo es inyectar gas del halógeno B y provocar una reacción de adición para <strong>transformar totalmente esos 50 gramos del compuesto X en el compuesto Y puro</strong>.</p>
+            <p class="mb-4 text-lg">Como arquitecto de masas, no uses fórmulas químicas modernas, solo la lógica de las leyes clásicas para calcular:</p>
+            <ul class="list-disc ml-6 mb-4 text-lg">
+                <li>¿Qué masa exacta en gramos de polvo de elemento A contenía esa muestra de 50 g del compuesto X?</li>
+                <li>¿Qué masa exacta de gas B se debe inyectar en el reactor para conseguir la transformación perfecta a compuesto Y?</li>
+            </ul>
+            
+            <details class="bg-slate-50 rounded-lg border border-slate-200 overflow-hidden">
+                <summary onclick="void(0)" class="cursor-pointer font-semibold text-slate-700 p-4 hover:bg-slate-100 transition-colors flex justify-between items-center">
+                    Ver el desarrollo analítico completo
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="p-6 border-t border-slate-200 bg-white">
+                    <p class="italic text-slate-600 mb-4">"El Gran Maestro entiende que la materia en el compuesto X tiene memoria. El elemento A original sigue allí atrapado, esperando a su socio halógeno restante para dar el salto evolutivo al compuesto Y."</p>
+                    
+                    <p class="font-bold mb-2">Fase A: Radiografía del Compuesto X (Proust y Lavoisier unidos)</p>
+                    <p class="mb-2">La receta del compuesto X es: $10 \text{ g (A)} + 15 \text{ g (B)} = \mathbf{25 \text{ gramos totales de X}}$.</p>
+                    <p class="mb-2">Porcentajes de masa en X (Ley de Proust):</p>
+                    <ul class="list-disc ml-6 mb-4 text-sm">
+                        <li>$\% \text{Elemento A} = (10 / 25) \times 100 = \mathbf{40\% \text{ de A}}$.</li>
+                        <li>$\% \text{Elemento B} = (15 / 25) \times 100 = \mathbf{60\% \text{ de B}}$.</li>
+                    </ul>
+                    <p class="mb-4">Si el investigador toma 50 gramos de compuesto X, la masa de sus elementos base será:<br>
+                    <strong>Masa A atrapada</strong> = $50 \times 0,40 = \mathbf{20 \text{ gramos del elemento A}}$.<br>
+                    <strong>Masa B atrapada</strong> = $50 \times 0,60 = \mathbf{30 \text{ gramos del elemento B}}$.</p>
+
+                    <p class="font-bold mb-2">Fase B: La Proyección hacia el Compuesto Y (Proust y Dalton)</p>
+                    <p class="mb-2">El objetivo es convertir esos 20 gramos de A puro en el compuesto Y.</p>
+                    <p class="mb-2">La receta del compuesto Y dice que: 10 g de A necesitan 30 g de B.</p>
+                    <p class="mb-2">Por proporción de Proust, si tenemos 20 g de A (el doble), para formar el compuesto Y en su totalidad, estos 20 g de A exigirán: $30 \times 2 = \mathbf{60 \text{ gramos del elemento B en total}}$.</p>
+
+                    <p class="font-bold mb-2">Fase C: El Balance Final (El Gas B a inyectar)</p>
+                    <p class="mb-2">El reactor ya tiene "encapsulados" 30 gramos del elemento B, provenientes de la estructura original de los 50 g del compuesto X.</p>
+                    <p class="mb-2">Si el estado final del compuesto Y exige 60 gramos totales de B, la diferencia es lo que debe ser inyectado externamente.</p>
+                    <p class="mb-4 text-red-800 bg-red-50 p-3 rounded font-bold">Masa de gas B a inyectar = 60 g (Requeridos para Y) - 30 g (Ya presentes en X) = 30 gramos exactos de gas B.</p>
+                    <p class="text-sm italic mt-2">Nótese cómo la proporción múltiple de Dalton (15g vs 30g por cada 10g de A, relación 1:2) sostiene lógicamente que, si ya teníamos la mitad de la carga halógena, solo debíamos duplicarla inyectando una masa idéntica a la inicial (30g) para alcanzar el nivel superior.</p>
+                </div>
+            </details>
+        </div>
+
+    </main>
+</body>
+</html>
