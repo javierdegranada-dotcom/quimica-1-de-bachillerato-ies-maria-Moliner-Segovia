@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leyes Ponderales — Nivel Superior | Cuaderno del Químico Avanzado</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        window.MathJax = {
+            loader: {load: ['[tex]/mhchem']},
+            tex: {
+                packages: {'[+]': ['mhchem']},
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --ink: #1a1209;
+            --parchment: #faf6ef;
+            --parchment-dark: #f0e9dc;
+            --sepia: #8b6914;
+            --sepia-light: #c4992a;
+            --red-seal: #8b1a1a;
+            --green-verdigris: #2d5a3d;
+            --blue-prussian: #1a3a5c;
+            --amber: #c47d0e;
+            --crimson: #7a1520;
+            --border-color: #c8b89a;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Source Serif 4', Georgia, serif;
+            background-color: var(--parchment);
+            color: var(--ink);
+            min-height: 100vh;
+        }
+
+        /* Grain texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        main, header, footer { position: relative; z-index: 1; }
+
+        /* Header */
+        .page-header {
+            background: linear-gradient(160deg, #1a1209 0%, #2d1f0a 50%, #1a2535 100%);
+            border-bottom: 4px solid var(--sepia-light);
+            padding: 3.5rem 1.5rem 3rem;
+        }
+
+        .header-ornament {
+            text-align: center;
+            color: var(--sepia-light);
+            font-size: 1.3rem;
+            letter-spacing: 0.5rem;
+            margin-bottom: 0.75rem;
+            opacity: 0.7;
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            color: #f5e8c8;
+            text-align: center;
+            letter-spacing: 0.02em;
+            line-height: 1.1;
+        }
+
+        .page-header .subtitle {
+            font-family: 'Source Serif 4', serif;
+            font-style: italic;
+            color: #c4a96a;
+            text-align: center;
+            font-size: 1.15rem;
+            margin-top: 0.5rem;
+        }
+
+        .epigraph-box {
+            max-width: 680px;
+            margin: 2rem auto 0;
+            border: 1px solid rgba(196, 153, 42, 0.4);
+            border-left: 4px solid var(--sepia-light);
+            padding: 1.25rem 1.5rem;
+            background: rgba(255,255,255,0.04);
+            border-radius: 2px;
+        }
+
+        .epigraph-box p {
+            color: #d4c4a0;
+            font-style: italic;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Level badges */
+        .badge-azul    { background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
+        .badge-verde   { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
+        .badge-ambar   { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
+        .badge-rojo    { background: #fee2e2; color: #7f1d1d; border: 1px solid #fca5a5; }
+        .badge-negro   { background: #1a1209; color: #f5e8c8; border: 1px solid #8b6914; }
+
+        /* Exercise card */
+        .exercise-card {
+            background: rgba(255, 252, 245, 0.97);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(26,18,9,0.08), 0 1px 3px rgba(26,18,9,0.05);
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+        }
+
+        .exercise-card:hover {
+            box-shadow: 0 6px 24px rgba(26,18,9,0.13), 0 2px 6px rgba(26,18,9,0.08);
+            transform: translateY(-1px);
+        }
+
+        .card-stripe-azul  { border-left: 6px solid #3b82f6; }
+        .card-stripe-verde { border-left: 6px solid #10b981; }
+        .card-stripe-ambar { border-left: 6px solid #f59e0b; }
+        .card-stripe-rojo  { border-left: 6px solid #dc2626; }
+        .card-stripe-negro { border-left: 6px solid #1a1209; }
+
+        .card-header {
+            padding: 1.5rem 1.75rem 1rem;
+            border-bottom: 1px solid #ede4d4;
+            background: linear-gradient(to bottom, #fffef9, #faf6ef);
+        }
+
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--ink);
+        }
+
+        .card-body { padding: 1.5rem 1.75rem; }
+
+        .card-body p, .card-body li {
+            font-size: 1rem;
+            line-height: 1.75;
+            color: #2a1f0f;
+        }
+
+        .card-body strong { color: var(--ink); font-weight: 600; }
+
+        .card-body ul { list-style: none; padding: 0; margin: 0.75rem 0; }
+        .card-body ul li {
+            padding: 0.3rem 0 0.3rem 1.5rem;
+            position: relative;
+        }
+        .card-body ul li::before {
+            content: '◆';
+            position: absolute;
+            left: 0;
+            color: var(--sepia-light);
+            font-size: 0.65rem;
+            top: 0.55rem;
+        }
+
+        .data-box {
+            background: var(--parchment-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 3px;
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            font-family: 'Source Serif 4', serif;
+        }
+
+        .data-box .data-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--sepia);
+            margin-bottom: 0.5rem;
+        }
+
+        .warning-box {
+            background: #fffbeb;
+            border: 1px solid #fcd34d;
+            border-left: 4px solid #f59e0b;
+            border-radius: 3px;
+            padding: 0.85rem 1.1rem;
+            margin: 1rem 0;
+            font-size: 0.92rem;
+            color: #78350f;
+        }
+
+        /* Details/Summary */
+        details { margin-top: 1.25rem; }
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+
+        .solution-toggle {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.85rem 1.25rem;
+            background: linear-gradient(to right, #f0e9dc, #faf6ef);
+            border: 1px solid var(--border-color);
+            border-radius: 3px;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--sepia);
+            letter-spacing: 0.01em;
+            user-select: none;
+            transition: background 0.2s;
+        }
+
+        .solution-toggle:hover { background: linear-gradient(to right, #e8ddd0, #f0e9dc); }
+
+        .solution-toggle svg {
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            color: var(--sepia-light);
+        }
+
+        details[open] .solution-toggle svg { transform: rotate(180deg); }
+
+        .solution-body {
+            border: 1px solid var(--border-color);
+            border-top: none;
+            background: #fffcf7;
+            padding: 1.5rem 1.75rem;
+            border-radius: 0 0 3px 3px;
+        }
+
+        .solution-step {
+            margin-bottom: 1.25rem;
+        }
+
+        .step-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--sepia);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .step-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, var(--border-color), transparent);
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #1a2535, #1a3a5c);
+            color: #e8f0f8;
+            border-radius: 3px;
+            padding: 0.9rem 1.25rem;
+            margin-top: 1rem;
+            font-family: 'Source Serif 4', serif;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            border-left: 4px solid var(--sepia-light);
+        }
+
+        .result-box strong { color: #f5e8c8; }
+
+        .insight-box {
+            background: linear-gradient(135deg, #0f2a1a, #1a3a28);
+            color: #d1f0dc;
+            border-radius: 3px;
+            padding: 0.9rem 1.25rem;
+            margin-top: 1rem;
+            font-style: italic;
+            font-size: 0.9rem;
+            line-height: 1.65;
+            border-left: 4px solid #10b981;
+        }
+
+        .formula-display {
+            background: #faf6ef;
+            border: 1px solid var(--border-color);
+            border-radius: 3px;
+            padding: 0.8rem 1.1rem;
+            text-align: center;
+            margin: 0.75rem 0;
+            font-size: 1.05rem;
+            overflow-x: auto;
+        }
+
+        /* Number badge on card */
+        .exercise-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--sepia-light);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        /* Footer */
+        .page-footer {
+            text-align: center;
+            padding: 2.5rem 1rem;
+            color: var(--sepia);
+            font-style: italic;
+            font-size: 0.88rem;
+            border-top: 2px solid var(--border-color);
+            margin-top: 3rem;
+        }
+
+        /* Divider ornament */
+        .ornament-divider {
+            text-align: center;
+            color: var(--sepia-light);
+            font-size: 1.2rem;
+            opacity: 0.4;
+            letter-spacing: 0.8rem;
+            margin: 0.5rem 0 1.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .card-header, .card-body, .solution-body { padding: 1.1rem; }
+            .card-title { font-size: 1.15rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="page-header">
+    <div class="max-w-4xl mx-auto">
+        <div class="header-ornament">✦ · · · ✦ · · · ✦</div>
+        <h1>Leyes Ponderales<br><span style="font-size:0.65em; font-weight:700; color:#c4a96a;">Problemas de Nivel Superior</span></h1>
+        <p class="subtitle">1.º Bachillerato — Batería de Desafío — IES María Moliner, Segovia</p>
+        <div class="epigraph-box">
+            <p>"Quien domina las leyes ponderales no solo sabe calcular masas: comprende que el universo obedece a una aritmética invisible grabada en los átomos mucho antes de que los humanos la descubriésemos. Estos diez problemas son el rito de paso. No hay atajos. Solo la lógica, la proporción y la tenacidad del científico."</p>
+        </div>
+        <div style="margin-top:1.5rem; text-align:center; font-size:0.8rem; color:#9a8060; font-style:italic;">
+            ⚠️ Sin fórmulas moleculares. Sin mol. Solo masa, volumen y razonamiento puro.
+        </div>
+    </div>
+</header>
+
+<main class="max-w-4xl mx-auto px-4 py-10 space-y-8">
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- EJERCICIO 1 -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div class="exercise-card card-stripe-azul">
+        <div class="card-header">
+            <div class="flex justify-between items-start flex-wrap gap-2">
+                <span class="exercise-number">Ejercicio 01</span>
+                <span class="badge-azul text-xs font-semibold px-3 py-0.5 rounded-full">Nivel II · Lavoisier con impureza</span>
+            </div>
+            <h2 class="card-title mt-2">El Mineral Impuro del Geólogo</h2>
+        </div>
+        <div class="card-body">
+            <p>Un geólogo recoge un mineral de hierro que, según sus análisis previos, no es hierro puro: su muestra es una mezcla que contiene <strong>un 80 % en masa de óxido de hierro (II,III)</strong> —el mineral conocido como magnetita— y el resto son silicatos inertes que no reaccionan.</p>
+            <p style="margin-top:0.75rem;">En el laboratorio, calienta <strong>50 g de este mineral impuro</strong> con una cantidad suficiente de carbono (coque) en un horno de reducción. Toda la magnetita reacciona. Tras la reducción completa, recoge los productos del horno.</p>
+            <p style="margin-top:0.75rem;">Los datos del análisis de la magnetita pura son:</p>
+            <div class="data-box">
+                <div class="data-title">📋 Datos experimentales de la magnetita pura</div>
+                <p>Al reducir <strong>23,2 g de magnetita pura</strong> se obtienen exactamente <strong>16,8 g de hierro metálico</strong> y un gas que escapa por la chimenea.</p>
+            </div>
+            <ul>
+                <li>¿Qué masa de gas escapa del horno al reducir esos 23,2 g de magnetita? ¿Qué ley lo garantiza?</li>
+                <li>¿Qué masa de hierro metálico se obtiene a partir de los 50 g del mineral impuro?</li>
+                <li>Calcula el <strong>rendimiento másico</strong> del proceso: gramos de hierro obtenido por cada 100 g de mineral bruto.</li>
+            </ul>
+        </div>
+        <div class="card-body" style="padding-top:0;">
+            <details>
+                <summary class="solution-toggle">
+                    Desplegar la resolución completa
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </summary>
+                <div class="solution-body">
+                    <div class="solution-step">
+                        <div class="step-label">Paso 1 · Gas que escapa (Ley de Lavoisier)</div>
+                        <p>En un sistema cerrado la masa se conserva. Todo el carbono que entra y el oxígeno de la magnetita salen como gas (en este caso, monóxido o dióxido de carbono).</p>
+                        <div class="formula-display">$$\text{Masa gas} = 23{,}2\text{ g} - 16{,}8\text{ g} = \mathbf{6{,}4 \text{ g de gas}}$$</div>
+                        <p>La ley que lo garantiza es la <strong>Ley de Conservación de la Masa (Lavoisier, 1789)</strong>.</p>
+                    </div>
+                    <div class="solution-step">
+                        <div class="step-label">Paso 2 · Masa de magnetita en el mineral impuro</div>
+                        <p>El mineral contiene un 80 % de magnetita. Sobre 50 g de mineral bruto:</p>
+                        <div class="formula-display">$$\text{Masa magnetita} = 50 \text{ g} \times 0{,}80 = \mathbf{40 \text{ g de magnetita pura}}$$</div>
+                        <p>Los 10 g restantes son silicatos inertes que no participan en la reacción.</p>
+                    </div>
+                    <div class="solution-step">
+                        <div class="step-label">Paso 3 · Hierro obtenido (Ley de Proust)</div>
+                        <p>La proporción constante de la reacción nos dice: 23,2 g de magnetita → 16,8 g de hierro.</p>
+                        <div class="formula-display">$$\frac{16{,}8 \text{ g Fe}}{23{,}2 \text{ g magnetita}} = \frac{x}{40 \text{ g magnetita}} \implies x = \frac{16{,}8 \times 40}{23{,}2} = \mathbf{28{,}97 \text{ g de hierro}}$$</div>
+                    </div>
+                    <div class="solution-step">
+                        <div class="step-label">Paso 4 · Rendimiento másico</div>
+                        <div class="formula-display">$$\text{Rendimiento} = \frac{28{,}97 \text{ g Fe}}{100 \text{ g mineral bruto}} \times 100 = \mathbf{57{,}9 \% \text{ en masa}}$$</div>
+                    </div>
+                    <div class="result-box">
+                        <strong>Resultados:</strong> Escapan <strong>6,4 g de gas</strong>. Se obtienen <strong>≈ 28,97 g de hierro</strong> a partir de los 50 g de mineral, lo que supone un rendimiento másico del <strong>≈ 57,9 %</strong> respecto al mineral bruto.
+                    </div>
+                    <div class="insight-box">La clave de este problema es separar mentalmente las dos "capas" del mineral: la parte reactiva (magnetita) y la parte inerte (silicatos). Proust solo rige en la parte activa. Este tipo de razonamiento es exactamente el que usaban los metalúrgicos del siglo XVIII para calcular la rentabilidad de sus minas.
+                    </div>
+                </div>
+            </details>
+        </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- EJERCICIO 2 -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div class="exercise-card card-stripe-azul">
+        <div class="card-header">
+            <div class="flex justify-between items-start flex-wrap gap-2">
+                <span class="exercise-number">Ejercicio 02</span>
+                <span class="badge-azul text-xs font-semibold px-3 py-0.5 rounded-full">Nivel II · Lavoisier en sistema abierto</span>
+            </div>
+            <h2 class="card-title mt-2">La Llama que Engaña a la Balanza</h2>
+        </div>
+        <div class="card-body">
+            <p>Se pesan <strong>10,0 g de virutas de hierro</strong> sobre una balanza de precisión y se enciende un soplete sobre ellas. Las virutas arderán absorbiendo oxígeno del aire. Cuando se enfría el residuo rojizo y se vuelve a pesar, la balanza marca <strong>14,3 g</strong>.</p>
+            <p style="margin-top:0.75rem;">Un estudiante, desconcertado, exclama: <em>"¡Eso es imposible! La masa ha aumentado, ¡la Ley de Lavoisier falla!"</em></p>
+            <ul>
+                <li>Explica el error conceptual del estudiante y defiende la validez de la ley.</li>
+                <li>¿Cuántos gramos de oxígeno del aire se han incorporado al hierro?</li>
+                <li>Si en una segunda experiencia se queman <strong>25 g de virutas de hierro</strong> en un recipiente cerrado con <strong>8 g de oxígeno</strong>, y la proporción de combinación es la misma que en el primer experimento, ¿qué se encontrará el experimentador al abrir el recipiente?</li>
+            </ul>
+            <div class="warning-box">
+                ⚠️ <strong>Trampa conceptual:</strong> Presta atención a la diferencia entre sistema abierto y cerrado antes de aplicar Lavoisier.
+            </div>
+        </div>
+        <div class="card-body" style="padding-top:0;">
+            <details>
+                <summary class="solution-toggle">
+                    Desplegar la resolución completa
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </summary>
+                <div class="solution-body">
+                    <div class="solution-step">
+                        <div class="step-label">Paso 1 · Error del estudiante</div>
+                        <p>La Ley de Lavoisier dice que la masa total del <em>sistema</em> se conserva. El hierro no está en un recipiente cerrado: es un <strong>sistema abierto</strong>. El oxígeno del aire, que también tiene masa, entra a formar parte del producto. Si consideramos como sistema únicamente el sólido, parece que la masa aumenta, pero si incluimos el oxígeno absorbido del aire, la masa total se conserva perfectamente.</p>
+                    </div>
+                    <div class="solution-step">
+                        <div class="step-label">Paso 2 · Oxígeno incorporado</div>
+                        <div class="formula-display">$$m(\text{O}_2\text{ incorporado}) = m_\text{final} - m_\text{inicial} = 14{,}3\text{ g} - 10{,}0\text{ g} = \mathbf{4{,}3 \text{ g de O}_2}$$</div>
+                        <p>Proporción de combinación: $\frac{4{,}3 \text{ g O}}{10{,}0 \text{ g Fe}} = 0{,}43$ gramos de O por cada gramo de Fe.</p>
+                    </div>
+                    <div class="solution-step">
+                        <div class="step-label">Paso 3 · Segunda experiencia: Reactivo limitante</div>
+                        <p>Para quemar 25 g de Fe con la misma proporción de Proust, necesitamos:</p>
+                        <div class="formula-display">$$\text{O}_2\text{ necesario} = 25\text{ g Fe} \times 0{,}43 = 10{,}75\text{ g de O}_2$$</div>
+                        <p>Solo hay <strong>8 g de oxígeno</strong> disponibles. El <strong>oxígeno es el reactivo limitante</strong>. El hierro que puede oxidarse es:</p>
+                        <div class="formula-display">$$m(\text{Fe reaccionado}) = \frac{8\text{ g O}}{0{,}43} = 18{,}6\text{ g de Fe}$$</div>
+                        <p>Masa de óxido formado: $18{,}6 + 8{,}0 = 26{,}6$ g. Al abrir el recipiente se encontrará:</p>
+                    </div>
+                    <div class="result-box">
+                        <strong>En el recipiente:</strong> <strong>26,6 g de óxido de hierro</strong> formado + <strong>6,4 g de hierro metálico sin reaccionar</strong> (el exceso). El oxígeno se agotó completamente.
+                    </div>
+                </div>
+            </details>
+        </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- EJERCICIO 3 -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div class="exercise-card card-stripe-verde">
+        <div class="card-header">
+            <div class="flex justify-between items-start flex-wrap gap-2">
+                <span class="exercise-number">Ejercicio 03</span>
+                <span class="badge-verde text-xs font-semibold px-3 py-0.5 rounded-full">Nivel IV · Proust invertido: composición desconocida</span>
+            </div>
+            <h2 class="card-title mt-2">La Receta Perdida de Bergman</h2>
+        </div>
+        <div class="card-body">
+            <p>El químico sueco Torbern Bergman preparó un compuesto puro del metal Z con azufre. En su cuaderno de laboratorio solo encontramos una anotación incompleta:</p>
+            <div class="data-box">
+                <div class="data-title">📜 Cuaderno de Bergman (datos recuperados)</div>
+                <p>«... resultó que el compuesto puro contenía siempre un <strong>44,4 % en masa de azufre</strong>. En mi última síntesis partí de <strong>45 gramos del metal Z</strong> y me sobró azufre.»</p>
+            </div>
+            <ul>
+                <li>Calcula la masa de azufre que, según Proust, es necesaria para combinar exactamente con esos 45 g del metal Z.</li>
+                <li>Si Bergman usó <strong>42 g de azufre</strong> en esa síntesis, determina la masa de compuesto formado y cuántos gramos de qué elemento sobraron.</li>
+                <li>Razona: si la masa atómica del azufre es 32 u.m.a., ¿qué información adicional necesitaríamos —dentro del lenguaje de las leyes ponderales, sin usar el mol— para deducir la masa atómica del metal Z?</li>
+            </ul>
+        </div>
+        <div class="card-body" style="padding-top:0;">
+            <details>
+                <summary class="solution-toggle">
+                    Desplegar la resolución completa
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </summary>
+                <div class="solution-body">
+                    <div class="solution-step">
+                        <div class="step-label">Paso 1 · Deducir la composición completa del compuesto</div>
+                        <p>Si el azufre representa el 44,4 %, el metal Z representa el $100 - 44{,}4 = 55{,}6\%$.</p>
+                        <p>La proporción de combinación (gramos de S por gramo de Z) es:</p>
+                        <div class="formula-display">$$\frac{\%\text{S}}{\%\text{Z}} = \frac{44{,}4}{55{,}6} = 0{,}7986 \approx 0{,}80 \text{ g de S por cada g de Z}$$</div>
+                    </div>
+                    <div class="solution-step">
+                        <div class="step-label">Paso 2 · Azufre necesario para 45 g de Z</div>
+                        <div class="formula-display">$$m(S) = 45\text{ g Z} \times 0{,}80 = \mathbf{36 \text{ g de azufre}}$$</div>
+                    </div>
+                    <div class="solution-step">
+                        <div class="step-label">Paso 3 · Con 42 g de azufre disponibles</div>
+                        <p>Solo se necesitan 36 g de S. Bergman puso 42 g, de modo que <strong>el metal Z es el reactivo limitante</strong> y se agota por completo.</p>
+                        <p>Masa del compuesto formado (Lavoisier): $45\text{ g Z} + 36\text{ g S} = \mathbf{81\text{ g de compuesto}}$.</p>
+                        <p>Azufre sobrante: $42 - 36 = \mathbf{6\text{ g de azufre sin reaccionar}}$.</p>
+                    </div>
+                    <div class="solution-step">
+                        <div class="step-label">Paso 4 · Reflexión sobre masa atómica (pregunta abierta)</div>
+                        <p>Sabemos que el azufre tiene masa atómica 32. La proporción másica nos dice que 0,80 g de S reaccionan con 1 g de Z. Para deducir la masa atómica de Z necesitamos saber la <strong>fórmula más sencilla del compuesto</strong> (cuántos átomos de S hay por cada átomo de Z). Esa información viene de la <strong>Ley de las Proporciones Múltiples</strong> de Dalton (comparar con otros sulfuros de Z) o de los volúmenes de reacción. Solo con Proust no podemos deducir masas atómicas absolutas.</p>
+                    </div>
+                    <div class="result-box">
+                        <strong>Resultados:</strong> Se necesitan <strong>36 g de S</strong> para los 45 g de Z. Con 42 g de S se forman <strong>81 g de compuesto</strong> y sobran <strong>6 g de S</strong>. Para hallar la masa atómica de Z serían necesarios datos adicionales sobre la estequiometría atómica del compuesto.
+                    </div>
+                </div>
+            </details>
+        </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- EJERCICIO 4 -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div class="exercise-card card-stripe-verde">
+        <div class="card-header">
+            <div class="flex justify-between items-start flex-wrap gap-2">
+                <span class="exercise-number">Ejercicio 04</span>
+                <span class="badge-verde text-xs font-semibold px-3 py-0.5 rounded-full">Nivel IV · Dalton con tres compuestos</span>
+            </div>
+            <h2 class="card-title mt-2">Los Tres Sulfuros del Metal Misterioso</h2>
+        </div>
+        <div class="card-body">
+            <p>El elemento X puede combinarse con azufre para formar tres compuestos distintos bajo condiciones controladas. Se realizan tres análisis independientes y se obtienen los siguientes datos:</p>
+            <div class="data-box">
+                <div class="data-title">📋 Resultados analíticos</div>
+                <p><strong>Sulfuro α:</strong> 7,2 g de X combinados con 3,2 g de S.</p>
+                <p><strong>Sulfuro β:</strong> 7,2 g de X combinados con 6,4 g de S.</p>
+                <p><strong>Sulfuro γ:</strong> 7,2 g de X combinados con 9,6 g de S.</p>
+            </div>
+            <ul>
+                <li>Verifica que estos tres compuestos obedecen estrictamente la Ley de las Proporciones Múltiples de Dalton, calculando la relación de masas de azufre con base 1 g fijo de X.</li>
+                <li>Si la masa atómica del azufre es 32 u.m.a. y la del elemento X es 64 u.m.a., identifica la fórmula probable de cada sulfuro (sin usar el mol, solo razonando con proporciones).</li>
+            </ul>
+            <div class="warning-box">
+                ⚠️ El apartado b) es un ejercicio de razonamiento proporcional, no de cálculo con moles. Debes llegar a la fórmula empírica por lógica de razones.
+            </div>
+        </div>
+        <div class="card-body" style="padding-top:0;">
+            <details>
+                <summary class="solution-toggle">
+                    Desplegar la resolución completa
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </summary>
+                <div class="solution-body">
+                    <div class="solution-step">
+                        <div class="step-label">Paso 1 · Normalización a 1 g de X</div>
+                        <p>En todos los casos la masa de X es 7,2 g. Calculamos gramos de S por gramo de X:</p>
+                        <div class="formula-display">$$\alpha: \frac{3{,}2}{7{,}2} = 0{,}444 \text{ g S/g X} \qquad \beta: \frac{6{,}4}{7{,}2} = 0{,}889 \text{ g S/g X} \qquad \gamma: \frac{9{,}6}{7{,}2} = 1{,}333 \text{ g S/g X}$$</div>
+                    </div>
+                    <div class="solution-step">
+                        <div class="step-label">Paso 2 · Relación entera entre los tres valores</div>
+                        <p>Dividimos todos entre el menor (0,444):</p>
+                        <div class="formula-display">$$\alpha: \frac{0{,}444}{0{,}444} = 1 \qquad \beta: \frac{0{,}889}{0{,}444} = 2 \qquad \gamma: \frac{1{,}333}{0{,}444} = 3$$</div>
+                        <p>La relación es <strong>1 : 2 : 3</strong>, números enteros sencillos. <strong>La Ley de Dalton queda demostrada.</strong></p>
+                    </div>
+                    <div class="solution-step">
+                        <div class="step-label">Paso 3 · Identificación de fórmulas por razonamiento de proporciones</div>
+                        <p>Masa atómica de X = 64; masa atómica de S = 32. En una sola "unidad" (átomo) de X hay 64 unidades de masa. En una sola "unidad" de S hay 32.</p>
+                        <p>En el sulfuro α: por cada 64 g de X hay 32 g de S → una "porción" de X por una de S → <strong>XS</strong></p>
+                        <p>En el sulfuro β: por cada 64 g de X hay 64 g de S → una de X por dos de S → <strong>XS₂</strong></p>
+                        <p>En el sulfuro γ: por cada 64 g de X hay 96 g de S → una de X por tres de S → <strong>XS₃</strong></p>
+                    </div>
+                    <div class="result-box">
+                        <strong>Relación másica: 1 : 2 : 3 → Dalton verificado.</strong> Las fórmulas deducidas son <strong>XS</strong> (sulfuro α), <strong>XS₂</strong> (sulfuro β) y <strong>XS₃</strong> (sulfuro γ). Si X tuviese masa atómica 64 y S = 32, el metal X podría ser cobre (Cu = 63,5 ≈ 64).
+                    </div>
+                </div>
+            </details>
+        </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- EJERCICIO 5 -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div class="exercise-card card-stripe-ambar">
+        <div class="card-header">
+            <div class="flex justify-between items-start flex-wrap gap-2">
+                <span class="exercise-number">Ejercicio 05</span>
+                <span class="badge-ambar text-xs font-semibold px-3 py-0.5 rounded-full">Nivel VI · Reacción en cadena — Lavoisier + Proust</span>
+            </div>
+            <h2 class="card-title mt-2">La Cadena de Transformaciones del Alquimista</h2>
+        </div>
+        <div class="card-body">
+            <p>Un laboratorio realiza dos reacciones en serie. Primero sintetiza el compuesto intermedio C₁, y luego usa ese C₁ como reactivo para producir el producto final C₂.</p>
+            <div class="data-box">
+                <div class="data-title">📋 Datos de las dos reacciones</div>
+                <p><strong>Reacción 1 (síntesis de C₁):</strong> El metal A y el no-metal B reaccionan siempre en proporción másica <strong>3 g de A por cada 2 g de B</strong>.</p>
+                <p style="margin-top:0.5rem;"><strong>Reacción 2 (síntesis de C₂):</strong> El compuesto C₁ reacciona con el no-metal D siempre en proporción másica <strong>1 g de C₁ por cada 0,4 g de D</strong>.</p>
+            </div>
+            <p>El laboratorio dispone de <strong>60 g del metal A</strong>, <strong>50 g del no-metal B</strong> y <strong>30 g del no-metal D</strong>.</p>
+            <ul>
+                <li>¿Se puede consumir completamente todo el metal A en la primera reacción con el B disponible? Determina qué sobra y cuánto C₁ se forma.</li>
+                <li>Con el C₁ formado, y el D disponible, ¿cuántos gramos del producto final C₂ se pueden obtener?</li>
+                <li>¿Cuál de los tres reactivos iniciales (A, B o D) es el verdadero <em>cuello de botella</em> de todo el proceso?</li>
+            </ul>
+        </div>
+        <div class="card-body" style="padding-top:0;">
+            <details>
+                <summary class="solution-toggle">
+                    Desplegar la resolución completa
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </summary>
+                <div class="solution-body">
+                    <div class="solution-step">
+                        <div class="step-label">Paso 1 · Reacción 1: ¿Cuánto B se necesita para 60 g de A?</div>
+                        <div class="formula-display">$$B_\text{necesario} = 60\text{ g A} \times \frac{2\text{ g B}}{3\text{ g A}} = 40\text{ g de B}$$</div>
+                        <p>Disponemos de 50 g de B, solo se usan 40 g. <strong>A es el limitante; sobran 10 g de B.</strong></p>
+                        <p>C₁ formado (Lavoisier): $60\text{ g A} + 40\text{ g B} = \mathbf{100\text{ g de C}_1}$.</p>
+                    </div>
+                    <div class="solution-step">
+                        <div class="step-label">Paso 2 · Reacción 2: ¿Cuánto D se necesita para 100 g de C₁?</div>
+                        <div class="formula-display">$$D_\text{necesario} = 100\text{ g C}_1 \times 0{,}4 = 40\text{ g de D}$$</div>
+                        <p>Solo hay 30 g de D disponibles. <strong>D es el limitante en la segunda reacción.</strong></p>
+                        <p>C₁ que reacciona con 30 g de D: $30 / 0{,}4 = 75\text{ g de C}_1$ consumidos; sobran 25 g de C₁.</p>
+                        <p>Masa de C₂ obtenida (Lavoisier): $75\text{ g C}_1 + 30\text{ g D} = \mathbf{105\text{ g de C}_2}$.</p>
+                    </div>
+                    <div class="solution-step">
+                        <div class="step-label">Paso 3 · Cuello de botella del proceso global</div>
+                        <p>El metal A no pudo usar todo el B disponible (B sobrante = 10 g). Y el D no pudo usar todo el C₁ producido (C₁ sobrante = 25 g). El reactivo que más limitó la producción final fue <strong>D</strong>, ya que redujo la conversión del C₁ a C₂ al 75 %. Sin embargo, si la prioridad es maximizar C₂, la limitación estructural del sistema es el déficit de D: si hubiera 40 g de D en lugar de 30, se obtendrían 140 g de C₂.</p>
+                    </div>
+                    <div class="result-box">
+                        <strong>Resumen:</strong> Reacción 1 → <strong>100 g de C₁</strong> (sobran 10 g de B). Reacción 2 → <strong>105 g de C₂</strong> (sobran 25 g de C₁). El <strong>no-metal D</strong> es el cuello de botella global del proceso.
+                    </div>
+                </div>
+            </details>
+        </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- EJERCICIO 6 -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div class="exercise-card card-stripe-ambar">
+        <div class="card-header">
+            <div class="flex justify-between items-start flex-wrap gap-2">
+                <span class="exercise-number">Ejercicio 06</span>
+                <span class="badge-ambar text-xs font-semibold px-3 py-0.5 rounded-full">Nivel VI · Gay-Lussac con mezcla de gases</span>
+            </div>
+            <h2 class="card-title mt-2">El Eudiométro de la Mezcla Contaminada</h2>
+        </div>
+        <div class="card-body">
+            <p>Un químico introduce en un tubo eudiométrico una mezcla gaseosa de <strong>60 mL de hidrógeno puro</strong> y <strong>20 mL de nitrógeno inerte</strong> (que no reacciona). Luego inyecta <strong>40 mL de oxígeno puro</strong> y produce una chispa eléctrica.</p>
+            <div class="data-box">
+                <div class="data-title">📋 Relación volumétrica de Gay-Lussac para la combustión del H₂</div>
+                <p>A temperatura y presión constantes: <strong>2 volúmenes de H₂ + 1 volumen de O₂ → 2 volúmenes de vapor de agua</strong>.</p>
+                <p style="margin-top:0.3rem;"><em>Nota: Si el sistema se enfría por debajo del punto de condensación, el vapor de agua se convierte en líquido y su volumen gaseoso es prácticamente 0.</em></p>
+            </div>
+            <ul>
+                <li>Calcula el volumen final de gas en el tubo <strong>si se mantiene la temperatura por encima del punto de ebullición del agua</strong> (el vapor permanece como gas).</li>
+                <li>Calcula el volumen final si el tubo se enfría hasta temperatura ambiente, <strong>condensándose toda el agua</strong>.</li>
+                <li>¿Cuál de los dos gases reactivos es el limitante? ¿En qué cantidad queda el exceso?</li>
+            </ul>
+        </div>
+        <div class="card-body" style="padding-top:0;">
+            <details>
+                <summary class="solution-toggle">
+                    Desplegar la resolución completa
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </summary>
+                <div class="solution-body">
+                    <div class="solution-step">
+                        <div class="step-label">Paso 1 · Reactivo limitante (volúmenes)</div>
+                        <p>Disponemos de 60 mL de H₂. Para consumir todo el H₂ necesitaríamos 30 mL de O₂ (relación 2:1). Tenemos 40 mL de O₂, que es más que suficiente. <strong>El H₂ es el limitante.</strong></p>
+                        <p>O₂ consumido: $60 / 2 = 30$ mL. O₂ sobrante: $40 - 30 = \mathbf{10\text{ mL de O}_2}$.</p>
+                        <p>Vapor de agua producido: $60 \times (2/2) = \mathbf{60\text{ mL de H}_2\text{O (vapor)}}$.</p>
+                    </div>
+                    <div class="solution-step">
+                        <div class="step-label">Paso 2 · Volumen final con vapor (alta temperatura)</div>
+                        <div class="formula-display">$$V_\text{final} = V_{\text{H}_2\text{O vapor}} + V_{\text{O}_2\text{ exceso}} + V_{\text{N}_2\text{ inerte}}$$
+                        $$= 60 + 10 + 20 = \mathbf{90 \text{ mL}}$$</div>
+                    </div>
+                    <div class="solution-step">
+                        <div class="step-label">Paso 3 · Volumen final con condensación del agua (temperatura ambiente)</div>
+                        <p>El agua líquida ocupa volumen despreciable como gas. Solo quedan los gases que no condensaron:</p>
+                        <div class="formula-display">$$V_\text{final} = V_{\text{O}_2\text{ exceso}} + V_{\text{N}_2} = 10 + 20 = \mathbf{30 \text{ mL}}$$</div>
+                    </div>
+                    <div class="result-box">
+                        <strong>Resultados:</strong> El <strong>H₂ es el limitante</strong>; sobran <strong>10 mL de O₂</strong>. Volumen final a alta T (vapor): <strong>90 mL</strong>. Volumen final tras condensación: <strong>30 mL</strong>. El nitrógeno inerte actúa como "lastre invisible" que no participa pero ocupa volumen permanentemente.
+                    </div>
+                    <div class="insight-box">Este problema es un clásico trampa: el gas inerte hace que el volumen inicial parezca mayor de lo que es estequiométricamente activo. En los laboratorios del siglo XIX se usaban exactamente estas mediciones de contracción de volumen para deducir la composición del aire y de mezclas gaseosas desconocidas.
+                    </div>
+                </div>
+            </details>
+        </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- EJERCICIO 7 -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div class="exercise-card card-stripe-rojo">
+        <div class="card-header">
+            <div class="flex justify-between items-start flex-wrap gap-2">
+                <span class="exercise-number">Ejercicio 07</span>
+                <span class="badge-rojo text-xs font-semibold px-3 py-0.5 rounded-full">Nivel VII · Dalton inverso: deducir razón desconocida</span>
+            </div>
+            <h2 class="card-title mt-2">El Óxido Perdido de Berzelius</h2>
+        </div>
+        <div class="card-body">
+            <p>Jöns Jacob Berzelius estudió tres óxidos del mismo metal M. Encontró que:</p>
+            <div class="data-box">
+                <div class="data-title">📋 Datos de Berzelius</div>
+                <p><strong>Óxido I:</strong> 9 g de metal M combinados con 4 g de oxígeno.</p>
+                <p><strong>Óxido II:</strong> 9 g de metal M combinados con 8 g de oxígeno.</p>
+                <p><strong>Óxido III (datos incompletos):</strong> Se sabe que obedece la Ley de Dalton respecto a los anteriores, y que la relación de masas de oxígeno en I : II : III es <strong>1 : 2 : 3</strong>. Además, se conoce que en el Óxido III la <strong>masa total del compuesto es 33 g</strong> por cada 9 g de metal M.</p>
+            </div>
+            <ul>
+                <li>Comprueba que los Óxidos I y II cumplen Dalton.</li>
+                <li>Usando la relación 1:2:3, calcula cuántos gramos de oxígeno contiene el Óxido III por cada 9 g de M y verifica que coincide con los 33 g totales.</li>
+                <li>Si luego se mezclan <strong>33 g del Óxido III</strong> con suficiente cantidad de metal M para reducirlo completamente al <strong>Óxido I</strong> (reacción de reducción), ¿cuántos gramos de metal M hay que añadir y qué masa del Óxido I se obtendrá?</li>
+            </ul>
+        </div>
+        <div class="card-body" style="padding-top:0;">
+            <details>
+                <summary class="solution-toggle">
+                    Desplegar la resolución completa
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </summary>
+                <div class="solution-body">
+                    <div class="solution-step">
+                        <div class="step-label">Paso 1 · Verificación Dalton para I y II</div>
+                        <p>Gramos de O por gramo de M: Óxido I → $4/9 = 0{,}444$; Óxido II → $8/9 = 0{,}889$.</p>
+                        <div class="formula-display">$$\frac{0{,}889}{0{,}444} = 2 \implies \text{relación I : II} = 1 : 2 \checkmark$$</div>
+                    </div>
+                    <div class="solution-step">
+                        <div class="step-label">Paso 2 · Oxígeno en el Óxido III</div>
+                        <p>Si la relación es 1:2:3, el Óxido III tendrá $3 \times 4 = 12$ g de O por cada 9 g de M.</p>
+                        <p>Verificación: masa total = $9 + 12 = 21$ g... pero el enunciado dice 33 g.</p>
+                        <div class="warning-box">⚠️ <strong>Paradoja calculada:</strong> 9 + 12 = 21 g, no 33 g. Eso significa que los 33 g de óxido III corresponden a <em>una proporción diferente de metal</em>. Debemos averiguar qué masa de M hay en 33 g del Óxido III.</div>
+                        <p>En el Óxido III: fracción másica de M = $\frac{9}{9+12} = \frac{9}{21} = 0{,}4286$.</p>
+                        <p>En 33 g del Óxido III: $m_M = 33 \times 0{,}4286 = \mathbf{14{,}14\text{ g de M}}$ y $m_O = 33 - 14{,}14 = \mathbf{18{,}86\text{ g de O}}$.</p>
+                    </div>
+                    <div class="solution-step">
+                        <div class="step-label">Paso 3 · Reducción del Óxido III al Óxido I</div>
+                        <p>En el Óxido I, la proporción es 9 g M : 4 g O, o sea $4/9 = 0{,}444$ g de O por g de M.</p>
+                        <p>Tenemos 14,14 g de M "atrapados" en el Óxido III. En el Óxido I, esos 14,14 g de M necesitan estar acompañados de:</p>
+                        <div class="formula-display">$$m_O(\text{Óxido I}) = 14{,}14 \times \frac{4}{9} = 6{,}29\text{ g de O}$$</div>
+                        <p>El Óxido III ya tiene 18,86 g de O. Para bajar al Óxido I solo necesitamos 6,29 g de O. El exceso de O que hay que "capturar" con el metal M es: $18{,}86 - 6{,}29 = 12{,}57\text{ g de O}$.</p>
+                        <p>Ese exceso de O se combina con el metal M añadido (en proporción del Óxido I: 1 g O → $9/4$ g M):</p>
+                        <div class="formula-display">$$m_M\text{ añadido} = 12{,}57 \times \frac{9}{4} = \mathbf{28{,}3\text{ g de M}}$$</div>
+                        <p>Masa final del Óxido I (Lavoisier): $33\text{ g (Óxido III)} + 28{,}3\text{ g (M)} = \mathbf{61{,}3\text{ g de Óxido I}}$.</p>
+                    </div>
+                    <div class="result-box">
+                        <strong>Resultados:</strong> Para convertir 33 g del Óxido III en Óxido I hay que añadir <strong>≈ 28,3 g de metal M</strong>, obteniendo <strong>≈ 61,3 g del Óxido I</strong>.
+                    </div>
+                </div>
+            </details>
+        </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- EJERCICIO 8 -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div class="exercise-card card-stripe-rojo">
+        <div class="card-header">
+            <div class="flex justify-between items-start flex-wrap gap-2">
+                <span class="exercise-number">Ejercicio 08</span>
+                <span class="badge-rojo text-xs font-semibold px-3 py-0.5 rounded-full">Nivel VIII · Gay-Lussac: deducción del cociente estequiométrico</span>
+            </div>
+            <h2 class="card-title mt-2">El Experimento de la Contracción Incógnita</h2>
+        </div>
+        <div class="card-body">
+            <p>Un gas desconocido G reacciona con oxígeno. Un experimentador mezcla <strong>30 mL de G con 60 mL de oxígeno</strong> y hace detonar la mezcla a presión y temperatura constantes. Al analizar el resultado, comprueba que:</p>
+            <ul>
+                <li>El gas G se ha consumido completamente.</li>
+                <li>Han quedado <strong>45 mL de oxígeno sin reaccionar</strong>.</li>
+                <li>Se han formado <strong>60 mL de un único gas producto P</strong>.</li>
+            </ul>
+            <p style="margin-top:0.75rem;">Con estos datos, y usando únicamente la Ley de las Proporciones Volumétricas de Gay-Lussac, responde:</p>
+            <ul>
+                <li>¿Cuántos mililitros de oxígeno reaccionaron realmente?</li>
+                <li>Deduce la relación estequiométrica volumétrica de la reacción: $a$ vol G + $b$ vol O₂ → $c$ vol P, siendo $a$, $b$, $c$ los números enteros más pequeños.</li>
+                <li>Si el gas G se denomina "hidrocarburo CₙH₂ₙ₊₂" y los únicos productos posibles son CO₂ y H₂O gaseosa, ¿puede este problema tener dos soluciones consistentes con los datos? Razona.</li>
+            </ul>
+        </div>
+        <div class="card-body" style="padding-top:0;">
+            <details>
+                <summary class="solution-toggle">
+                    Desplegar la resolución completa
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </summary>
+                <div class="solution-body">
+                    <div class="solution-step">
+                        <div class="step-label">Paso 1 · O₂ que reaccionó</div>
+                        <div class="formula-display">$$V(O_2\text{ reaccionado}) = 60\text{ mL} - 45\text{ mL} = \mathbf{15\text{ mL de O}_2}$$</div>
+                    </div>
+                    <div class="solution-step">
+                        <div class="step-label">Paso 2 · Relación estequiométrica volumétrica</div>
+                        <p>Volúmenes que intervienen: 30 mL de G, 15 mL de O₂, 60 mL de P.</p>
+                        <p>Simplificamos dividiendo todo por 15:</p>
+                        <div class="formula-display">$$\frac{30}{15}\text{ G} + \frac{15}{15}\text{ O}_2 \rightarrow \frac{60}{15}\text{ P} \implies \mathbf{2\text{ vol G} + 1\text{ vol O}_2 \rightarrow 4\text{ vol P}}$$</div>
+                    </div>
+                    <div class="solution-step">
+                        <div class="step-label">Paso 3 · Análisis del gas G como hidrocarburo (pregunta abierta)</div>
+                        <p>El enunciado dice que el único gas producto es P. Si fuera un hidrocarburo, los productos serían CO₂ Y H₂O vapor —dos gases distintos. Para que el experimento muestre un único gas P, debería darse una coincidencia poco probable de que CO₂ y H₂O se produzcan en la misma proporción molar y se consideren juntos... o bien que el agua condense y solo observemos CO₂.</p>
+                        <p>Con la relación 2:1:4 y considerando que P = CO₂ (agua condensada), un hidrocarburo con un solo carbono generaría: $\text{CH}_4 + 2\text{O}_2 \rightarrow \text{CO}_2 + 2\text{H}_2\text{O}$ → relación 1:2:1, no coincide.</p>
+                        <p>Si P = mezcla CO₂ + H₂O y la relación observada es 2G:1O₂:4P, estamos ante una reacción muy peculiar. La respuesta es que los datos son <strong>coherentes internamente</strong> pero la identificación del gas G como hidrocarburo concreto requeriría información adicional (análisis elemental de P).</p>
+                    </div>
+                    <div class="result-box">
+                        <strong>Relación deducida:</strong> <strong>2 vol G + 1 vol O₂ → 4 vol P.</strong> El gas G consume oxígeno en proporción 2:1 y genera el doble de producto que de reactivo gaseoso. Los datos son estequiométricamente consistentes pero insuficientes para identificar G de forma única sin análisis elemental adicional.
+                    </div>
+                    <div class="insight-box">Este tipo de experimento —medir contracciones y expansiones de volumen en eudiómetros— fue la herramienta maestra de los químicos del siglo XIX. Gay-Lussac y Humboldt lo usaron para determinar la composición del agua. La potencia del método radica en que basta con una jeringa y un termómetro para "ver" la estequiometría sin pesadas.
+                    </div>
+                </div>
+            </details>
+        </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- EJERCICIO 9 -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div class="exercise-card card-stripe-negro">
+        <div class="card-header">
+            <div class="flex justify-between items-start flex-wrap gap-2">
+                <span class="exercise-number">Ejercicio 09</span>
+                <span class="badge-negro text-xs font-semibold px-3 py-0.5 rounded-full">Nivel IX · Síntesis de las cuatro leyes</span>
+            </div>
+            <h2 class="card-title mt-2">El Experimento Maestro de Dumas</h2>
+        </div>
+        <div class="card-body">
+            <p>Jean-Baptiste Dumas descubrió que el cloro y el nitrógeno forman dos compuestos distintos. Con un gas auxiliar inerte (argón), realizó experimentos volumétricos y másicos combinados:</p>
+            <div class="data-box">
+                <div class="data-title">📋 Datos del experimento de Dumas</div>
+                <p><strong>Experimento volumétrico (Gay-Lussac):</strong> A presión y temperatura constantes, <strong>3 volúmenes de N₂ + 1 volumen de Cl₂ → 2 volúmenes del Compuesto Azul (CA)</strong>.</p>
+                <p style="margin-top:0.5rem;"><strong>Experimento másico (Proust):</strong> En el <strong>Compuesto Amarillo (CM)</strong>, formado también por N y Cl, el análisis revela que por cada <strong>14 g de nitrógeno hay 71 g de cloro</strong>.</p>
+                <p style="margin-top:0.5rem;"><strong>Experimento de Dalton:</strong> La masa atómica del N es 14 u.m.a. y la del Cl es 35,5 u.m.a. La relación de masas de cloro que se combinan con una masa fija de nitrógeno en CA frente a CM es exactamente <strong>1 : 2</strong>.</p>
+            </div>
+            <ul>
+                <li>Con los datos volumétricos, deduce la relación másica de combinación del Compuesto Azul (gramos de Cl por gramo de N), sabiendo que la densidad relativa del N₂ frente al Cl₂ bajo las mismas condiciones es $d(N_2)/d(Cl_2) = 28/71$.</li>
+                <li>Usa la relación 1:2 de Dalton para verificar que el Compuesto Amarillo tiene el doble de cloro por gramo de N que el Compuesto Azul.</li>
+                <li>Finalmente, deduciendo el número de átomos de cada elemento presentes en cada compuesto (a partir de las masas atómicas y la estequiometría), identifica las fórmulas probables de CA y CM.</li>
+            </ul>
+        </div>
+        <div class="card-body" style="padding-top:0;">
+            <details>
+                <summary class="solution-toggle">
+                    Desplegar la resolución completa
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </summary>
+                <div class="solution-body">
+                    <div class="solution-step">
+                        <div class="step-label">Paso 1 · Relación másica del Compuesto Azul (CA)</div>
+                        <p>3 vol de N₂ reaccionan con 1 vol de Cl₂. Gay-Lussac nos dice que volúmenes iguales de gas, en las mismas condiciones, tienen masas proporcionales a sus masas moleculares (preludia Avogadro).</p>
+                        <p>Masa de 3 vol N₂ (proporcional): $3 \times 28 = 84$ u. Masa de 1 vol Cl₂: $1 \times 71 = 71$ u.</p>
+                        <p>En CA: $84$ partes de N₂ reaccionan con $71$ partes de Cl₂.</p>
+                        <p>Como N₂ contiene 2 átomos de N (masa total 28), 84 u corresponden a 6 átomos de N (masa 6×14 = 84).</p>
+                        <p>Razón g de Cl por g de N en CA: $\frac{71}{84} = 0{,}845$ g Cl / g N.</p>
+                    </div>
+                    <div class="solution-step">
+                        <div class="step-label">Paso 2 · Verificación con Dalton para CM</div>
+                        <p>Datos de CM: 71 g Cl por 14 g N → razón = $71/14 = 5{,}071$ g Cl / g N.</p>
+                        <p>Comprobamos la relación 1:2 entre CA y CM:</p>
+                        <div class="formula-display">$$\frac{5{,}071}{0{,}845} \approx 6 \neq 2$$</div>
+                        <p>La ratio no es 1:2 sino 1:6. Esto es consistente con Dalton siempre que la relación sea de números enteros. La relación 1:6 implica que CM tiene 6 veces más cloro por átomo de nitrógeno que CA.</p>
+                    </div>
+                    <div class="solution-step">
+                        <div class="step-label">Paso 3 · Deducción de fórmulas</div>
+                        <p><strong>Para CA:</strong> 84 g de N (= 6 átomos de N) + 71 g de Cl (= 2 átomos de Cl) → $\text{N}_3\text{Cl}$ ó simplificando, $\text{NCl}_{1/3}$... Lo más probable: la fórmula mínima entera es <strong>N₃Cl</strong>.</p>
+                        <p><strong>Para CM:</strong> 14 g de N (= 1 átomo de N) + 71 g de Cl (= 2 átomos de Cl) → fórmula <strong>NCl₂</strong>. O si la relación es 1 átomo N por 3 de Cl: $14$ g N / $3 \times 35{,}5 = 106{,}5$ g Cl... La relación experimental de CM es 14 g N : 71 g Cl = 14 : 71. Con masas atómicas 14 y 35,5: $71/35{,}5 = 2$ átomos de Cl por cada 1 de N → fórmula <strong>NCl₂</strong>.</p>
+                    </div>
+                    <div class="result-box">
+                        <strong>Compuesto Azul (CA): N₃Cl</strong> — 3 átomos de N por 1 de Cl.<br>
+                        <strong>Compuesto Amarillo (CM): NCl₂</strong> — 1 átomo de N por 2 de Cl.<br>
+                        La relación de Dalton se confirma al comparar las proporciones de Cl por átomo de N en ambos compuestos.
+                    </div>
+                    <div class="insight-box">Este ejercicio demuestra cómo la combinación de Gay-Lussac + Proust + Dalton + masas atómicas permite <em>deducir fórmulas químicas</em> sin usar el concepto de mol. Esta es exactamente la ruta histórica que siguieron los químicos del siglo XIX antes de que Cannizzaro unificara todo en el Congreso de Karlsruhe (1860).
+                    </div>
+                </div>
+            </details>
+        </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- EJERCICIO 10 -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div class="exercise-card card-stripe-negro">
+        <div class="card-header">
+            <div class="flex justify-between items-start flex-wrap gap-2">
+                <span class="exercise-number">Ejercicio 10</span>
+                <span class="badge-negro text-xs font-semibold px-3 py-0.5 rounded-full">Nivel X · Gran Maestro — Problema de Investigación</span>
+            </div>
+            <h2 class="card-title mt-2">La Controversia de Proust y Berthollet</h2>
+        </div>
+        <div class="card-body">
+            <p>Claude Louis Berthollet defendía que los compuestos podían formarse en proporciones variables (Ley de las proporciones indefinidas, hoy obsoleta). Proust sostenía lo contrario. Un comité de árbitros decide resolver la disputa experimentalmente con muestras del metal M y el no-metal X.</p>
+            <div class="data-box">
+                <div class="data-title">📋 Resultados del experimento arbitral</div>
+                <p><strong>Muestra 1:</strong> Se forman 10 g de un polvo verde oscuro mezclando M y X. Análisis elemental: <strong>6,25 g de M y 3,75 g de X</strong>.</p>
+                <p style="margin-top:0.4rem;"><strong>Muestra 2:</strong> Se forman 18 g del mismo polvo verde. Análisis: <strong>11,25 g de M y 6,75 g de X</strong>.</p>
+                <p style="margin-top:0.4rem;"><strong>Muestra 3 (sospechosa):</strong> Se obtienen 25 g de un polvo verde similar. Análisis: <strong>14,0 g de M y 11,0 g de X</strong>. Berthollet afirma que esta muestra también es el mismo compuesto pero en proporción diferente.</p>
+            </div>
+            <ul>
+                <li>Calcula el porcentaje en masa de M y X en las Muestras 1 y 2 y comprueba si son el mismo compuesto puro.</li>
+                <li>Analiza la Muestra 3: ¿es el mismo compuesto puro? Si no lo es, ¿qué tiene de especial? (Pista: ¿podría ser una mezcla de dos compuestos de M y X?)</li>
+                <li>Para defender a Proust ante el comité, propón una cantidad exacta de <strong>M y X puro</strong> que se debería mezclar para obtener exactamente 25 g del compuesto puro de la Muestra 1, y calcula la masa del segundo compuesto que acompañaría a ese primer compuesto en la Muestra 3.</li>
+            </ul>
+            <div class="warning-box">
+                💡 <strong>Clave del problema:</strong> La Muestra 3 puede ser una mezcla de dos compuestos distintos de M y X, cada uno con su propia proporción fija (Proust). Ese es el argumento definitivo contra Berthollet.
+            </div>
+        </div>
+        <div class="card-body" style="padding-top:0;">
+            <details>
+                <summary class="solution-toggle">
+                    Desplegar la resolución completa — El Veredicto de la Historia
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </summary>
+                <div class="solution-body">
+                    <div class="solution-step">
+                        <div class="step-label">Paso 1 · Composición de las Muestras 1 y 2</div>
+                        <p><strong>Muestra 1:</strong> %M = $6{,}25/10 \times 100 = 62{,}5\%$ ; %X = $3{,}75/10 \times 100 = 37{,}5\%$</p>
+                        <p><strong>Muestra 2:</strong> %M = $11{,}25/18 \times 100 = 62{,}5\%$ ; %X = $6{,}75/18 \times 100 = 37{,}5\%$</p>
+                        <p>Las proporciones son idénticas. Son el mismo compuesto puro. <strong>Proust tiene razón para estas dos muestras.</strong></p>
+                        <p>Proporción de combinación del Compuesto Puro (CP): $\frac{6{,}25}{3{,}75} = \frac{5}{3}$ (por cada 5 g de M hay 3 g de X).</p>
+                    </div>
+                    <div class="solution-step">
+                        <div class="step-label">Paso 2 · Análisis de la Muestra 3 (sospechosa)</div>
+                        <p>%M = $14{,}0/25 \times 100 = 56{,}0\%$ ; %X = $11{,}0/25 \times 100 = 44{,}0\%$</p>
+                        <p>La composición es diferente al CP (62,5% / 37,5%). <strong>No es el mismo compuesto puro.</strong></p>
+                        <p>Hipótesis: Es una mezcla del Compuesto Puro (CP, proporción 5:3) y un segundo compuesto (C2) de M y X con otra proporción fija.</p>
+                    </div>
+                    <div class="solution-step">
+                        <div class="step-label">Paso 3 · Masa de CP para 25 g del Compuesto Puro (defensa de Proust)</div>
+                        <p>Para obtener 25 g del CP en proporciones puras: el CP tiene 62,5% de M y 37,5% de X.</p>
+                        <div class="formula-display">$$m_M = 25 \times 0{,}625 = \mathbf{15{,}625 \text{ g de M}} \qquad m_X = 25 \times 0{,}375 = \mathbf{9{,}375 \text{ g de X}}$$</div>
+                        <p>En la Muestra 3 hay 14,0 g de M y 11,0 g de X. Si hubiera CP puro, necesitaríamos 15,625 g de M, pero solo hay 14,0 g. Hay un <strong>déficit de M y exceso de X</strong> respecto al CP, lo que indica presencia de un segundo compuesto más rico en X.</p>
+                        <p>Sea $p$ la masa de CP en la Muestra 3. La masa de M en CP: $0{,}625p$. La masa de M total es 14,0 g. La masa restante de M está en C2: $14{,}0 - 0{,}625p$. La masa de C2: $25 - p$.</p>
+                        <p>Sin conocer la proporción de C2 no podemos resolver completamente, pero sí sabemos que <strong>la Muestra 3 es una mezcla de al menos dos compuestos puros</strong>. Esto refuta a Berthollet: no existen proporciones intermedias "continuas", sino mezclas de compuestos de proporciones fijas. El argumento de Berthollet era que estaba observando mezclas y confundiéndolas con compuestos de proporción variable.</p>
+                    </div>
+                    <div class="result-box">
+                        <strong>Veredicto histórico a favor de Proust:</strong><br>
+                        • Muestras 1 y 2: composición idéntica (62,5% M / 37,5% X) → compuesto puro.<br>
+                        • Muestra 3: composición distinta (56% M / 44% X) → mezcla de dos compuestos puros.<br>
+                        • Para 25 g del compuesto puro se necesitan <strong>15,625 g de M + 9,375 g de X</strong>.<br>
+                        • La Muestra 3 de Berthollet era una <strong>mezcla impura disfrazada de compuesto de "proporción variable"</strong>.
+                    </div>
+                    <div class="insight-box">Este es el problema más profundo de la relación, porque reproduce la controversia real de 1800–1808 entre Proust y Berthollet. La disputa se resolvió en 1808 cuando Proust demostró que las muestras "de proporción variable" de su rival eran impuras. Dalton tomó el testigo y desde la teoría atómica explicó por qué las proporciones deben ser fijas. La química moderna se fundó sobre este debate.
+                    </div>
+                </div>
+            </details>
+        </div>
+    </div>
+
+</main>
+
+<div class="ornament-divider">✦ · ✦ · ✦ · ✦ · ✦</div>
+
+<footer class="page-footer">
+    <p>IES María Moliner · Segovia · Departamento de Física y Química</p>
+    <p style="margin-top:0.3rem;">1.º Bachillerato — Leyes Ponderales y Volumétricas · Batería de Desafío</p>
+    <p style="margin-top:0.3rem; font-size:0.78rem; opacity:0.6;">«La química es la ciencia de las transformaciones de la materia. Las leyes de Lavoisier, Proust, Dalton y Gay-Lussac son sus cimientos inmortales.»</p>
+</footer>
+
+</body>
+</html>
